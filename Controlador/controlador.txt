@@ -1,0 +1,10 @@
+Contiene todo el código relacionado al control del sistema:
+    - Código que permite modificar ventanas según los estimulos del usuario y las respuestas de la base de datos.
+    - Código que permite llamar a las funciones de las distintas clases según los estimulos del usuario.
+    - Conecta el backend (manejo de la base de datos) con el frontend (interfaz).
+
+NO AGREGAR
+    - NADA relacionado a la base de datos.
+        Ej: No podemos poner los accesos a las tablas de una base de datos para mostrarlo.
+    - NADA relacionado al visual.
+        Ej: No podemos poner el código de una ventana.

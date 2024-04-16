@@ -1,0 +1,9 @@
+Contiene todo el código relacionado a la interfaz:
+    - Código de las ventanas
+    - Código de los botones
+
+NO AGREGAR
+    - NADA relacionado a la base de datos.
+        Ej: No podemos poner los accesos a las tablas de una base de datos para mostrarlo.
+    - NADA relacionado al controlador.
+        Ej: No podemos hacer llamado a las funciones de las clases y conectarlo con lo visual.

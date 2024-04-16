@@ -1,0 +1,10 @@
+Contiene todo el código relacionado a la base de datos:
+    - Código del patrón Singleton
+    - Código del patrón DAO --> Permite generar un acceso a las entidades de las bases de datos para bajar sus datos a un objeto creado a partir de una clase.
+    - Clases que van a contener los datos que bajemos de la base de datos.
+
+NO AGREGAR
+    - NADA relacionado a lo visual.
+        Ej: No podemos poner el código de una ventana.
+    - NADA relacionado al controlador.
+        Ej: No podemos hacer llamado a las funciones de las clases y conectarlo con lo visual.
