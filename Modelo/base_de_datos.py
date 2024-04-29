@@ -20,10 +20,9 @@ class BaseDeDatos(metaclass=BaseDeDatosMeta):
     def __init__(self):
         try:
             self.conexion = psycopg2.connect(
-                host="localhost",  # * ¿Acá iría el link del host?
-                user="postgres",
-                password="",  # * Si la base esta en un server seria la misma contraseña para todos.
-                database="",  # * Mismo nombre que base de datos
+                conn=psycopg2.connect(
+                    "postgresql://neondb_owner:wiNYtFRd70MD@ep-lucky-union-a7zkmfpp.ap-southeast-2.aws.neon.tech/neondb?sslmode=require"
+                )
             )
             print("Conexión exitosa")
         except Exception as ex:
