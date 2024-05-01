@@ -8,6 +8,7 @@ class VistaInicioSesion(QMainWindow):
         super().__init__()
         self.setWindowTitle("SISTEMA DE GESTION DE CAFETERIA")
         self.setFixedSize(400,500)
+        self.setStyleSheet("background-color: #fbd845")
 
         layout = QVBoxLayout()
 
@@ -17,6 +18,7 @@ class VistaInicioSesion(QMainWindow):
 
         self.campo_nombre = QLineEdit()
         self.campo_nombre.setFixedSize(250,20)
+        self.campo_nombre.setStyleSheet("background-color: white")
 
         lbl_contraseña = QLabel("Ingrese su contraseña")
         lbl_contraseña.setFixedSize(250,50)
@@ -25,13 +27,16 @@ class VistaInicioSesion(QMainWindow):
         self.campo_contraseña = QLineEdit()
         self.campo_contraseña.setEchoMode(QLineEdit.EchoMode(2))
         self.campo_contraseña.setFixedSize(250,20)
+        self.campo_contraseña.setStyleSheet("background-color: white")
 
         combo_1 = QComboBox()
         combo_1.addItems(["Vendedor","Jefe"])
+        combo_1.setStyleSheet("background-color: white")
 
         btn = QPushButton("Registrarse")
         btn.setFixedSize(110,30)
         btn.clicked.connect(controlador.valido_entrada)
+        btn.setStyleSheet("background-color: #fbd845")
 
         layout_2 = QHBoxLayout()
         layout_2.addWidget(btn)
@@ -48,8 +53,3 @@ class VistaInicioSesion(QMainWindow):
         widget.setLayout(layout)
 
         self.setCentralWidget(widget)
-
-# app = QApplication(sys.argv)
-# window = MainWindow()
-# window.show()
-# app.exec()
