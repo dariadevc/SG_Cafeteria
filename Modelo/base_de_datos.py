@@ -20,9 +20,7 @@ class BaseDeDatos(metaclass=BaseDeDatosMeta):
     def __init__(self):
         try:
             self.conexion = psycopg2.connect(
-                conn=psycopg2.connect(
-                    "postgresql://neondb_owner:wiNYtFRd70MD@ep-lucky-union-a7zkmfpp.ap-southeast-2.aws.neon.tech/neondb?sslmode=require"
-                )
+                "postgresql://neondb_owner:wiNYtFRd70MD@ep-lucky-union-a7zkmfpp.ap-southeast-2.aws.neon.tech/neondb?sslmode=require"
             )
             print("Conexión exitosa")
         except Exception as ex:
@@ -36,7 +34,7 @@ class BaseDeDatos(metaclass=BaseDeDatosMeta):
             return cursor.fetchone()
         except Exception as ex:
 
-            return f"{ex} n/Error en la consulta: {consulta}. n/No se pudo obtener el elemento de la base de datos."
+            return f"{ex} Error en la consulta: {consulta}. No se pudo obtener el elemento de la base de datos."
 
     def obtener_elementos(self, consulta):
         """Devuelve uno o más elementos de la base de datos según la consulta realizada"""
@@ -45,7 +43,7 @@ class BaseDeDatos(metaclass=BaseDeDatosMeta):
             cursor.execute(consulta)
             return cursor.fetchall()
         except Exception as ex:
-            return f"{ex} n/Error en la consulta: {consulta}. n/No se pudieron obtener los elemento de la base de datos."
+            return f'{ex} Error en la consulta: "{consulta}". No se pudieron obtener los elemento de la base de datos.'
 
     def consulta(self, consulta, valores):
         """Permite realizar consultas a la base de datos."""
@@ -54,4 +52,4 @@ class BaseDeDatos(metaclass=BaseDeDatosMeta):
             cursor.execute(consulta, valores)
             return cursor.connection.commit()
         except Exception as ex:
-            return f"{ex} n/Error en la consulta: {consulta}."
+            return f"{ex} Error en la consulta: {consulta}."
