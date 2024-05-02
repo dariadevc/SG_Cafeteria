@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 from Visual.vista_venta import VistaVenta
+from Visual.vista_stock import VistaStock
 import sys
 
 class VistaJefe (QMainWindow):
@@ -32,20 +33,21 @@ class VistaJefe (QMainWindow):
         ##                       BOTONES
         layout_barra_navegacion = QHBoxLayout()
         self.btn_venta = QPushButton("Gestion de Ventas")
-        btn_stock = QPushButton("Gestion de Stock")
-        btn_informe = QPushButton("Informes")
+        self.btn_stock = QPushButton("Gestion de Stock")
+        self.btn_informe = QPushButton("Informes")
         self.btn_venta.setStyleSheet("background-color: #816561")
-        btn_stock.setStyleSheet("background-color: cyan")
-        btn_informe.setStyleSheet("background-color: #637d96")
+        self.btn_stock.setStyleSheet("background-color: cyan")
+        self.btn_informe.setStyleSheet("background-color: #637d96")
         layout_barra_navegacion.addWidget(self.btn_venta)
-        layout_barra_navegacion.addWidget(btn_stock)
-        layout_barra_navegacion.addWidget(btn_informe)
+        layout_barra_navegacion.addWidget(self.btn_stock)
+        layout_barra_navegacion.addWidget(self.btn_informe)
 
         layout_principal.addLayout(layout_segunda_presentacion)
         layout_principal.addLayout(layout_barra_navegacion)
         
         self.stack_layout = QStackedLayout()
         self.stack_layout.addWidget(VistaVenta())
+        self.stack_layout.addWidget(VistaStock())
         layout_principal.addLayout(self.stack_layout)
 
         widget = QWidget()
