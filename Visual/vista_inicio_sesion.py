@@ -8,7 +8,7 @@ class VistaInicioSesion(QMainWindow):
         super().__init__()
         self.setWindowTitle("SISTEMA DE GESTION DE CAFETERIA")
         self.setFixedSize(400,500)
-        self.setStyleSheet("background-color: #fbd845")
+        self.setStyleSheet("background-color: #29621f")
 
         layout = QVBoxLayout()
 
@@ -29,24 +29,30 @@ class VistaInicioSesion(QMainWindow):
         self.campo_contraseña.setFixedSize(250,20)
         self.campo_contraseña.setStyleSheet("background-color: white")
 
-        combo_1 = QComboBox()
-        combo_1.addItems(["Vendedor","Jefe"])
-        combo_1.setStyleSheet("background-color: white")
+        self.combo_1 = QComboBox()
+        self.combo_1.addItems(["Vendedor","Jefe"])
+        self.combo_1.setStyleSheet("background-color: white")
 
         btn = QPushButton("Registrarse")
         btn.setFixedSize(110,30)
         btn.clicked.connect(controlador.valido_entrada)
-        btn.setStyleSheet("background-color: #fbd845")
 
         layout_2 = QHBoxLayout()
         layout_2.addWidget(btn)
+
+        self.estado = QLabel()
+        self.estado.setText("Datos Incorrectos")
+        self.estado.setStyleSheet("color: red")
+        self.estado.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.estado.hide()
 
         layout.addWidget(lbl_nombre)
         layout.addWidget(self.campo_nombre)
         layout.addWidget(lbl_contraseña)
         layout.addWidget(self.campo_contraseña)
-        layout.addWidget(combo_1)
+        layout.addWidget(self.combo_1)
         layout.addLayout(layout_2)
+        layout.addWidget(self.estado)
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         widget = QWidget()

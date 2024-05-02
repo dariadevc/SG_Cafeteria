@@ -2,9 +2,10 @@ from Visual.vista_jefe import VistaJefe
 
 class ControladorJefe:
     
-    def __init__(self):
+    def __init__(self, usuario):
         self.__vista_jefe = VistaJefe(self)
         self.__vista_jefe.show()
+        self.__vista_jefe.nombre.setText(self.__vista_jefe.nombre.text() + usuario.get_usuario())
         self.__vista_jefe.btn_venta.clicked.connect(self.cambio_a_venta)
         self.__vista_jefe.btn_stock.clicked.connect(self.cambio_a_stock)
     
