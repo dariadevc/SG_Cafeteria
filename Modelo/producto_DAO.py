@@ -12,7 +12,7 @@ class ProductoDAO:
         consulta = 'INSERT into public."productos"(descripcion, fecha, cantidad, stock_minimo, precio_unitario) VALUES (%s, %s, %s, %s, %s)'
         valores = (descripcion, fecha_modif, cantidad, minimo, precio)
         self.__base.consulta(consulta, valores)
-        print(f"Se agrego a la base de datos un nuevo producto")
+        print("Se agrego a la base de datos un nuevo producto")
 
     ## TODO: Agregar código para identificar el producto que se va a eliminar
     def eliminar_producto(self, cod_producto, causa):

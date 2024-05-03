@@ -5,3 +5,8 @@ import sys
 app = QApplication(sys.argv)
 window = ControladorInicioSesion()
 app.exec()
+
+
+## Datos inicio sesión
+## mgarrison
+## E$8HjHRj)o
