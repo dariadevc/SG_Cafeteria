@@ -1,0 +1,27 @@
+from Visual.vista_vendedor import VistaVendedor
+
+class ControladorVendedor:
+    
+    def __init__(self, usuario):
+        self.__vista_vendedor = VistaVendedor()
+        self.__vista_vendedor.show()
+        self.__vista_vendedor.label_usuario.setText(usuario.get_usuario())
+        self.__vista_vendedor.btn_agregar_producto.clicked.connect(self.agregar_producto)
+        self.__vista_vendedor.btn_eliminar_producto.clicked.connect(self.eliminar_producto)
+        self.__vista_vendedor.btn_imprimir_ticket.clicked.connect(self.imprimir_ticket)
+        self.__vista_vendedor.btn_cambiar_precio.clicked.connect(self.precio_total)
+    
+    def actualizar_precio_total(self, nuevo_texto):
+         self.__vista_vendedor.precio_total.setText(nuevo_texto)
+
+    
+   
+    
+    def agregar_producto(self):
+        pass
+    
+    def eliminar_producto(self):
+        pass
+    
+    def imprimir_ticket(self):
+        pass

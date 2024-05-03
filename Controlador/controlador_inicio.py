@@ -1,5 +1,6 @@
 from Visual.vista_inicio_sesion import VistaInicioSesion
 from Controlador.controlador_jefe import ControladorJefe
+from Modelo.usuario import Usuario
 
 class ControladorInicioSesion:
     
@@ -10,9 +11,11 @@ class ControladorInicioSesion:
     def valido_entrada (self):
         nombre = self.__vista.campo_nombre.text()
         contraseña = self.__vista.campo_contraseña.text()
-        #if Usuario.validar(nombre, contraseña) == True  
-        boolean = True
-        if boolean:  ##esto es para probar que se inicie correctamente la siguiente vista
-            self.__vista = ControladorJefe()
+        tipo = self.__vista.combo_1.currentText()
+        usuario = Usuario('','','',tipo,nombre,contraseña,'','')
+        
+        if usuario.login() != None:  ##esto es para probar que se inicie correctamente la siguiente vista
+            self.__vista.estado.hide()
+            self.__vista = ControladorJefe(usuario)
         else:
-            print("Datos Incorrectos")
+            self.__vista.estado.show()
