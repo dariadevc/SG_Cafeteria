@@ -1,4 +1,4 @@
-from base_de_datos import BaseDeDatos
+from Modelo.base_de_datos import BaseDeDatos
 
 
 ## TODO: Cambiar producto por factura, falta la tabla de factura
