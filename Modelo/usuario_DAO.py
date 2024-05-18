@@ -1,5 +1,5 @@
 # from __future__ import annotations
-from base_de_datos import BaseDeDatos
+from Modelo.base_de_datos import BaseDeDatos
 
 # from usuario import Usuario
 

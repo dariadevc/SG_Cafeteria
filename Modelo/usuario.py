@@ -1,5 +1,5 @@
 from __future__ import annotations
-from usuario_DAO import UsuarioDAO
+from Modelo.usuario_DAO import UsuarioDAO
 
 
 class Usuario:
@@ -12,7 +12,7 @@ class Usuario:
         self.__contra = contra
         self.__baja = baja
         self.__causa = causa
-        self.__usuariodao = UsuarioDao()
+        self.__usuariodao = UsuarioDAO()
 
     ## Getters y Setters
 
@@ -88,5 +88,5 @@ class Usuario:
             return datos + f" | BAJA: {self.__baja} | CAUSA: {self.__causa}"
 
     def login(self):
-        result = self.__usuariodao.login(self.__usuario, self.__contra)
+        result = self.__usuariodao.login_usuario(self.__usuario, self.__contra)
         return result
