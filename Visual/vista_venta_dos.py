@@ -44,8 +44,9 @@ class VentanaVenta (VistaCabecera):
         widget.setLayout(self.layout_principal)
         self.setCentralWidget(widget)
 
-
+"""
 app = QApplication(sys.argv)
 window = VentanaVenta()
 window.show()
 app.exec()
+"""
