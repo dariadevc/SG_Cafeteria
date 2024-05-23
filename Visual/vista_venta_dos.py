@@ -1,4 +1,4 @@
-from vista_cabecera import VistaCabecera
+from Visual.vista_cabecera import VistaCabecera
 from vista_ticket import VistaTicket
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
@@ -14,10 +14,10 @@ class VentanaVenta (VistaCabecera):
         self.layout_botones_venta = QVBoxLayout()
         
         boton_generar_ticket = QPushButton("GENERAR TICKET")
-        boton_generar_ticket.setFixedSize(100,80)
+        boton_generar_ticket.setFixedSize(70,80)
         boton_generar_ticket.setStyleSheet("background-color: lightblue;")
         boton_anular_venta = QPushButton("ANULAR VENTA")
-        boton_anular_venta.setFixedSize(100,80)
+        boton_anular_venta.setFixedSize(70,80)
         boton_anular_venta.setStyleSheet("background-color: lightblue;")
         self.layout_botones_venta.addWidget(boton_generar_ticket)
         self.layout_botones_venta.addWidget(boton_anular_venta)
@@ -34,7 +34,7 @@ class VentanaVenta (VistaCabecera):
         self.contenedor = QGroupBox()
         self.contenedor.setStyleSheet("background-color: lightblue;")
         self.contenedor.setLayout(self.stacked_botones)
-        self.contenedor.setFixedSize(550,440)
+        self.contenedor.setFixedSize(600,500)
         
         layout_venta.addLayout(self.layout_botones_venta)
         layout_venta.addWidget(self.contenedor)
