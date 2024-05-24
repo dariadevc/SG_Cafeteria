@@ -2,14 +2,18 @@ import sys
 from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import *
-sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Visual')
-sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Controlador')
-sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
-from vista_inicio_sesion import VistaInicioSesion
-from vista_venta_dos import VentanaVenta
-from usuario import Usuario
-from usuario_DAO import UsuarioDAO
- 
+# sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Visual')
+# sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Controlador')
+# sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
+# from vista_inicio_sesion import VistaInicioSesion
+# from vista_venta_dos import VentanaVenta
+# from usuario import Usuario
+# from usuario_DAO import UsuarioDAO
+from Visual.vista_inicio_sesion import VistaInicioSesion
+#from Visual.vista_venta_dos import VentanaVenta
+from Controlador.controlador_vendedor import ControladorVendedor
+from Modelo.usuario import Usuario
+from Modelo.usuario_DAO import UsuarioDAO
 
 class ControladorInicioSesion:
 
@@ -32,10 +36,14 @@ class ControladorInicioSesion:
     def valido_entrada(self):
         nombre_usuario = self.__vista.inputUsuario.text()
         contrasenia = self.__vista.inputContrasenia.text()
-        usuario_dao = UsuarioDAO()
-        if usuario_dao.login_usuario(nombre_usuario,contrasenia) is not None:
-              self.__vista = VentanaVenta()
-              self.__vista.show()
+        #usuario_dao = UsuarioDAO()
+        tipo = "vendedor"
+        usuario = Usuario('','','',tipo,nombre_usuario,contrasenia,'','')
+        #if usuario_dao.login_usuario(nombre_usuario,contrasenia) is not None:
+        if usuario.login() is not None:
+            #self.__vista = VentanaVenta()
+            self.__vista = ControladorVendedor(usuario)
+            #self.__vista.show()
         else:
             self.__vista.etiqueta_error.setText('Usuario o contrasena Incorrecta') 
             QTimer.singleShot(2000, self.limpiar_error)

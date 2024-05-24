@@ -1,6 +1,6 @@
 import sys
-sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Controlador')
-from controlador_inicio import ControladorInicioSesion
+#sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Controlador')
+from Controlador.controlador_inicio import ControladorInicioSesion
 from PyQt6.QtWidgets import QApplication
 
 

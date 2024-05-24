@@ -1,7 +1,7 @@
 from __future__ import annotations
 import sys
-sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
-from usuario_DAO import UsuarioDAO
+#sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
+from Modelo.usuario_DAO import UsuarioDAO
 
 
 

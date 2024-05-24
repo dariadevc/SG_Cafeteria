@@ -1,7 +1,7 @@
 # from __future__ import annotations
 import sys
-sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
-from base_de_datos import BaseDeDatos
+#sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
+from Modelo.base_de_datos import BaseDeDatos
 
 # from usuario import Usuario
 

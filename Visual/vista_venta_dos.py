@@ -1,35 +1,33 @@
 from Visual.vista_cabecera import VistaCabecera
-from vista_ticket import VistaTicket
+from Visual.vista_ticket import VistaTicket
+from Visual.vista_anular import VistaAnular
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
-import sys
 
 class VentanaVenta (VistaCabecera):
     
     def __init__(self):
         super().__init__()
         self.boton_venta.setStyleSheet("background-color: rgb(135, 206, 235);")
-        
         layout_venta = QHBoxLayout()
         self.layout_botones_venta = QVBoxLayout()
-        
-        boton_generar_ticket = QPushButton("GENERAR TICKET")
-        boton_generar_ticket.setFixedSize(70,80)
-        boton_generar_ticket.setStyleSheet("background-color: lightblue;")
-        boton_anular_venta = QPushButton("ANULAR VENTA")
-        boton_anular_venta.setFixedSize(70,80)
-        boton_anular_venta.setStyleSheet("background-color: lightblue;")
-        self.layout_botones_venta.addWidget(boton_generar_ticket)
-        self.layout_botones_venta.addWidget(boton_anular_venta)
+        self.boton_generar_ticket = QPushButton("GENERAR\n TICKET")
+        self.boton_generar_ticket.setFixedSize(70,80)
+        self.boton_generar_ticket.setStyleSheet("background-color: lightblue;")
+        self.boton_anular_venta = QPushButton("ANULAR\n VENTA")
+        self.boton_anular_venta.setFixedSize(70,80)
+        self.boton_anular_venta.setStyleSheet("background-color: lightblue;")
+        self.layout_botones_venta.addWidget(self.boton_generar_ticket)
+        self.layout_botones_venta.addWidget(self.boton_anular_venta)
         self.layout_botones_venta.setContentsMargins(0,50,10,50)
-        
+
         lbl_bienvenida = QLabel("BIENVENIDO A LA SECCION DE VENTAS")
         lbl_bienvenida.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         
         self.stacked_botones.addWidget(lbl_bienvenida)
         self.stacked_botones.addWidget(VistaTicket())
-        self.stacked_botones.setCurrentIndex(0)
+        self.stacked_botones.addWidget(VistaAnular())
         
         self.contenedor = QGroupBox()
         self.contenedor.setStyleSheet("background-color: lightblue;")
@@ -43,10 +41,3 @@ class VentanaVenta (VistaCabecera):
         widget = QWidget()
         widget.setLayout(self.layout_principal)
         self.setCentralWidget(widget)
-
-"""
-app = QApplication(sys.argv)
-window = VentanaVenta()
-window.show()
-app.exec()
-"""
