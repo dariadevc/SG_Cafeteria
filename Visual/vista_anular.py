@@ -8,7 +8,7 @@ class VistaAnular (QMainWindow):
         
         layout = QVBoxLayout()
         
-        lbl_bienvenida = QLabel("Bienvenido a Anular Venta!!!")
+        lbl_bienvenida = QLabel("La venta fue anulada")
         
         tabla = QTableWidget()
         

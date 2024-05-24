@@ -25,10 +25,10 @@ class VistaTicket(QMainWindow):
         ########################################################
         
         self.layout_mas_menos = QHBoxLayout()
-        btn_suma = QPushButton("+")
-        btn_resta = QPushButton("-")
-        self.layout_mas_menos.addWidget(btn_resta)
-        self.layout_mas_menos.addWidget(btn_suma)
+        self.btn_suma = QPushButton("+")
+        self.btn_resta = QPushButton("-")
+        self.layout_mas_menos.addWidget(self.btn_resta)
+        self.layout_mas_menos.addWidget(self.btn_suma)
         self.layout_mas_menos.setContentsMargins(0,0,0,0)
         self.layout_mas_menos.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         
@@ -52,9 +52,19 @@ class VistaTicket(QMainWindow):
         self.tabla1.setItem(3,0,QTableWidgetItem('MEDIALUNAS  $2200'))
         
         tabla2 = QTableView()
-        
+        self.tabla2 = QTableWidget()
+        self.tabla2.setColumnCount(2)
+        self.tabla2.setRowCount(0)  # Inicialmente vacía
+        self.tabla2.verticalHeader().setVisible(False)
+        self.tabla2.horizontalHeader().setVisible(False)
+        self.tabla2.setColumnWidth(0, 200)
+        self.tabla2.setColumnWidth(1, 65)
+
         layout_tablas.addWidget(self.tabla1)
-        layout_tablas.addWidget(tabla2)
+        layout_tablas.addWidget(self.tabla2)
+        
+        # layout_tablas.addWidget(self.tabla1)
+        # layout_tablas.addWidget(tabla2)
         
         #####################IMPRIMIR#########################
         

@@ -1,4 +1,5 @@
 from Visual.vista_venta_dos import VentanaVenta
+from Controlador.controlador_generar_ticket import ControladorTicket
 
 class ControladorVenta:
     
@@ -12,6 +13,8 @@ class ControladorVenta:
         self.__vista_venta.boton_informe.clicked.connect(self.cambio_a_informe)
         self.__vista_venta.boton_generar_ticket.clicked.connect(self.cambio_a_generar)
         self.__vista_venta.boton_anular_venta.clicked.connect(self.cambio_a_anular)
+
+
     
     
     def cambio_a_stock (self):
@@ -24,6 +27,8 @@ class ControladorVenta:
         self.__vista_venta.boton_anular_venta.setStyleSheet("background-color: lightblue;")
         self.__vista_venta.boton_generar_ticket.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.__vista_venta.stacked_botones.setCurrentIndex(1)
+        vista_ticket = self.__vista_venta.obtener_vista_ticket()
+        self.controlador_ticket = ControladorTicket(vista_ticket)
     
     def cambio_a_anular (self):
         self.__vista_venta.boton_generar_ticket.setStyleSheet("background-color: lightblue;")

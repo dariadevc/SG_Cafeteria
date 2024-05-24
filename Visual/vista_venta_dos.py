@@ -24,10 +24,12 @@ class VentanaVenta (VistaCabecera):
         lbl_bienvenida = QLabel("BIENVENIDO A LA SECCION DE VENTAS")
         lbl_bienvenida.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
-        
+        self.vista_ticket = VistaTicket()
+        self.vista_anular = VistaAnular()
+
         self.stacked_botones.addWidget(lbl_bienvenida)
-        self.stacked_botones.addWidget(VistaTicket())
-        self.stacked_botones.addWidget(VistaAnular())
+        self.stacked_botones.addWidget(self.vista_ticket)
+        self.stacked_botones.addWidget(self.vista_anular)
         
         self.contenedor = QGroupBox()
         self.contenedor.setStyleSheet("background-color: lightblue;")
@@ -41,3 +43,6 @@ class VentanaVenta (VistaCabecera):
         widget = QWidget()
         widget.setLayout(self.layout_principal)
         self.setCentralWidget(widget)
+
+    def obtener_vista_ticket(self):
+        return self.vista_ticket
