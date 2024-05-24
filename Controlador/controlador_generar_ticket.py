@@ -1,9 +1,22 @@
 from Visual.vista_ticket import VistaTicket
+from Modelo.producto_dao import ProductoDAO
 
 class ControladorTicket:
     def __init__(self, vista):
         self.__vista_ticket = VistaTicket()
+        self.__producto_dao = ProductoDAO()
         self.__vista_ticket.btn_suma.clicked.connect(self.sumar_producto)
+        self.__vista_ticket.btn_resta.clicked.connect(self.restar_producto)
+        self.cargar_productos()
+    
+    def cargar_productos(self):
+        productos = self.__producto_dao.obtener_todos_productos(1)
+        self.__vista_ticket.tabla1.setRowCount(len(productos))
+        for fila, producto in enumerate(productos):
+            descripcion = QTableWidgetItem(producto[1])
+            cantidad = QTableWidgetItem(str(producto[3]))
+            self.__vista_ticket.tabla1.setItem(fila, 0, descripcion)
+            self.__vista_ticket.tabla1.setItem(fila, 1, cantidad)
 
     def sumar_producto(self):
         items_seleccionados = self.__vista_ticket.tabla1.selectedItems()
