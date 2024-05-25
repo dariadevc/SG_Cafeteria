@@ -1,33 +1,11 @@
 from Visual.vista_ticket import VistaTicket
-from Visual.vista_factura import PDF
-from Modelo.producto_DAO import ProductoDAO
-from PyQt6.QtWidgets import *
-from datetime import datetime
 
 class ControladorTicket:
     def __init__(self, vista):
         self.__vista_ticket = VistaTicket()
+        self.__producto_dao = ProductoDAO()
         self.__vista_ticket.btn_suma.clicked.connect(self.sumar_producto)
-        self.rellenar_tabla()
 
-    def rellenar_tabla(self):
-        producto_dao = ProductoDAO()
-        productos = producto_dao.obtener_todos_productos(0)
-        fila = 0
-        print(productos)
-        for producto in productos:
-            print(producto)
-            fila += 1
-            if fila < 5:
-                self.__vista_ticket.tabla1.setItem(fila,0,QTableWidgetItem(producto[1]))
-            else: 
-                break
-
-
-
-
-
-        
     def sumar_producto(self):
         items_seleccionados = self.__vista_ticket.tabla1.selectedItems()
         if len(items_seleccionados) > 0:
