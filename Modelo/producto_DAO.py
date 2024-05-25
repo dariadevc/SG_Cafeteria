@@ -41,7 +41,8 @@ class ProductoDAO:
             "stock_minimo",
             "precio_unitario",
         ]
-        consulta = f'SELECT * FROM public."productos" ORDER BY {orden[opcion]};'
+        consulta = 'SELECT * FROM public."productos";'# ORDER BY {orden[opcion]};'
+        print("prueba")
         return self.__base.obtener_elementos(consulta)
 
     def agregar_stock(self, cod_producto, cantidad):
