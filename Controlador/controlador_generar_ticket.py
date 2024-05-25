@@ -21,7 +21,7 @@ class ControladorTicket:
             self.__vista_ticket.tabla1.setItem(fila, 0, descripcion)
             self.__vista_ticket.tabla1.setItem(fila, 1, cantidad)
 
-        
+
     def sumar_producto(self):
         items_seleccionados = self.__vista_ticket.tabla1.selectedItems()
         if len(items_seleccionados) > 0:
