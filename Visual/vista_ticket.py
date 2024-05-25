@@ -46,10 +46,10 @@ class VistaTicket(QMainWindow):
         
         self.tabla1.adjustSize()
         
-        self.tabla1.setItem(0,0,QTableWidgetItem(str('COCA COLA 1L $1200')))
-        self.tabla1.setItem(1,0,QTableWidgetItem('COCA COLA 2.25L $3400'))
-        self.tabla1.setItem(2,0,QTableWidgetItem('COCA COLA 3L $5200'))
-        self.tabla1.setItem(3,0,QTableWidgetItem('MEDIALUNAS  $2200'))
+        #self.tabla1.setItem(0,0,QTableWidgetItem(str('COCA COLA 1L $1200')))
+        #self.tabla1.setItem(1,0,QTableWidgetItem('COCA COLA 2.25L $3400'))
+        #self.tabla1.setItem(2,0,QTableWidgetItem('COCA COLA 3L $5200'))
+        #self.tabla1.setItem(3,0,QTableWidgetItem('MEDIALUNAS  $2200'))
         
         tabla2 = QTableView()
         self.tabla2 = QTableWidget()
@@ -69,12 +69,12 @@ class VistaTicket(QMainWindow):
         #####################IMPRIMIR#########################
         
         layout_imprimir = QHBoxLayout()
-        btn_imprimir = QPushButton("IMPRIMIR")
-        btn_imprimir.setFixedSize(250,40)
-        btn_imprimir.setStyleSheet('background-color: lightblue')
-        btn_imprimir.setContentsMargins(0,20,0,0)
+        self.btn_imprimir = QPushButton("IMPRIMIR")
+        self.btn_imprimir.setFixedSize(250,40)
+        self.btn_imprimir.setStyleSheet('background-color: lightblue')
+        self.btn_imprimir.setContentsMargins(0,20,0,0)
         
-        layout_imprimir.addWidget(btn_imprimir)
+        layout_imprimir.addWidget(self.btn_imprimir)
         
         ####################LAYOUT PANTALLA####################
         layout_vertical.addLayout(layout_cabecera)

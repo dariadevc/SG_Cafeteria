@@ -1,5 +1,8 @@
 from Visual.vista_ticket import VistaTicket
-from Modelo.producto_dao import ProductoDAO
+from Visual.vista_factura import PDF
+from Modelo.producto_DAO import ProductoDAO
+from PyQt6.QtWidgets import *
+from datetime import datetime
 
 class ControladorTicket:
     def __init__(self, vista):
@@ -18,6 +21,7 @@ class ControladorTicket:
             self.__vista_ticket.tabla1.setItem(fila, 0, descripcion)
             self.__vista_ticket.tabla1.setItem(fila, 1, cantidad)
 
+        
     def sumar_producto(self):
         items_seleccionados = self.__vista_ticket.tabla1.selectedItems()
         if len(items_seleccionados) > 0:
@@ -39,7 +43,8 @@ class ControladorTicket:
                 self.__vista_ticket.tabla1.setItem(fila_seleccionada, 2, QTableWidgetItem(str(cantidad_disponible - 1)))
         
     def restar_producto(self):
-        items_seleccionados = self.__vista_ticket.tabla2.selectedItems()
+        print("se resto un producto")
+        items_seleccionados = self.__vista_ticket.tabla1.selectedItems()
         if len(items_seleccionados) > 0:
             # fila_seleccionada = items_seleccionados[0].row()
             producto = items_seleccionados[0].text()
@@ -57,3 +62,9 @@ class ControladorTicket:
                             cantidad_disponible = int(self.__vista_ticket.tabla1.item(fila1, 2).text())
                             self.__vista_ticket.tabla1.setItem(fila1, 2, QTableWidgetItem(str(cantidad_disponible + 1)))
                             return
+                        
+
+    def imprimir_producto(self):
+        pdf = PDF()
+        lista = [("cola cola", 2,15.65 ),("cafe doble", 2,30.65 )]
+        pdf.crear_factura(nro_factura = '001', fecha= datetime.now(), lista_pedido=  lista, nro_mesa= '05', metodo_pago = 'Efectivo', empleado='Juan', dni= '39910232')

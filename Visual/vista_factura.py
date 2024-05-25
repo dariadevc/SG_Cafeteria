@@ -23,7 +23,7 @@ class PDF(FPDF):
         pdf.set_font('Arial', 'B', 12)    
         pdf.cell(0, 10, 'CAFETERIA VIERA', 0, 1, 'C')
         pdf.set_font('Arial', '', 12)
-        pdf.image("C://Users//camus//Desktop//SG_Cafeteria 18-05//vista//coffe.png", x=0, y=25, w=30,h=25)
+        pdf.image("C://Users//camus//Desktop//SG_Cafeteria_clone//Visual//imagenes//coffe.png", x=0, y=25, w=30,h=25)
         pdf.cell(200, 10, txt = "                        C.U.I.T : 20-13243654-39 ", ln = True, align = 'L')
         pdf.cell(200, 10, txt = "                        INGR. BRUTOS : 244541-02 ", ln = True, align = 'L')
         pdf.cell(200, 10, txt = "                        AV. SAN MARTIN 534", ln = True, align = 'L')

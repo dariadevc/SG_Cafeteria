@@ -13,6 +13,7 @@ class ControladorVenta:
         self.__vista_venta.boton_informe.clicked.connect(self.cambio_a_informe)
         self.__vista_venta.boton_generar_ticket.clicked.connect(self.cambio_a_generar)
         self.__vista_venta.boton_anular_venta.clicked.connect(self.cambio_a_anular)
+       
 
 
     
@@ -29,6 +30,9 @@ class ControladorVenta:
         self.__vista_venta.stacked_botones.setCurrentIndex(1)
         vista_ticket = self.__vista_venta.obtener_vista_ticket()
         self.controlador_ticket = ControladorTicket(vista_ticket)
+        self.__vista_venta.vista_ticket.btn_resta.clicked.connect(self.controlador_ticket.restar_producto)
+        self.__vista_venta.vista_ticket.btn_suma.clicked.connect(self.controlador_ticket.sumar_producto)
+        self.__vista_venta.vista_ticket.btn_imprimir.clicked.connect(self.controlador_ticket.imprimir_producto)
     
     def cambio_a_anular (self):
         self.__vista_venta.boton_generar_ticket.setStyleSheet("background-color: lightblue;")
