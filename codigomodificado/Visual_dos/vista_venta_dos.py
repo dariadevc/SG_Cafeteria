@@ -1,12 +1,12 @@
-from Visual.vista_cabecera import VistaCabecera
-from Visual.vista_ticket import VistaTicket
-from Visual.vista_anular import VistaAnular
+from Visual_dos.vista_cabecera import VistaCabecera
+from Visual_dos.vista_ticket import VistaTicket
+from Visual_dos.vista_anular import VistaAnular
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 
 class VentanaVenta (VistaCabecera):
     
-    def __init__(self):
+    def __init__(self, controlador):
         super().__init__()
         self.boton_venta.setStyleSheet("background-color: rgb(135, 206, 235);")
         layout_venta = QHBoxLayout()
@@ -24,25 +24,29 @@ class VentanaVenta (VistaCabecera):
         lbl_bienvenida = QLabel("BIENVENIDO A LA SECCION DE VENTAS")
         lbl_bienvenida.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
-        self.vista_ticket = VistaTicket()
-        self.vista_anular = VistaAnular()
+        #self.vista_ticket = VistaTicket()
+#        self.vista_anular = VistaAnular()
 
-        self.stacked_botones.addWidget(lbl_bienvenida)
-        self.stacked_botones.addWidget(self.vista_ticket)
-        self.stacked_botones.addWidget(self.vista_anular)
+        #self.stacked_botones.addWidget(lbl_bienvenida)
+        #self.stacked_botones.addWidget(self.vista_ticket)
+        #self.stacked_botones.addWidget(self.vista_anular)
         
         self.contenedor = QGroupBox()
         self.contenedor.setStyleSheet("background-color: lightblue;")
-        self.contenedor.setLayout(self.stacked_botones)
+        #self.contenedor.setLayout(self.stacked_botones)
         self.contenedor.setFixedSize(600,500)
         
         layout_venta.addLayout(self.layout_botones_venta)
         layout_venta.addWidget(self.contenedor)
         self.layout_principal.addLayout(layout_venta)
         
-        widget = QWidget()
-        widget.setLayout(self.layout_principal)
-        self.setCentralWidget(widget)
+        self.boton_cerrar.clicked.connect(controlador.cerrar_sesion)
+        self.boton_stock.clicked.connect(controlador.cambio_a_stock)
+        self.boton_informe.clicked.connect(controlador.cambio_a_informe)
+        self.boton_generar_ticket.clicked.connect(controlador.cambio_a_generar)
+        self.boton_anular_venta.clicked.connect(controlador.cambio_a_anular)
+        
+        self.setLayout(self.layout_principal)
 
-    def obtener_vista_ticket(self):
-        return self.vista_ticket
+    # def obtener_vista_ticket(self):
+    #     return self.vista_ticket

@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import *
 
 from Visual_dos.vista_inicio_sesion import VistaInicioSesion
 from Controlador_dos.controlador_vendedor import ControladorVendedor
+from Controlador_dos.controlador_jefe import ControladorJefe
 from Modelo_dos.usuario import Usuario
 
 class ControladorInicioSesion:
@@ -31,11 +32,14 @@ class ControladorInicioSesion:
         nombre_usuario = self.__vista.inputUsuario.text()
         contrasenia = self.__vista.inputContrasenia.text()
         
-        tipo = "vendedor"
+        tipo = "VENDEDOR"
         usuario = Usuario('','','',tipo,nombre_usuario,contrasenia,'','')
         
         if usuario.login() is not None:
-            self.inicio = ControladorVendedor(usuario)
+            if tipo == "VENDEDOR":
+                self.inicio = ControladorVendedor(usuario)
+            else:
+                self.inicio = ControladorJefe(usuario)
             self.__vista.close()
         else:
             self.__vista.etiqueta_error.setText('Usuario o contrasena Incorrecta') 

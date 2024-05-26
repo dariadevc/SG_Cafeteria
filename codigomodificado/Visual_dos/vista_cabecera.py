@@ -4,15 +4,15 @@ from PyQt6.QtGui import *
 import sys
 
 
-class VistaCabecera (QMainWindow):
+class VistaCabecera (QWidget):
     
     def __init__(self):
         super().__init__()
         self.setStyleSheet("background-color: rgb(135, 206, 235);")
         
-        self.btn_cerrar = QPushButton("Cerrar\nSesion")
-        self.btn_cerrar.setFixedSize(80,60)
-        self.btn_cerrar.setStyleSheet("background-color: lightblue;")
+        self.boton_cerrar = QPushButton("Cerrar\nSesion")
+        self.boton_cerrar.setFixedSize(80,60)
+        self.boton_cerrar.setStyleSheet("background-color: lightblue;")
         
         self.label = QLabel("Nombre y Apellido")
         self.label.setFixedSize(500,60)
@@ -42,7 +42,7 @@ class VistaCabecera (QMainWindow):
         self.boton_informe.setFixedSize(220,25)
         
         layout_usuario.setContentsMargins(20,0,0,0)
-        layout_usuario.addWidget(self.btn_cerrar)
+        layout_usuario.addWidget(self.boton_cerrar)
         layout_usuario.addWidget(self.label)
         layout_usuario.addWidget(self.imagen)
         

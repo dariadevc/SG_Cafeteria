@@ -1,10 +1,9 @@
-import sys
 from PyQt6.QtCore import * 
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 
 
-class VistaInicioSesion(QMainWindow):
+class VistaInicioSesion(QWidget):
     def __init__(self,controlador):
         super().__init__()
         self.setWindowTitle("Bienvenido ")
@@ -96,6 +95,5 @@ class VistaInicioSesion(QMainWindow):
         
         self.contenedor_principal.addWidget(self.frame_imagen)   
         self.contenedor_principal.addWidget(self.frame_login)   
-        central_widget = QWidget()  
-        central_widget.setLayout(self.contenedor_principal)
-        self.setCentralWidget(central_widget)  
+        
+        self.setLayout(self.contenedor_principal)

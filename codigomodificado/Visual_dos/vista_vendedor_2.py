@@ -1,10 +1,10 @@
-from Visual.vista_cabecera import VistaCabecera
+from Visual_dos.vista_cabecera import VistaCabecera
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
-#from Visual.layout_venta import VistaVenta
+
 class VistaVendedor (VistaCabecera):
     
-    def __init__(self):
+    def __init__(self, controlador):
         super().__init__()
         
         layout_vendedor = QVBoxLayout()
@@ -16,6 +16,10 @@ class VistaVendedor (VistaCabecera):
         #self.stacked_botones.addWidget(VistaVenta())
         self.layout_principal.addLayout(layout_vendedor)
         
-        widget = QWidget()
-        widget.setLayout(self.layout_principal)
-        self.setCentralWidget(widget)
+        
+        self.boton_cerrar.clicked.connect(controlador.logout)
+        self.boton_venta.clicked.connect(controlador.cambio_a_venta)
+        self.boton_stock.clicked.connect(controlador.cambio_a_stock)
+        self.boton_informe.clicked.connect(controlador.cambio_a_informe)
+        
+        self.setLayout(self.layout_principal)
