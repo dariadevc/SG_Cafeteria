@@ -4,12 +4,12 @@ from PyQt6.QtGui import *
 import sys
 
 
-class VistaCabecera (QWidget):
+class VistaPrincipal (QWidget):
     
     def __init__(self):
         super().__init__()
         self.setStyleSheet("background-color: rgb(135, 206, 235);")
-        
+        self.setWindowTitle("SG - Cafeteria")
         self.boton_cerrar = QPushButton("Cerrar\nSesion")
         self.boton_cerrar.setFixedSize(80,60)
         self.boton_cerrar.setStyleSheet("background-color: lightblue;")
@@ -32,14 +32,11 @@ class VistaCabecera (QWidget):
         self.layout_botones = QHBoxLayout()
         
         self.boton_venta = QPushButton("VENTA")
-        self.boton_venta.setFixedSize(220,25)
         self.boton_venta.setStyleSheet("background-color: lightblue;")
         self.boton_stock = QPushButton("STOCK")
-        self.boton_stock.setFixedSize(220,25)
         self.boton_stock.setStyleSheet("background-color: lightblue;")
         self.boton_informe = QPushButton("INFORME")
         self.boton_informe.setStyleSheet("background-color: lightblue;")
-        self.boton_informe.setFixedSize(220,25)
         
         layout_usuario.setContentsMargins(20,0,0,0)
         layout_usuario.addWidget(self.boton_cerrar)
@@ -50,7 +47,10 @@ class VistaCabecera (QWidget):
         self.layout_botones.addWidget(self.boton_stock)
         self.layout_botones.addWidget(self.boton_informe)
         
-        self.stacked_botones = QStackedLayout()
+        self.stacked_layout = QStackedLayout()
         
         self.layout_principal.addLayout(layout_usuario)
         self.layout_principal.addLayout(self.layout_botones)
+        self.layout_principal.addLayout(self.stacked_layout)
+        
+        self.setLayout(self.layout_principal)

@@ -1,4 +1,4 @@
-from Visual_dos.vista_vendedor_2 import VistaVendedor
+from Visual_dos.vista_vendedor import VistaVendedor
 from Controlador_dos.controlador_venta import ControladorVenta
 import Controlador_dos.controlador_inicio
 

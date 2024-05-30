@@ -1,6 +1,4 @@
-# from Visual_dos.vista_ticket import VistaTicket
-#import Visual_dos.vista_ticket
-import Visual_dos.vista_ticket_dos
+from Visual_dos.vista_ticket import VistaTicket
 from Visual_dos.vista_factura import PDF
 from Modelo_dos.producto_DAO import ProductoDAO
 from PyQt6.QtWidgets import *
@@ -11,18 +9,15 @@ import Controlador_dos.controlador_venta
 
 class ControladorTicket:
     def __init__(self, usuario):
-        #self.__vista_ticket = Visual_dos.vista_ticket.VistaTicket()
         self.__usuario = usuario
-        nombre = usuario.get_usuario()
-        self.__vista_ticket = Visual_dos.vista_ticket_dos.VistaTicketDos(self)
+        #nombre = usuario.get_usuario()
+        self.__vista_ticket = VistaTicket()
         self.__vista_ticket.show()
         self.__producto_dao = ProductoDAO()
-        self.__vista_ticket.label.setText(nombre)
         self.cargar_productos()
     
     def cargar_productos(self):
         productos = self.__producto_dao.obtener_todos_productos(1)
-        #print(productos)
         self.__vista_ticket.tabla1.setRowCount(len(productos))
         for fila, producto in enumerate(productos):
             descripcion = QTableWidgetItem(f"{producto[1]}")
@@ -71,7 +66,7 @@ class ControladorTicket:
                         if self.__vista_ticket.tabla1.item(fila1, 0).text() == producto:
                             cantidad_disponible = int(self.__vista_ticket.tabla1.item(fila1, 2).text())
                             self.__vista_ticket.tabla1.setItem(fila1, 2, QTableWidgetItem(str(cantidad_disponible + 1)))
-                            return
+                            #return
 
 
     def imprimir_producto(self):

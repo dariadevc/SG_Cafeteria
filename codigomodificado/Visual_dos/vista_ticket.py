@@ -1,13 +1,15 @@
-from Visual_dos.vista_venta_dos import VentanaVenta
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
+import Controlador_dos.controlador_generar_ticket
 
-class VistaTicketDos (VentanaVenta):
+class VistaTicket(QWidget):
     
-    def __init__(self, controlador):
-        super().__init__(controlador)
+    def __init__(self):
+        super().__init__()
         
         layout_vertical = QVBoxLayout()
+        
+        ########################CABECERA########################
         
         layout_cabecera = QHBoxLayout()
         layout_cabecera.setContentsMargins(170,0,120,0)
@@ -20,6 +22,8 @@ class VistaTicketDos (VentanaVenta):
         layout_cabecera.addWidget(qle)
         layout_cabecera.setAlignment(Qt.AlignmentFlag.AlignTop)
         
+        ########################################################
+        
         self.layout_mas_menos = QHBoxLayout()
         self.btn_suma = QPushButton("+")
         self.btn_resta = QPushButton("-")
@@ -28,15 +32,19 @@ class VistaTicketDos (VentanaVenta):
         self.layout_mas_menos.setContentsMargins(0,0,0,0)
         self.layout_mas_menos.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         
+        ######################TABLAS##############################
+        
         layout_tablas = QHBoxLayout()
         
         self.tabla1 = QTableWidget()
         self.tabla1.setColumnCount(2)
-        #self.tabla1.setRowCount(20)
+        self.tabla1.setRowCount(20)
         self.tabla1.verticalHeader().setVisible(False)
         self.tabla1.horizontalHeader().setVisible(False)
         self.tabla1.setColumnWidth(0,200)
         self.tabla1.setColumnWidth(1,65)
+        
+        self.tabla1.adjustSize()
         
         self.tabla2 = QTableWidget()
         self.tabla2.setColumnCount(2)
@@ -49,6 +57,9 @@ class VistaTicketDos (VentanaVenta):
         layout_tablas.addWidget(self.tabla1)
         layout_tablas.addWidget(self.tabla2)
         
+        
+        #####################IMPRIMIR#########################
+        
         layout_imprimir = QHBoxLayout()
         self.btn_imprimir = QPushButton("IMPRIMIR")
         self.btn_imprimir.setFixedSize(250,40)
@@ -57,6 +68,7 @@ class VistaTicketDos (VentanaVenta):
         
         layout_imprimir.addWidget(self.btn_imprimir)
         
+        ####################LAYOUT PANTALLA####################
         layout_vertical.addLayout(layout_cabecera)
         layout_vertical.addLayout(self.layout_mas_menos)
         layout_vertical.addLayout(layout_tablas)
@@ -64,14 +76,7 @@ class VistaTicketDos (VentanaVenta):
         layout_vertical.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         layout_vertical.setContentsMargins(10,10,10,10)
         
-        self.contenedor.setLayout(layout_vertical)
-        
-        self.btn_suma.clicked.connect(controlador.sumar_producto)
-        self.btn_resta.clicked.connect(controlador.restar_producto)
-        self.btn_imprimir.clicked.connect(controlador.imprimir_producto)
-        self.boton_cerrar.clicked.connect(controlador.cerrar_sesion)
-        self.boton_stock.clicked.connect(controlador.cambio_a_stock)
-        self.boton_informe.clicked.connect(controlador.cambio_a_informe)
-        self.boton_generar_ticket.clicked.connect(controlador.cambio_a_generar)
-        self.boton_anular_venta.clicked.connect(controlador.cambio_a_anular)
-        
+        self.setLayout(layout_vertical)
+    
+    def lleno_tabla (self):
+        Controlador_dos.controlador_generar_ticket.ControladorTicket(self).cargar_productos()

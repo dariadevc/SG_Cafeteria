@@ -6,7 +6,6 @@ class ControladorJefe:
     def __init__(self, usuario):
         self.__vista_jefe = VistaJefe(self)
         self.__vista_jefe.show()
-        self.__vista_jefe.stack_layout.setCurrentIndex(0)
         self.__vista_jefe.label.setText("Bienvenidoo " + usuario.get_usuario())
     
     def cerrar_sesion (self):
