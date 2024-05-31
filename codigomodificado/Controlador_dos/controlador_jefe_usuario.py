@@ -1,9 +1,9 @@
 from Visual_dos.ventana_usuario_jefe import VentanaUsuarioJefe
-#from Modelo_dos.usuario import Usuario
 from Modelo_dos.usuario_DAO import UsuarioDAO
 import Controlador_dos.controlador_inicio
 from Controlador_dos.controlador_agregar_usuarios import ControladorAgregarUsuario
 from Controlador_dos.controlador_eliminar_usuarios import ControladorEliminarUsuario
+from Controlador_dos.controlador_modificar_usuario import ControladorModificarUsuario
 from PyQt6.QtWidgets import *
 
 class ControladorJefeUsuario:
@@ -54,11 +54,10 @@ class ControladorJefeUsuario:
         self.__controlador_agregar = ControladorAgregarUsuario()
     
     def modificar_usuario (self):
-        print("modificar")
         usuario_seleccionado = self.__ventana_usuario_jefe.tabla_usuarios.selectedItems()
-        #self.__controlador_modificar = ControladorModificarUsuario(usuario_seleccionado)
+        usuario_a_modificar = self.__usuario_dao.obtener_un_usuario(usuario_seleccionado[0].text())
+        self.__controlador_modificar = ControladorModificarUsuario(usuario_a_modificar)
     
     def eliminar_usuario (self):
         usuario_seleccionado = self.__ventana_usuario_jefe.tabla_usuarios.selectedItems()
-        #print(usuario_seleccionado[0].text())
         self.__controlador_eliminar = ControladorEliminarUsuario(usuario_seleccionado[0].text())

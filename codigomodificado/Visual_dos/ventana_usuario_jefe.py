@@ -16,15 +16,6 @@ class VentanaUsuarioJefe (VistaJefe):
         self.tabla_usuarios.setRowCount(8)
         self.tabla_usuarios.setFixedSize(550,450)
         
-        self.tabla_usuarios.setItem(1,0,QTableWidgetItem("3423234324"))
-        self.tabla_usuarios.setItem(1,1,QTableWidgetItem("fila uno"))
-        self.tabla_usuarios.setItem(1,2,QTableWidgetItem("ape1"))
-        self.tabla_usuarios.setItem(1,3,QTableWidgetItem("tipo"))
-        self.tabla_usuarios.setItem(1,4,QTableWidgetItem("nose"))
-        self.tabla_usuarios.setItem(3,0,QTableWidgetItem("12412412"))
-        self.tabla_usuarios.setItem(1,1,QTableWidgetItem("olanda"))
-        self.tabla_usuarios.setItem(3,2,QTableWidgetItem("qhcace"))
-        
         self.tabla_usuarios.setHorizontalHeaderLabels(["DNI","NOMBRE","APELLIDO","TIPO","BAJA","CAUSA"])
         self.tabla_usuarios.verticalHeader().setVisible(False)
         self.tabla_usuarios.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)

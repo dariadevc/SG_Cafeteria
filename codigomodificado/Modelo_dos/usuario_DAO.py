@@ -27,9 +27,11 @@ class UsuarioDAO:
         print(f"Se dio la baja lógica del usuario con el dni {dni}")
 
     ## TODO: Agregar los "usuario_modificado.get_[x]" cuando los defina.
-    def modificar_usuario(self, dni):  # , usuario_modificado=Usuario):
-        consulta = 'UPDATE public."usuarios" SET dni_empleado = %s, nombre_empleado = %s, apellido_empleado = %s, nombre_usuario = %s, contra = %s WHERE dni_empleado = %s;'
-        valores = ()
+    #def modificar_usuario(self, dni):  # , usuario_modificado=Usuario):
+    def modificar_usuario (self,dni,nombre,apellido,nombre_usuario,contrasenia):
+        #consulta = 'UPDATE public."usuarios" SET dni_empleado = %s, nombre_empleado = %s, apellido_empleado = %s, nombre_usuario = %s, contra = %s WHERE dni_empleado = %s;'
+        consulta = 'UPDATE public."usuarios" SET nombre_empleado = %s, apellido_empleado = %s, nombre_usuario = %s, contra = %s WHERE dni_empleado = %s;'
+        valores = (nombre,apellido,nombre_usuario,contrasenia,dni)
         self.base.consulta(consulta, valores)
         print(f"Se modificaron los datos del usuario con el dni {dni}")
 
