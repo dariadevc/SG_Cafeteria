@@ -25,7 +25,7 @@ class VistaPrincipal (QWidget):
         self.imagen.setFixedSize(100,80)
         self.imagen.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
-        self.setFixedSize(750,670)
+        self.setFixedSize(750,640)
         self.layout_principal = QVBoxLayout()
         
         layout_usuario = QHBoxLayout()

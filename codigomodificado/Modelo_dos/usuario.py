@@ -93,3 +93,6 @@ class Usuario:
     def login(self):
         result = self.__usuariodao.login_usuario(self.__usuario, self.__contra)
         return result
+
+    def agregar_a_bd (self):
+        self.__usuariodao.agregar_usuario(self.__dni,self.__nombre,self.__apellido,self.__usuario,self.__contra)
