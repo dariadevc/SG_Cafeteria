@@ -7,7 +7,7 @@ class VentanaModificarUsuario (QWidget):
     def __init__(self, controlador):
         super().__init__()
         
-        self.setFixedSize(QSize(400,300))
+        self.setFixedSize(QSize(400,350))
         
         palette = QPalette()
         palette.setColor(QPalette.ColorGroup.All, QPalette.ColorRole.Window, QColor(135, 206, 235)) #color de la ventana
@@ -16,8 +16,13 @@ class VentanaModificarUsuario (QWidget):
         layout_modificar_usuario = QVBoxLayout()
         layout_modificar_usuario.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
+        layout_bienvenida = QVBoxLayout()
+        
         self.label_0 = QLabel("Bienvenido a Modificar Usuario")
         self.label_0.setStyleSheet("font: bold;")
+        
+        layout_bienvenida.addWidget(self.label_0)
+        
         self.label_1 = QLabel("DNI del Usuario a Modificar: ")
         self.label_1.setStyleSheet("font: bold;")
         self.label_dni = QLabel()
@@ -44,7 +49,9 @@ class VentanaModificarUsuario (QWidget):
         self.boton_modificar = QPushButton("Guardar Usuario")
         self.boton_modificar.clicked.connect(controlador.modificar_usuario)
         
-        layout_modificar_usuario.addWidget(self.label_0)
+        layout_bienvenida.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout_bienvenida.setSpacing(20)
+        layout_modificar_usuario.addLayout(layout_bienvenida)
         layout_modificar_usuario.addWidget(self.label_1)
         layout_modificar_usuario.addWidget(self.label_2)
         layout_modificar_usuario.addWidget(self.input_1)

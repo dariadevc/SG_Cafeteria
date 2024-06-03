@@ -5,6 +5,7 @@ from Controlador_dos.controlador_agregar_usuarios import ControladorAgregarUsuar
 from Controlador_dos.controlador_eliminar_usuarios import ControladorEliminarUsuario
 from Controlador_dos.controlador_modificar_usuario import ControladorModificarUsuario
 from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
 
 class ControladorJefeUsuario:
     
@@ -54,10 +55,22 @@ class ControladorJefeUsuario:
         self.__controlador_agregar = ControladorAgregarUsuario()
     
     def modificar_usuario (self):
-        usuario_seleccionado = self.__ventana_usuario_jefe.tabla_usuarios.selectedItems()
-        usuario_a_modificar = self.__usuario_dao.obtener_un_usuario(usuario_seleccionado[0].text())
-        self.__controlador_modificar = ControladorModificarUsuario(usuario_a_modificar)
+        try:
+            usuario_seleccionado = self.__ventana_usuario_jefe.tabla_usuarios.selectedItems()
+            usuario_a_modificar = self.__usuario_dao.obtener_un_usuario(usuario_seleccionado[0].text())
+            self.__controlador_modificar = ControladorModificarUsuario(usuario_a_modificar)
+        except IndexError:
+            self.__ventana_usuario_jefe.boton_modificar_usuario.setStyleSheet("background-color:gray")
+            QTimer.singleShot(1000,self.cambio_de_color)
     
     def eliminar_usuario (self):
-        usuario_seleccionado = self.__ventana_usuario_jefe.tabla_usuarios.selectedItems()
-        self.__controlador_eliminar = ControladorEliminarUsuario(usuario_seleccionado[0].text())
+        try:
+            usuario_seleccionado = self.__ventana_usuario_jefe.tabla_usuarios.selectedItems()
+            self.__controlador_eliminar = ControladorEliminarUsuario(usuario_seleccionado[0].text())
+        except IndexError:
+            self.__ventana_usuario_jefe.boton_eliminar_usuario.setStyleSheet("background-color:gray")
+            QTimer.singleShot(1000,self.cambio_de_color)
+    
+    def cambio_de_color (self):
+        self.__ventana_usuario_jefe.boton_eliminar_usuario.setStyleSheet("background-color: rgb(135, 206, 235)")
+        self.__ventana_usuario_jefe.boton_modificar_usuario.setStyleSheet("background-color: rgb(135, 206, 235)")
