@@ -1,7 +1,13 @@
 import sys
-#sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Controlador')
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Controlador')
 from Controlador_dos.controlador_inicio import ControladorInicioSesion
 from PyQt6.QtWidgets import QApplication
+
+
+# sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Controlador')
 
 
 app = QApplication(sys.argv)
