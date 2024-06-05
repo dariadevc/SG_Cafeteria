@@ -30,9 +30,9 @@ class VentanaPedido(QWidget):
         self._contenedor.setSpacing(30)
 
         self._contenedor_nombres = QHBoxLayout()
-        self._etiqueta_comida = QLabel("Comida")
+        self._etiqueta_comida = QLabel("Bebidas")
         self._etiqueta_comida.setStyleSheet("background-color: black; color: white;font-weight: bold;")
-        self._etiqueta_bebida = QLabel("Bebidas")
+        self._etiqueta_bebida = QLabel("Comida")
         self._etiqueta_bebida.setStyleSheet("background-color: black; color: white;font-weight: bold;")
         self._etiqueta_helado = QLabel("Helados")
         self._etiqueta_helado.setStyleSheet("background-color: black; color: white;font-weight: bold;")

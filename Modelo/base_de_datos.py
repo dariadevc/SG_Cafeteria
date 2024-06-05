@@ -36,14 +36,17 @@ class BaseDeDatos(metaclass=BaseDeDatosMeta):
 
             return f"{ex} Error en la consulta: {consulta}. No se pudo obtener el elemento de la base de datos."
 
-    def obtener_elementos(self, consulta):
+    def obtener_elementos(self, consulta, valores=None):
         """Devuelve uno o más elementos de la base de datos según la consulta realizada"""
         try:
             cursor = self.conexion.cursor()
-            cursor.execute(consulta)
+            if valores:
+                cursor.execute(consulta, valores)
+            else:
+                cursor.execute(consulta)
             return cursor.fetchall()
         except Exception as ex:
-            return f'{ex} Error en la consulta: "{consulta}". No se pudieron obtener los elemento de la base de datos.'
+            return f'{ex} Error en la consulta: "{consulta}". No se pudieron obtener los elementos de la base de datos.'
 
     def consulta(self, consulta, valores):
         """Permite realizar consultas a la base de datos."""
