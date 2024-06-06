@@ -1,38 +1,50 @@
 from Visual_dos.vista_venta import VentanaVenta
-from Controlador_dos.controlador_generar_ticket import ControladorTicket
+from Controlador_dos.controlador_pedido import ControladorPedido
 import Controlador_dos.controlador_vendedor
 import Controlador_dos.controlador_inicio
 from Visual_dos.vista_anular import VistaAnular
 
 from PyQt6.QtWidgets import *
 
+
 class ControladorVenta:
-    
+
     def __init__(self, usuario):
         self.__vista_venta = VentanaVenta(self)
-        self.__vista_venta.show()
+        # self.__vista_venta.show()
         self.__usuario = usuario
-        nombre_usuario = usuario.get_usuario()        
-        self.__vista_venta.label.setText(nombre_usuario)
+        self.__mesas_ocupadas = set()  # Almacena las mesas ocupadas
+        self.__pedido = None  # Para instanciar el controlador del pedido más adelante
 
-    def cerrar_sesion (self):
-        self.__cerrar = Controlador_dos.controlador_inicio.ControladorInicioSesion()
-        self.__vista_venta.close()
+        # Guarda las instancias de los pedidos, así no se abren muchas ventanas por mesa
+        self.pedidos_activos = {}
 
-    def cambio_a_stock (self):
-        self.__vendedor_stock = Controlador_dos.controlador_vendedor.ControladorVendedor(self.__usuario).cambio_a_stock()
-        self.__vista_venta.close()
-    
-    def cambio_a_informe (self):
-        self.__vendedor_informe = Controlador_dos.controlador_vendedor.ControladorVendedor(self.__usuario).cambio_a_informe()
-        self.__vista_venta.close()
-    
-    def cambio_a_generar (self):
-        self.__generar_ticket = ControladorTicket(self.__usuario)
-        #self.__vista_venta.close()
-    
-    def cambio_a_anular (self):
-        print("cambio a anular")
-        self.__vista = VistaAnular()
-        self.__vista.show()
-        #self.__vista_venta.close()
+    def get_vista(self):
+        return self.__vista_venta
+
+    def seleccionar_mesa(self, numero_mesa):
+        if numero_mesa in self.pedidos_activos:
+            self.__pedido = self.pedidos_activos[numero_mesa]
+            self.__pedido.abrir_ventana_pedido()
+        else:
+            self.__mesas_ocupadas.add(numero_mesa)
+            self.__vista_venta.actualizar_estado_mesas(self.__mesas_ocupadas)
+            self.__pedido = ControladorPedido(
+                self.__usuario, numero_mesa, self.actualizar_mesa
+            )
+            self.pedidos_activos[numero_mesa] = self.__pedido
+            self.__pedido.abrir_ventana_pedido()
+
+    def anular_venta(self, numero_mesa):
+        if numero_mesa in self.__mesas_ocupadas:
+            self.__mesas_ocupadas.remove(numero_mesa)
+            self.__vista_venta.actualizar_estado_mesas(self.__mesas_ocupadas)
+
+    def actualizar_mesa(self, numero_mesa, estado):
+        if estado == "ocupada":
+            self.__mesas_ocupadas.add(numero_mesa)
+        elif estado == "libre":
+            self.__mesas_ocupadas.remove(numero_mesa)
+            if numero_mesa in self.pedidos_activos:
+                del self.pedidos_activos[numero_mesa]
+        self.__vista_venta.actualizar_estado_mesas(self.__mesas_ocupadas)
