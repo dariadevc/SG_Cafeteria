@@ -1,4 +1,4 @@
-from Modelo_dos.base_de_datos import BaseDeDatos
+from Modelo.base_de_datos import BaseDeDatos
 from datetime import datetime
 
 
@@ -32,7 +32,7 @@ class ProductoDAO:
     #     consulta = f'SELECT * FROM public."productos" WHERE {acá va cod_producto} = {cod_producto}'
     #     return self.base.obtener_un_elemento(consulta)
 
-    def obtener_todos_productos(self, opcion):
+    def obtener_todos_productos(self):
         orden = [
             "cod_producto",
             "descripcion",
@@ -44,6 +44,21 @@ class ProductoDAO:
         consulta = 'SELECT * FROM public."productos";'# ORDER BY {orden[opcion]};'
         print("prueba")
         return self.__base.obtener_elementos(consulta)
+    
+    def obtener_productos_categoria(self, categoria):
+        orden = [
+            "cod_producto",
+            "descripcion",
+            "categoria",
+            "fecha",
+            "cantidad",
+            "stock_minimo",
+            "precio_unitario",
+        ]
+        consulta = 'SELECT * FROM public."productos" WHERE categoria = %s;'
+        valor = (categoria,)
+        print("descarga los elementos por categoria") 
+        return self.__base.obtener_elementos(consulta,valor)
 
     def agregar_stock(self, cod_producto, cantidad):
         consulta = 'UPDATE public."productos" SET cantidad = cantidad + %s, fecha = %s WHERE codigo_producto = %s;'

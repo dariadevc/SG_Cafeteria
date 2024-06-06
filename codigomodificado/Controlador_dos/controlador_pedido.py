@@ -8,7 +8,7 @@ import re
 # sys.path.append('C://Users//camus//Desktop//SG_Cafeteria)//Visual')
 # sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
 
-from Modelo.producto_DAO import ProductoDAO
+from codigomodificado.Modelo_dos.producto_DAO import ProductoDAO
 from codigomodificado.Visual_dos.vista_pedido import VentanaPedido
 from Visual.vista_factura import PDF
 
