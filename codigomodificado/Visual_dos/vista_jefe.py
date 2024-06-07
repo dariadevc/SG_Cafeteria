@@ -16,9 +16,6 @@ class VistaJefe(VistaPrincipal):
         self.boton_usuario.setStyleSheet("background-color:lightblue")
         self.layout_botones.addWidget(self.boton_usuario)
 
-        self.stacked_layout.addWidget(self.bienvenida)
-        self.stacked_layout.setCurrentIndex(0)
-
         self.boton_usuario.clicked.connect(controlador.cambio_a_usuario)
         self.boton_informe.clicked.connect(controlador.cambio_a_informe)
         self.boton_venta.clicked.connect(controlador.cambio_a_venta)

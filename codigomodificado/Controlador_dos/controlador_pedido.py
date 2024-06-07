@@ -1,4 +1,7 @@
 import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
@@ -8,9 +11,9 @@ import re
 # sys.path.append('C://Users//camus//Desktop//SG_Cafeteria)//Visual')
 # sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
 
-from codigomodificado.Modelo_dos.producto_DAO import ProductoDAO
-from codigomodificado.Visual_dos.vista_pedido import VentanaPedido
-from Visual.vista_factura import PDF
+from Modelo_dos.producto_DAO import ProductoDAO
+from Visual_dos.vista_pedido import VentanaPedido
+from Visual_dos.vista_factura import PDF
 
 
 class ControladorPedido:
@@ -92,13 +95,16 @@ class ControladorPedido:
                     etiqueta_cantidad = (
                         etiqueta_cantidad_item.widget()
                     )  # Obtiene la etiqueta de cantidad
-                    self.stock_producto= self.stock[indice_modificado]
+                    self.stock_producto = self.stock[indice_modificado]
                     if cantidad <= self.stock_producto:
-                            print(nueva_cantidad)
-                            etiqueta_cantidad.setText(str(nueva_cantidad)) 
+                        print(nueva_cantidad)
+                        etiqueta_cantidad.setText(str(nueva_cantidad))
                     else:
-                             etiqueta_cantidad.setStyleSheet(" color: red;")
-                             QTimer.singleShot(2000, lambda: etiqueta_cantidad.setStyleSheet("color: black;"))
+                        etiqueta_cantidad.setStyleSheet(" color: red;")
+                        QTimer.singleShot(
+                            2000,
+                            lambda: etiqueta_cantidad.setStyleSheet("color: black;"),
+                        )
         if (
             producto in self.diccionario_pedidos and cantidad == 0
         ):  # Eliminar el layout del producto si la cantidad es 0
@@ -199,22 +205,20 @@ class ControladorPedido:
             item5 = widget_5.text()
 
             lista_widgets.append((item1, item3, float(item5)))
-            lista_widget_stock.append((item1,item3))
-            
+            lista_widget_stock.append((item1, item3))
 
-            for nombre ,cantidad in  lista_widget_stock:
-                  
+            for nombre, cantidad in lista_widget_stock:
                 for producto in self.productos:
-                        if nombre == producto[1]:
-                            codigo =producto[0]
-                            break 
+                    if nombre == producto[1]:
+                        codigo = producto[0]
+                        break
                 print(codigo)
                 print(cantidad)
                 self.__producto_dao.disminuir_stock(codigo, cantidad)
 
         pdf = PDF()
         pdf.crear_factura(
-            nro_factura="001",
+            nro_factura=self.formatear_numero_factura(self.__numero_mesa),
             fecha=datetime.now(),
             lista_pedido=lista_widgets,
             nro_mesa=self.__numero_mesa,
@@ -228,6 +232,9 @@ class ControladorPedido:
         # Elimina instancia de pedido del diccionario de pedido
         # del self.controladores_pedidos[self.numero_mesa]
 
+    def formatear_numero_factura(self, nro_factura, longitud=7):
+        return "0000-" + str(nro_factura).zfill(longitud)
+
     def anular_pedido(self):
         self.__actualizar_mesa_callback(self.__numero_mesa, "libre")
         self.__vista_pedido.close()
@@ -238,11 +245,3 @@ class ControladorPedido:
 
     def abrir_ventana_pedido(self):
         self.__vista_pedido.show()
-
-
-# """
-# if __name__ == "__main__":
-#     app = QApplication([])
-#     controlador_pedido = ControladorPedido()
-#     app.exec()
-# """

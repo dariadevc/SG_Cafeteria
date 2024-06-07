@@ -30,7 +30,6 @@ class FacturaDAO:
             monto_total,
             self.__hora_actual,
         )
-        # self.__base.consulta(consulta, valores)
         ## RETURNING hace que devuelva el id de la factura recién creada
         try:
             id_factura = self.__base.obtener_un_elemento(consulta, valores)
@@ -39,8 +38,6 @@ class FacturaDAO:
         except Exception as e:
             print("Error al obtener las facturas por fecha:", e)
             return None
-
-        return id_factura
 
     def agregar_detalle_factura(self, id_factura, id_producto, cantidad):
         consulta = 'INSERT into public."detalle_factura"(id_factura, id_producto, cantidad) VALUES (%s, %s, %s)'
@@ -78,4 +75,4 @@ class FacturaDAO:
             return None
 
 
-print(FacturaDAO().obtener_producto_por_factura(1))
+## print(FacturaDAO().obtener_producto_por_factura(1))
