@@ -12,6 +12,7 @@ class ControladorStock:
         self.__producto_dao = ProductoDAO()
         self.__ventana_stock.show()
         self.cargar_productos()
+
     
     def cargar_productos (self):
         self.__ventana_stock.limpiar_tabla()

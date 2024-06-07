@@ -1,7 +1,7 @@
 from Visual_dos.vista_vendedor import VistaVendedor
 from Visual_dos.vista_venta import VentanaVenta
-from Visual_dos.vista_stock import VistaStock
 from Controlador_dos.controlador_venta import ControladorVenta
+from Controlador_dos.controlador_stock import ControladorStock
 import Controlador_dos.controlador_inicio
 
 
@@ -16,12 +16,12 @@ class ControladorVendedor:
 
         ## Instancia secciones con sus controladores
         self.__controlador_venta = ControladorVenta(usuario, self.__id_usuario)
-        # self.__controlador_stock = ControladorStock()
+        self.__controlador_stock = ControladorStock()
         # self.__controlador_informe = ControladorInforme()
 
         self.__vista_venta = self.__controlador_venta.get_vista()
         # self.__vista_stock = self.__controlador_stock.get_vista()
-        self.__vista_stock = VistaStock()  # Para probar que funciona el stacked
+        self.__vista_stock = self.__controlador_stock.get_vista() # Para probar que funciona el stacked
         # self.__vista_informe = self.__controlador_informe.get_vista()
 
         ## Agrega secciones al stacked layout
