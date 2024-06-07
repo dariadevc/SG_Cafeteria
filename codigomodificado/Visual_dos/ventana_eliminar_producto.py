@@ -23,7 +23,7 @@ class VentanaEliminarProducto (QWidget):
         self.combo_box = QComboBox()
         self.combo_box.addItems(["Stock Insuficiente","Poca demanda"])
         
-        self.boton_eliminar = QPushButton("Eliminar Usuario")
+        self.boton_eliminar = QPushButton("Eliminar Producto")
         self.boton_eliminar.clicked.connect(controlador.eliminar_producto)
         
         self.layout_ventana.addWidget(self.label_1)

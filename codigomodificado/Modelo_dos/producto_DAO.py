@@ -31,9 +31,9 @@ class ProductoDAO:
         self.__base.consulta(consulta, valores)
         print(f"Se modificaron los datos del producto con el código {cod_prod}")
 
-    # def obtener_un_producto(self, cod_prod):
-    #     consulta = f'SELECT * FROM public."productos" WHERE {acá va cod_producto} = {cod_producto}'
-    #     return self.base.obtener_un_elemento(consulta)
+    def obtener_un_producto(self, codigo):
+        consulta = f'SELECT * FROM public."productos" WHERE codigo_producto ={codigo}'
+        return self.__base.obtener_un_elemento(consulta)
 
     def obtener_todos_productos(self):
         orden = [
@@ -44,8 +44,7 @@ class ProductoDAO:
             "stock_minimo",
             "precio_unitario",
         ]
-        consulta = 'SELECT * FROM public."productos";'  # ORDER BY {orden[opcion]};'
-        print("prueba")
+        consulta = 'SELECT * FROM public."productos"'  # ORDER BY {orden[opcion]};'
         return self.__base.obtener_elementos(consulta)
 
     def obtener_productos_categoria(self, categoria):
@@ -91,4 +90,4 @@ class ProductoDAO:
 # ProductoDAO().disminuir_stock(2, 10)
 # print(ProductoDAO().obtener_stock_minimo(1))
 
-print(ProductoDAO().obtener_productos_categoria("A"))
+#print(ProductoDAO().obtener_productos_categoria("A"))

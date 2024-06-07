@@ -9,9 +9,6 @@ class VistaJefe(VistaPrincipal):
     def __init__(self, controlador):
         super().__init__()
 
-        # self.bienvenida = QLabel("Bienvenidooo")
-        # self.bienvenida.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
         self.boton_usuario = QPushButton("USUARIO")
         self.boton_usuario.setStyleSheet("background-color:lightblue")
         self.layout_botones.addWidget(self.boton_usuario)
