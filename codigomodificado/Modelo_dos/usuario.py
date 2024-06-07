@@ -7,6 +7,7 @@ from Modelo_dos.usuario_DAO import UsuarioDAO
 
 class Usuario:
     def __init__(self, datos):
+        self.__id_usuario = datos[0]
         self.__dni = datos[1]
         self.__nombre = datos[2]
         self.__apellido = datos[3]
@@ -18,6 +19,10 @@ class Usuario:
         self.__usuariodao = UsuarioDAO()
 
     ## Getters y Setters
+
+    def get_id(self):
+        print("Se solicitó el dni del usuario.")
+        return self.__id_usuario
 
     def get_dni(self):
         print("Se solicitó el dni del usuario.")

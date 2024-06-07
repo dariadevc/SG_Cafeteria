@@ -55,7 +55,7 @@ class ControladorInicioSesion:
                 # self.inicio = ControladorJefe(usuario)
             else:
                 if not usuario.get_baja():
-                    self.inicio = ControladorVendedor(usuario)
+                    self.inicio = ControladorVendedor(usuario, usuario.get_id)
                     print("Inicio sesión de vendedor")
                 else:
                     self.__vista.etiqueta_error.setText(

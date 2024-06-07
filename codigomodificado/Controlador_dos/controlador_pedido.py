@@ -12,6 +12,7 @@ import re
 # sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
 
 from Modelo_dos.producto_DAO import ProductoDAO
+from Modelo_dos.factura_DAO import FacturaDAO
 from Visual_dos.vista_pedido import VentanaPedido
 from Visual_dos.vista_factura import PDF
 
@@ -19,7 +20,7 @@ from Visual_dos.vista_factura import PDF
 class ControladorPedido:
     def __init__(
         self,
-        usuario,
+        id_usuario,
         numero_mesa,
         actualizar_mesa_callback,
         productos_seleccionados=None,
@@ -27,7 +28,7 @@ class ControladorPedido:
         self.__vista_pedido = VentanaPedido(self, numero_mesa)
         self.__vista_pedido.show()
         # self.__vista_pedido.closed.connect(self.cerrar_ventana_pedido)
-        self.__usuario = usuario
+        self.__id_usuario = id_usuario
         self.__numero_mesa = numero_mesa
         self.__actualizar_mesa_callback = actualizar_mesa_callback
         self.__productos_seleccionados = productos_seleccionados or {}
@@ -55,6 +56,9 @@ class ControladorPedido:
         )
         for producto in self.__vista_pedido.productos_agregados:
             print(f"Descripción: {producto[0]}, Cantidad: {producto[1]}")
+
+        ## instancia facturaDAO
+        self.__factura = FacturaDAO()
 
     def llenar_tabla(self, tabla, productos):
         for producto in productos:
@@ -207,25 +211,44 @@ class ControladorPedido:
             lista_widgets.append((item1, item3, float(item5)))
             lista_widget_stock.append((item1, item3))
 
-            for nombre, cantidad in lista_widget_stock:
-                for producto in self.productos:
-                    if nombre == producto[1]:
-                        codigo = producto[0]
-                        break
-                print(codigo)
-                print(cantidad)
-                self.__producto_dao.disminuir_stock(codigo, cantidad)
+        for nombre, cantidad in lista_widget_stock:
+            for producto in self.productos:
+                if nombre == producto[1]:
+                    codigo = producto[0]
+                    break
+            print(codigo)
+            print(cantidad)
+            self.__producto_dao.disminuir_stock(codigo, cantidad)
 
-        pdf = PDF()
-        pdf.crear_factura(
-            nro_factura=self.formatear_numero_factura(self.__numero_mesa),
-            fecha=datetime.now(),
-            lista_pedido=lista_widgets,
+        # Agregar la factura a la base de datos
+        monto_bruto = sum(float(item[2]) for item in lista_widgets)
+        nro_factura = self.formatear_numero_factura(self.__numero_mesa)
+        id_factura = self.__factura.agregar_factura(
+            monto_bruto=monto_bruto,
             nro_mesa=self.__numero_mesa,
-            metodo_pago="Efectivo",
-            empleado=self.__usuario,
-            dni="39910232",
+            cod_pago=1,  # Acá deberíamos agregar el código del pago
+            id_empleado=self.__id_usuario,  # Acá deberíamos agregar el id del usuario que esta usando el sistema
+            monto_total=monto_bruto,  # Acá debería aplicarse el descuento si lo hacemos
         )
+
+        # Agregar los detalles de la factura a la base de datos
+        for producto, cantidad, precio in lista_widgets:
+            for prod in self.productos:
+                if prod[1] == producto:
+                    id_producto = prod[0]
+                    break
+            self.__factura.agregar_detalle_factura(id_factura, id_producto, cantidad)
+
+        # pdf = PDF()
+        # pdf.crear_factura(
+        #     nro_factura=self.formatear_numero_factura(id_factura),
+        #     fecha=datetime.now(),
+        #     lista_pedido=lista_widgets,
+        #     nro_mesa=self.__numero_mesa,
+        #     metodo_pago="Efectivo",
+        #     empleado=self.__usuario,
+        #     dni="39910232",
+        # )
         self.__actualizar_mesa_callback(self.__numero_mesa, "libre")
         self.__vista_pedido.close()
 

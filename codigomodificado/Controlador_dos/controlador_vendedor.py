@@ -7,14 +7,15 @@ import Controlador_dos.controlador_inicio
 
 class ControladorVendedor:
 
-    def __init__(self, usuario):
+    def __init__(self, usuario, id_usuario):
         self.__vista_vendedor = VistaVendedor(self)
-        self._usuario = usuario
+        self.__usuario = usuario
+        self.__id_usuario = id_usuario
         nombre_usuario = usuario.get_usuario()
         self.__vista_vendedor.label.setText(nombre_usuario)
 
         ## Instancia secciones con sus controladores
-        self.__controlador_venta = ControladorVenta(usuario)
+        self.__controlador_venta = ControladorVenta(usuario, self.__id_usuario)
         # self.__controlador_stock = ControladorStock()
         # self.__controlador_informe = ControladorInforme()
 

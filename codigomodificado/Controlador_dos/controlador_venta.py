@@ -9,8 +9,9 @@ from PyQt6.QtWidgets import *
 
 class ControladorVenta:
 
-    def __init__(self, usuario):
+    def __init__(self, usuario, id_usuario):
         self.__vista_venta = VentanaVenta(self)
+        self.__id_usuario = id_usuario
         # self.__vista_venta.show()
         self.__usuario = usuario
         self.__mesas_ocupadas = set()  # Almacena las mesas ocupadas
@@ -30,7 +31,7 @@ class ControladorVenta:
             self.__mesas_ocupadas.add(numero_mesa)
             self.__vista_venta.actualizar_estado_mesas(self.__mesas_ocupadas)
             self.__pedido = ControladorPedido(
-                self.__usuario, numero_mesa, self.actualizar_mesa
+                self.__id_usuario, numero_mesa, self.actualizar_mesa
             )
             self.pedidos_activos[numero_mesa] = self.__pedido
             self.__pedido.abrir_ventana_pedido()
