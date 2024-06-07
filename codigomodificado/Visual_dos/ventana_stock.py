@@ -1,7 +1,6 @@
-#from Visual_dos.vista_jefe import VistaJefe
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
-
+from PyQt6.QtGui import *
 
 class VentanaStock (QWidget):
     
@@ -11,9 +10,10 @@ class VentanaStock (QWidget):
         
         ###################################################
         self.tabla_productos = QTableWidget()
-        self.tabla_productos.setColumnCount(8)
+        self.tabla_productos.setColumnCount(9)
         self.tabla_productos.setFixedSize(550,450)
-        self.tabla_productos.setColumnWidth(1,30)##descripcion
+        self.tabla_productos.setColumnWidth(0,20)
+        self.tabla_productos.setColumnWidth(1,100)##descripcion
         self.tabla_productos.setColumnWidth(2,80)##categoria
         self.tabla_productos.setColumnWidth(3,60)##fecha
         self.tabla_productos.setColumnWidth(4,70)##cantidad
@@ -21,15 +21,19 @@ class VentanaStock (QWidget):
         self.tabla_productos.setColumnWidth(6,50)##baja
         self.tabla_productos.setColumnWidth(7,95)
         
-        self.tabla_productos.setHorizontalHeaderLabels(["Descripcion","Cat","FechaMod","Cantidad","StockMin","Precio","Baja","Causa"])
+        self.tabla_productos.setHorizontalHeaderLabels(["cod","Descripcion","Cat","FechaMod","Cantidad","StockMin","Precio","Baja","Causa"])
         self.tabla_productos.verticalHeader().setVisible(False)
         self.tabla_productos.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tabla_productos.cellClicked.connect(self.selecciono_fila)
         ###################################################
         self.layout_botonera = QVBoxLayout()
         
+        icon = QPixmap("C://Users//Alan//Desktop//clon//codigomodificado//Visual_dos//imagenes//refrescar3.jpg").scaled(25,25)
+        
         self.boton_refrescar_tabla = QPushButton()
         self.boton_refrescar_tabla.setFixedSize(80,30)
+        self.boton_refrescar_tabla.setIcon(QIcon(icon))
+        self.boton_refrescar_tabla.setIconSize(icon.size())
         self.boton_agregar_producto = QPushButton("AGREGAR PRODUCTO")
         self.boton_agregar_producto.setFixedSize(120,70)
         self.boton_modificar_producto = QPushButton("MODIFICAR PRODUCTO")
