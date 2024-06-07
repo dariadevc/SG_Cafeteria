@@ -50,9 +50,9 @@ class ControladorInicioSesion:
         if usuario_datos is not None:
             usuario = Usuario(usuario_datos)
             print("Valor de baja:", usuario.get_baja())
-            if usuario.get_tipo() == True:
+            if usuario.get_tipo():
                 print("Inicio sesión de jefe")
-                # self.inicio = ControladorJefe(usuario)
+                self.inicio = ControladorJefe(usuario, usuario.get_id)
             else:
                 if not usuario.get_baja():
                     self.inicio = ControladorVendedor(usuario, usuario.get_id)

@@ -239,16 +239,16 @@ class ControladorPedido:
                     break
             self.__factura.agregar_detalle_factura(id_factura, id_producto, cantidad)
 
-        # pdf = PDF()
-        # pdf.crear_factura(
-        #     nro_factura=self.formatear_numero_factura(id_factura),
-        #     fecha=datetime.now(),
-        #     lista_pedido=lista_widgets,
-        #     nro_mesa=self.__numero_mesa,
-        #     metodo_pago="Efectivo",
-        #     empleado=self.__usuario,
-        #     dni="39910232",
-        # )
+        pdf = PDF()
+        pdf.crear_factura(
+            nro_factura=self.formatear_numero_factura(id_factura),
+            fecha=datetime.now(),
+            lista_pedido=lista_widgets,
+            nro_mesa=self.__numero_mesa,
+            metodo_pago="Efectivo",
+            empleado=self.__id_usuario,
+            dni="39910232",
+        )
         self.__actualizar_mesa_callback(self.__numero_mesa, "libre")
         self.__vista_pedido.close()
 

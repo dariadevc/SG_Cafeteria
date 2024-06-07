@@ -47,7 +47,7 @@ class VentanaStock(QWidget):
         self.layout_botonera = QVBoxLayout()
 
         icon = QPixmap(
-            "C://Users//Alan//Desktop//clon//codigomodificado//Visual_dos//imagenes//refrescar3.jpg"
+             "C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//refrescar3.jpg"
         ).scaled(25, 25)
 
         self.boton_refrescar_tabla = QPushButton()

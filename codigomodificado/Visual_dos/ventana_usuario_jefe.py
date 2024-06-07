@@ -12,14 +12,20 @@ class VentanaUsuarioJefe (QWidget):
         self.tabla_usuarios = QTableWidget()
         self.tabla_usuarios.setColumnCount(6)
         self.tabla_usuarios.setColumnWidth(0,100)
-        self.tabla_usuarios.setColumnWidth(3,30)
-        self.tabla_usuarios.setColumnWidth(4,40)
-        self.tabla_usuarios.setColumnWidth(5,150)
+        self.tabla_usuarios.setColumnWidth(3,80)
+        self.tabla_usuarios.setColumnWidth(4,150)
+        self.tabla_usuarios.setColumnWidth(5,50)
         self.tabla_usuarios.setFixedSize(550,450)
         
-        self.tabla_usuarios.setHorizontalHeaderLabels(["DNI","NOMBRE","APELLIDO","TIPO","BAJA","CAUSA"])
+        self.tabla_usuarios.setHorizontalHeaderLabels(["DNI","NOMBRE","APELLIDO","NOMBRE USUARIO","CAUSA","BAJA"])
         self.tabla_usuarios.verticalHeader().setVisible(False)
         self.tabla_usuarios.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+
+        self.tabla_usuarios.setStyleSheet("background-color: white;")
+        self.tabla_usuarios.horizontalHeader().setStyleSheet(
+            "background-color: lightblue; font-weight: bold;"
+        )
+
         self.tabla_usuarios.cellClicked.connect(self.selecciono_fila)
         ###################################################
         self.layout_botonera_usuario = QVBoxLayout()

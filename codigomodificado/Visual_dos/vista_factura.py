@@ -27,7 +27,7 @@ class PDF(FPDF):
         pdf.cell(0, 10, "CAFETERIA VIERA", 0, 1, "C")
         pdf.set_font("Arial", "", 12)
         # C:/Users/Alambrito/Documents/GitHub/
-        # pdf.image("C://Users//camus//Desktop//SG_Cafeteria_clone//Visual//imagenes//coffe.png", x=0, y=25, w=30,h=25)
+        pdf.image("C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//coffe.png", x=0, y=25, w=30,h=25)
         # pdf.image(
         #     "C://Users//Alambrito//Documents//Github//SG_Cafeteria//Visual//imagenes//coffe.png",
         #     x=0,
@@ -36,13 +36,13 @@ class PDF(FPDF):
         #     h=25,
         # )
 
-        pdf.image(
-            "C:/Users/Daria/Desktop/Universidad/Cursada_2024/200/220/223_POO/POO_CC/SG_Cafeteria/codigomodificado/Visual_dos/imagenes",
-            x=0,
-            y=25,
-            w=30,
-            h=25,
-        )
+        # pdf.image(
+        #     "C:/Users/Daria/Desktop/Universidad/Cursada_2024/200/220/223_POO/POO_CC/SG_Cafeteria/codigomodificado/Visual_dos/imagenes",
+        #     x=0,
+        #     y=25,
+        #     w=30,
+        #     h=25,
+        # )
 
         pdf.cell(
             200,

@@ -22,7 +22,7 @@ class VistaPrincipal(QWidget):
         self.imagen = QLabel("foto")
         # pixmap = QPixmap("C:/Users/Alambrito/Documents/GitHub/SG_Cafeteria/Visual/imagenes/foto_usuario.jpg")
         pixmap = QPixmap(
-            "C:/Users/Daria/Desktop/Universidad/Cursada_2024/200/220/223_POO/POO_CC/SG_Cafeteria/codigomodificado/Visual_dos/imagenes/foto_usuario.jpg"
+            "C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//foto_usuario.jpg"
         )
         self.imagen.setPixmap(pixmap.scaled(100, 80))
         self.imagen.setFixedSize(100, 80)

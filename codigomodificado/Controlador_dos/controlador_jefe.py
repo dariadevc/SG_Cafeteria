@@ -7,16 +7,17 @@ from Controlador_dos.controlador_stock import ControladorStock
 
 class ControladorJefe:
 
-    def __init__(self, usuario):
+    def __init__(self, usuario, id_usuario):
         self.__vista_jefe = VistaJefe(self)
         self.__vista_jefe.show()
         self._usuario = usuario
+        self.__id_usuario = id_usuario
         nombre_usuario = self._usuario.get_usuario()
 
-        self.__controlador_venta = ControladorVenta(usuario)
+        self.__controlador_venta = ControladorVenta(usuario, self.__id_usuario)
         self.__vista_venta = self.__controlador_venta.get_vista()
 
-        self.__controlador_stock = ControladorStock(usuario)
+        self.__controlador_stock = ControladorStock()
         self.__vista_stock = self.__controlador_stock.get_vista()
 
         self.__controlador_usuario = ControladorJefeUsuario()
@@ -46,19 +47,19 @@ class ControladorJefe:
     def cambio_a_venta(self):
         self.__vista_jefe.cambiar_vista(0)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_venta)
-        print("venta click")
+        #print("venta click")
 
     def cambio_a_stock(self):
         self.__vista_jefe.cambiar_vista(1)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_stock)
-        print("stock click")
+        #print("stock click")
 
     def cambio_a_informe(self):
-        self.__vista_jefe.cambiar_vista(2)
+        self.__vista_jefe.cambiar_vista(3)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_stock)
-        print("informe click")
+        #print("informe click")
 
     def cambio_a_usuario(self):
-        self.__vista_jefe.cambiar_vista(3)
+        self.__vista_jefe.cambiar_vista(2)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_usuario)
-        print("usuario click")
+        #print("usuario click")

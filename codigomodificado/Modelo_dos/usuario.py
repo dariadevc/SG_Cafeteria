@@ -50,7 +50,7 @@ class Usuario:
 
     def get_tipo(self):
         print("Se solicitó el tipo del usuario.")
-        return self.__tipo == "True"
+        return self.__tipo
 
     def set_tipo(self, tipo):
         self.__tipo = tipo
