@@ -1,20 +1,20 @@
 from __future__ import annotations
 import sys
-#sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
+
+# sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
 from Modelo_dos.usuario_DAO import UsuarioDAO
 
 
-
 class Usuario:
-    def __init__(self, dni, nombre, apellido, tipo, usuario, contra, baja, causa):
-        self.__dni = dni
-        self.__nombre = nombre
-        self.__apellido = apellido
-        self.__tipo = tipo
-        self.__usuario = usuario
-        self.__contra = contra
-        self.__baja = baja
-        self.__causa = causa
+    def __init__(self, datos):
+        self.__dni = datos[1]
+        self.__nombre = datos[2]
+        self.__apellido = datos[3]
+        self.__usuario = datos[4]
+        self.__contra = datos[5]
+        self.__baja = datos[6]
+        self.__causa = datos[7]
+        self.__tipo = datos[8]
         self.__usuariodao = UsuarioDAO()
 
     ## Getters y Setters
@@ -45,7 +45,7 @@ class Usuario:
 
     def get_tipo(self):
         print("Se solicitó el tipo del usuario.")
-        return self.__tipo
+        return self.__tipo == "True"
 
     def set_tipo(self, tipo):
         self.__tipo = tipo
@@ -91,8 +91,13 @@ class Usuario:
             return datos + f" | BAJA: {self.__baja} | CAUSA: {self.__causa}"
 
     def login(self):
-        result = self.__usuariodao.login_usuario(self.__usuario, self.__contra)
-        return result
+        resultado = self.__usuariodao.login_usuario(self.__usuario, self.__contra)
+        if resultado:
+            return Usuario(resultado)
+        else:
+            return None
 
-    def agregar_a_bd (self):
-        self.__usuariodao.agregar_usuario(self.__dni,self.__nombre,self.__apellido,self.__usuario,self.__contra)
+    def agregar_a_bd(self):
+        self.__usuariodao.agregar_usuario(
+            self.__dni, self.__nombre, self.__apellido, self.__usuario, self.__contra
+        )
