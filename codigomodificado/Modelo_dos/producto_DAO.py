@@ -10,7 +10,7 @@ class ProductoDAO:
     ## TODO: Consultar el tema de agregar un código extra para cada producto, con el que lo identifiquen los empleados, no en la base
     def agregar_producto(self, descripcion, cantidad, minimo, precio):
         consulta = 'INSERT into public."productos"(descripcion, fecha, cantidad, stock_minimo, precio_unitario) VALUES (%s, %s, %s, %s, %s)'
-        #valores = (descripcion, fecha_modif, cantidad, minimo, precio)
+        # valores = (descripcion, fecha_modif, cantidad, minimo, precio)
         valores = (descripcion, self.__fecha_actual, cantidad, minimo, precio)
         self.__base.consulta(consulta, valores)
         print("Se agrego a la base de datos un nuevo producto")
@@ -23,7 +23,9 @@ class ProductoDAO:
         print(f"Se dio la baja lógica del producto con el código {cod_producto}")
 
     ## TODO: Agregar los "producto_modificado.get_[x]" cuando los defina.
-    def modificar_producto(self, cod_prod, descripcion, cantidad, stock, precio):  # , producto_modificado=Producto):
+    def modificar_producto(
+        self, cod_prod, descripcion, cantidad, stock, precio
+    ):  # , producto_modificado=Producto):
         consulta = 'UPDATE public."productos" SET descripcion = %s, fecha = %s, cantidad = %s, stock_minimo = %s, precio_minimo = %s WHERE codigo_producto = %s;'
         valores = (descripcion, self.__fecha_actual, cantidad, stock, precio, cod_prod)
         self.__base.consulta(consulta, valores)
@@ -42,10 +44,10 @@ class ProductoDAO:
             "stock_minimo",
             "precio_unitario",
         ]
-        consulta = 'SELECT * FROM public."productos";'# ORDER BY {orden[opcion]};'
+        consulta = 'SELECT * FROM public."productos";'  # ORDER BY {orden[opcion]};'
         print("prueba")
         return self.__base.obtener_elementos(consulta)
-    
+
     def obtener_productos_categoria(self, categoria):
         orden = [
             "cod_producto",
@@ -58,8 +60,8 @@ class ProductoDAO:
         ]
         consulta = 'SELECT * FROM public."productos" WHERE categoria = %s;'
         valor = (categoria,)
-        print("descarga los elementos por categoria") 
-        return self.__base.obtener_elementos(consulta,valor)
+        print("descarga los elementos por categoria")
+        return self.__base.obtener_elementos(consulta, valor)
 
     def agregar_stock(self, cod_producto, cantidad):
         consulta = 'UPDATE public."productos" SET cantidad = cantidad + %s, fecha = %s WHERE codigo_producto = %s;'
@@ -88,3 +90,5 @@ class ProductoDAO:
 # ProductoDAO().agregar_stock(4, 10)
 # ProductoDAO().disminuir_stock(2, 10)
 # print(ProductoDAO().obtener_stock_minimo(1))
+
+print(ProductoDAO().obtener_productos_categoria("A"))

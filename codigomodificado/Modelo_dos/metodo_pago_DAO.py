@@ -1,4 +1,5 @@
-from Modelo.base_de_datos import BaseDeDatos
+from codigomodificado.Modelo_dos.base_de_datos import BaseDeDatos
+
 
 class MetodoPagoDAO:
     def __init__(self):
@@ -7,18 +8,14 @@ class MetodoPagoDAO:
     def habilitar_metodo(self):
         pass
 
-
     def deshabilitar_metodo(self):
         pass
-
 
     def obtener_un_metodo(self):
         pass
 
-
     def obtener_todos_metodos(self):
         pass
-
 
     def modificar_descuento(self):
         pass
