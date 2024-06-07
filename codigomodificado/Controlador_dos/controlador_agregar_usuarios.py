@@ -15,4 +15,3 @@ class ControladorAgregarUsuario:
         contrasenia = self.__ventana_agregar_usuario.line_edit_5.text()
         usuario_nuevo = Usuario(dni, nombre, apellido, '', nombre_usuario, contrasenia,'','')
         usuario_nuevo.agregar_a_bd()
-        #print("Usuario agregado correctamente")

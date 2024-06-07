@@ -1,6 +1,5 @@
 from Visual_dos.ventana_usuario_jefe import VentanaUsuarioJefe
 from Modelo_dos.usuario_DAO import UsuarioDAO
-import Controlador_dos.controlador_inicio
 from Controlador_dos.controlador_agregar_usuarios import ControladorAgregarUsuario
 from Controlador_dos.controlador_eliminar_usuarios import ControladorEliminarUsuario
 from Controlador_dos.controlador_modificar_usuario import ControladorModificarUsuario
@@ -9,9 +8,8 @@ from PyQt6.QtCore import *
 
 class ControladorJefeUsuario:
     
-    def __init__(self, usuario):
-        self.__ventana_usuario_jefe = VentanaUsuarioJefe(self)
-        self.__ventana_usuario_jefe.label.setText(f"Bienvenido Jefe {usuario.get_usuario()}")
+    def __init__(self):
+        self.__ventana_usuario_jefe = VentanaUsuarioJefe()
         self.__ventana_usuario_jefe.show()
         self.__usuario_dao = UsuarioDAO()
         self.cargar_usuarios()
@@ -35,21 +33,8 @@ class ControladorJefeUsuario:
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila,4,baja)
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila,5,causa)
     
-    def cerrar_sesion (self):
-        self.__cerrar = Controlador_dos.controlador_inicio.ControladorInicioSesion()
-        self.__ventana_usuario_jefe.close()
-    
-    def cambio_a_usuario (self):
-        pass
-    
-    def cambio_a_informe (self):
-        print("cambiar a informe")
-    
-    def cambio_a_venta (self):
-        print("cambiar a venta")
-    
-    def cambio_a_stock (self):
-        print("cambiar a stock")
+    def get_vista(self):
+        return self.__ventana_usuario_jefe
     
     def agregar_usuario (self):
         self.__controlador_agregar = ControladorAgregarUsuario()

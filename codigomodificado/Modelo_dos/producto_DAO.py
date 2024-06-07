@@ -1,4 +1,4 @@
-from Modelo.base_de_datos import BaseDeDatos
+from Modelo_dos.base_de_datos import BaseDeDatos
 from datetime import datetime
 
 
@@ -8,25 +8,26 @@ class ProductoDAO:
         self.__fecha_actual = datetime.today().strftime("%Y-%m-%d")
 
     ## TODO: Consultar el tema de agregar un código extra para cada producto, con el que lo identifiquen los empleados, no en la base
-    def agregar_producto(self, descripcion, fecha_modif, cantidad, minimo, precio):
+    def agregar_producto(self, descripcion, cantidad, minimo, precio):
         consulta = 'INSERT into public."productos"(descripcion, fecha, cantidad, stock_minimo, precio_unitario) VALUES (%s, %s, %s, %s, %s)'
-        valores = (descripcion, fecha_modif, cantidad, minimo, precio)
+        #valores = (descripcion, fecha_modif, cantidad, minimo, precio)
+        valores = (descripcion, self.__fecha_actual, cantidad, minimo, precio)
         self.__base.consulta(consulta, valores)
         print("Se agrego a la base de datos un nuevo producto")
 
     ## TODO: Agregar código para identificar el producto que se va a eliminar
     def eliminar_producto(self, cod_producto, causa):
-        consulta = 'UPDATE public."productos" SET vigente = %s, motivo_baja = %s WHERE {código_producto} = %s;'
-        valores = (True, causa, cod_producto)
+        consulta = 'UPDATE public."productos" SET vigente = %s, motivo_baja = %s WHERE codigo_producto = %s;'
+        valores = (False, causa, cod_producto)
         self.__base.consulta(consulta, valores)
         print(f"Se dio la baja lógica del producto con el código {cod_producto}")
 
     ## TODO: Agregar los "producto_modificado.get_[x]" cuando los defina.
-    def modificar_producto(self, cod_producto):  # , producto_modificado=Producto):
-        consulta = 'UPDATE public."productos" SET {cod_producto} = %s, descripcion = %s, fecha = %s, cantidad = %s, stock_minimo = %s, precio_minimo = %s WHERE dni_empleado = %s;'
-        valores = ()
+    def modificar_producto(self, cod_prod, descripcion, cantidad, stock, precio):  # , producto_modificado=Producto):
+        consulta = 'UPDATE public."productos" SET descripcion = %s, fecha = %s, cantidad = %s, stock_minimo = %s, precio_minimo = %s WHERE codigo_producto = %s;'
+        valores = (descripcion, self.__fecha_actual, cantidad, stock, precio, cod_prod)
         self.__base.consulta(consulta, valores)
-        print(f"Se modificaron los datos del producto con el código {cod_producto}")
+        print(f"Se modificaron los datos del producto con el código {cod_prod}")
 
     # def obtener_un_producto(self, cod_prod):
     #     consulta = f'SELECT * FROM public."productos" WHERE {acá va cod_producto} = {cod_producto}'
