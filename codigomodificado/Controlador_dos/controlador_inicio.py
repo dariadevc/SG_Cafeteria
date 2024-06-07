@@ -49,13 +49,20 @@ class ControladorInicioSesion:
 
         if usuario_datos is not None:
             usuario = Usuario(usuario_datos)
-            print(usuario.datos_usuario())
-            if usuario.get_tipo == True:
+            print("Valor de baja:", usuario.get_baja())
+            if usuario.get_tipo() == True:
                 print("Inicio sesión de jefe")
                 # self.inicio = ControladorJefe(usuario)
             else:
-                self.inicio = ControladorVendedor(usuario)
-                print("Inicio sesión de vendedor")
+                if not usuario.get_baja():
+                    self.inicio = ControladorVendedor(usuario)
+                    print("Inicio sesión de vendedor")
+                else:
+                    self.__vista.etiqueta_error.setText(
+                        "El usuario está dado de baja\nNo se puede iniciar sesión"
+                    )
+                    QTimer.singleShot(2000, self.limpiar_error)
+                    return
             self.__vista.close()
         else:
             self.__vista.etiqueta_error.setText("Usuario o contrasena Incorrecta")
