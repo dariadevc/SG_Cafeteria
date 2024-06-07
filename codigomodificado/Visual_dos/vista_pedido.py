@@ -14,198 +14,200 @@ class VentanaPedido(QWidget):
         self.setFixedSize(675, 500)
         self.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.controlador = controlador
-        self._botones_sumar = []
-        self._botones_restar = []
-        self._etiquetas_cantidad = []
-        self._productos_agregados = []
-        self._pedidos_realizados = []
+        self.botones_sumar = []
+        self.botones_restar = []
+        self.etiquetas_cantidad = []
+        self.productos_agregados = []
+        self.pedidos_realizados = []
+        self.stock =[]
+        
 
-        self._imagenes_x_subido = QPixmap(
-            "C://Desktop//SG_Cafeteria//Visual//imagenes//check.jpg"
+        self.imagenes_x_subido = QPixmap(
+            "C://SG_Cafeteria//Visual//imagenes//check.jpg"
         ).scaled(10, 10)
-        self._imagenes_menos_subido = QPixmap(
+        self.imagenes_menos_subido = QPixmap(
             "C://SG_Cafeteria//Visual//imagenes//-.jfif"
         ).scaled(10, 10)
-        self._imagenes_mas_subido = QPixmap(
+        self.imagenes_mas_subido = QPixmap(
             "C://SG_Cafeteria//Visual//imagenes//+.jfif"
         ).scaled(10, 10)
         # self._imagenes_x_subido = QPixmap("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes//check.jpg").scaled(10, 10)
         # self._imagenes_menos_subido = QPixmap("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes//-.jfif").scaled(10, 10)
         # self._imagenes_mas_subido = QPixmap("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes//+.jfif").scaled(10, 10)
 
-        self._contenedor = QVBoxLayout()
-        self._contenedor.setSpacing(30)
+        self.contenedor = QVBoxLayout()
+        self.contenedor.setSpacing(30)
 
-        self._contenedor_nombres = QHBoxLayout()
-        self._etiqueta_comida = QLabel("Bebidas")
-        self._etiqueta_comida.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._etiqueta_comida.setStyleSheet(
+        self.contenedor_nombres = QHBoxLayout()
+        self.etiqueta_comida = QLabel("Bebidas")
+        self.etiqueta_comida.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.etiqueta_comida.setStyleSheet(
             "background-color: darkblue; color: white;font-weight: bold;"
         )
-        self._etiqueta_bebida = QLabel("Comida")
-        self._etiqueta_bebida.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._etiqueta_bebida.setStyleSheet(
+        self.etiqueta_bebida = QLabel("Comida")
+        self.etiqueta_bebida.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.etiqueta_bebida.setStyleSheet(
             "background-color: darkblue; color: white;font-weight: bold;"
         )
-        self._etiqueta_helado = QLabel("Helados")
-        self._etiqueta_helado.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._etiqueta_helado.setStyleSheet(
+        self.etiqueta_helado = QLabel("Helados")
+        self.etiqueta_helado.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.etiqueta_helado.setStyleSheet(
             "background-color: darkblue; color: white;font-weight: bold;"
         )
 
-        self._contenedor_nombres.addWidget(self._etiqueta_comida)
-        self._contenedor_nombres.addWidget(self._etiqueta_bebida)
-        self._contenedor_nombres.addWidget(self._etiqueta_helado)
+        self.contenedor_nombres.addWidget(self.etiqueta_comida)
+        self.contenedor_nombres.addWidget(self.etiqueta_bebida)
+        self.contenedor_nombres.addWidget(self.etiqueta_helado)
 
-        self._contenedor.addLayout(self._contenedor_nombres)
+        self.contenedor.addLayout(self.contenedor_nombres)
 
-        self._tabla_alta = QHBoxLayout()
-        self._tabla_alta.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
+        self.tabla_alta = QHBoxLayout()
+        self.tabla_alta.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
 
-        self._tabla_comida = QVBoxLayout()
-        self._tabla_bebidas = QVBoxLayout()
-        self._tabla_helados = QVBoxLayout()
+        self.tabla_comida = QVBoxLayout()
+        self.tabla_bebidas = QVBoxLayout()
+        self.tabla_helados = QVBoxLayout()
 
-        self._tabla_alta.addLayout(self._tabla_comida)
-        self._tabla_alta.addLayout(self._tabla_bebidas)
-        self._tabla_alta.addLayout(self._tabla_helados)
+        self.tabla_alta.addLayout(self.tabla_comida)
+        self.tabla_alta.addLayout(self.tabla_bebidas)
+        self.tabla_alta.addLayout(self.tabla_helados)
 
-        self._contenedor.addLayout(self._tabla_alta)
+        self.contenedor.addLayout(self.tabla_alta)
 
-        self._tabla_baja = QHBoxLayout()
-        self._tabla_baja.setAlignment(
+        self.tabla_baja = QHBoxLayout()
+        self.tabla_baja.setAlignment(
             Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft
         )
 
-        self._tabla_pedido = QVBoxLayout()
-        _spacio_pedido = QSpacerItem(
+        self.tabla_pedido = QVBoxLayout()
+        spacio_pedido = QSpacerItem(
             1000, 600, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed
         )
-        self._tabla_pedido.addSpacerItem(_spacio_pedido)
+        self.tabla_pedido.addSpacerItem(spacio_pedido)
 
-        self._tabla_pedido.setAlignment(
+        self.tabla_pedido.setAlignment(
             Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignRight
         )
 
         ## Botón finalizar pedido
-        self._boton_finalizar_pedido = QPushButton("Finalizar Pedido")
+        self.boton_finalizar_pedido = QPushButton("Finalizar Pedido")
         font = QFont()
         font.setBold(True)
-        self._boton_finalizar_pedido.setFont(font)
-        self._tamano_botones = QSize(150, 80)
-        self._boton_finalizar_pedido.setFixedSize(self._tamano_botones)
-        self._boton_finalizar_pedido.setStyleSheet(
+        self.boton_finalizar_pedido.setFont(font)
+        self.tamano_botones = QSize(150, 80)
+        self.boton_finalizar_pedido.setFixedSize(self.tamano_botones)
+        self.boton_finalizar_pedido.setStyleSheet(
             "background-color: green; color: white"
         )
-        self._boton_finalizar_pedido.clicked.connect(controlador.finalizar_pedido)
+        self.boton_finalizar_pedido.clicked.connect(controlador.finalizar_pedido)
 
         ## Botón anular pedido
-        self._boton_anular_pedido = QPushButton("Anular Pedido")
+        self.boton_anular_pedido = QPushButton("Anular Pedido")
         font = QFont()
         font.setBold(True)
-        self._boton_anular_pedido.setFont(font)
-        self._boton_anular_pedido.setFixedSize(self._tamano_botones)
-        self._boton_anular_pedido.setStyleSheet("background-color: green; color: white")
-        self._boton_anular_pedido.clicked.connect(controlador.anular_pedido)
+        self.boton_anular_pedido.setFont(font)
+        self.boton_anular_pedido.setFixedSize(self.tamano_botones)
+        self.boton_anular_pedido.setStyleSheet("background-color: green; color: white")
+        self.boton_anular_pedido.clicked.connect(controlador.anular_pedido)
 
         # Layout botones
-        self._botones_pedido = QVBoxLayout()
-        self._botones_pedido.addWidget(self._boton_finalizar_pedido)
-        self._botones_pedido.addWidget(self._boton_anular_pedido)
+        self.botones_pedido = QVBoxLayout()
+        self.botones_pedido.addWidget(self.boton_finalizar_pedido)
+        self.botones_pedido.addWidget(self.boton_anular_pedido)
 
-        self._tabla_baja.addLayout(self._tabla_pedido)
-        self._tabla_baja.addLayout(self._botones_pedido)
+        self.tabla_baja.addLayout(self.tabla_pedido)
+        self.tabla_baja.addLayout(self.botones_pedido)
 
-        self._contenedor.addLayout(self._tabla_alta)
-        self._contenedor.addLayout(self._tabla_baja)
+        self.contenedor.addLayout(self.tabla_alta)
+        self.contenedor.addLayout(self.tabla_baja)
 
-        self.setLayout(self._contenedor)
+        self.setLayout(self.contenedor)
 
     def agregarFilaConBotones(self, layout, descripcion_producto):
-        _fila_layout = QHBoxLayout()
-        _tamano_etiqueta = QSize(300, 15)
-        _tamano_botones = QSize(15, 15)
+        fila_layout = QHBoxLayout()
+        tamano_etiqueta = QSize(300, 15)
+        tamano_botones = QSize(15, 15)
 
-        _etiqueta_producto = QLabel(descripcion_producto)
-        _etiqueta_producto.setFixedSize(_tamano_etiqueta)
-        _etiqueta_producto.setFixedWidth(600)
+        etiqueta_producto = QLabel(descripcion_producto)
+        etiqueta_producto.setFixedSize(tamano_etiqueta)
+        etiqueta_producto.setFixedWidth(600)
 
-        _boton_menos = QPushButton()
-        _boton_menos.setFixedSize(_tamano_botones)
-        _boton_menos.setIcon(QIcon(self._imagenes_menos_subido))
-        _boton_menos.setIconSize(self._imagenes_menos_subido.size())
-        _boton_menos.setStyleSheet(
+        boton_menos = QPushButton()
+        boton_menos.setFixedSize(tamano_botones)
+        boton_menos.setIcon(QIcon(self.imagenes_menos_subido))
+        boton_menos.setIconSize(self.imagenes_menos_subido.size())
+        boton_menos.setStyleSheet(
             "background-color: none; padding-top: 7px; padding-bottom: 5px;"
         )
-        _boton_menos.setProperty("accion", "restar")
-        _boton_menos.clicked.connect(self.controlador.boton_presionado)
+        boton_menos.setProperty("accion", "restar")
+        boton_menos.clicked.connect(self.controlador.boton_presionado)
 
-        _boton_cantidad = QLabel("0")
-        _boton_cantidad.setFixedSize(_tamano_botones)
+        boton_cantidad = QLabel("0")
+        boton_cantidad.setFixedSize(tamano_botones)
 
-        _boton_mas = QPushButton()
-        _boton_mas.setFixedSize(_tamano_botones)
-        _boton_mas.setIcon(QIcon(self._imagenes_mas_subido))
-        _boton_mas.setIconSize(self._imagenes_mas_subido.size())
-        _boton_mas.setStyleSheet(
+        boton_mas = QPushButton()
+        boton_mas.setFixedSize(tamano_botones)
+        boton_mas.setIcon(QIcon(self.imagenes_mas_subido))
+        boton_mas.setIconSize(self.imagenes_mas_subido.size())
+        boton_mas.setStyleSheet(
             "background-color: none; padding-top: 7px; padding-bottom: 5px;"
         )
-        _boton_mas.setProperty("accion", "sumar")
-        _boton_mas.clicked.connect(self.controlador.boton_presionado)
+        boton_mas.setProperty("accion", "sumar")
+        boton_mas.clicked.connect(self.controlador.boton_presionado)
 
-        _fila_layout.addWidget(_etiqueta_producto)
-        _fila_layout.addWidget(_boton_menos)
-        _fila_layout.addWidget(_boton_cantidad)
-        _fila_layout.addWidget(_boton_mas)
-        layout.addLayout(_fila_layout)
-        self._botones_sumar.append(_boton_mas)
-        self._botones_restar.append(_boton_menos)
-        self._etiquetas_cantidad.append(_boton_cantidad)
-        self._productos_agregados.append((_etiqueta_producto.text(), 0))
+        fila_layout.addWidget(etiqueta_producto)
+        fila_layout.addWidget(boton_menos)
+        fila_layout.addWidget(boton_cantidad)
+        fila_layout.addWidget(boton_mas)
+        layout.addLayout(fila_layout)
+        self.botones_sumar.append(boton_mas)
+        self.botones_restar.append(boton_menos)
+        self.etiquetas_cantidad.append(boton_cantidad)
+        self.productos_agregados.append((etiqueta_producto.text(), 0))
 
     def agregarFilaConBotonEliminar(self, layout, descripcion, precio):
 
-        _fila_layout = QHBoxLayout()
-        __tamano_etiqueta = QSize(200, 15)
-        __tamano_botones = QSize(15, 15)
+        fila_layout = QHBoxLayout()
+        tamano_etiqueta = QSize(200, 15)
+        tamano_botones = QSize(15, 15)
 
-        _boton_eliminar = QPushButton()
-        _boton_eliminar.setFixedSize(__tamano_botones)
-        _boton_eliminar.setIcon(QIcon(self._imagenes_x_subido))
-        _boton_eliminar.setIconSize(self._imagenes_x_subido.size())
-        _boton_eliminar.setStyleSheet(
+        boton_eliminar = QPushButton()
+        boton_eliminar.setFixedSize(tamano_botones)
+        boton_eliminar.setIcon(QIcon(self.imagenes_x_subido))
+        boton_eliminar.setIconSize(self.imagenes_x_subido.size())
+        boton_eliminar.setStyleSheet(
             "background-color: none; padding-top: 7px; padding-bottom: 5px;"
         )
 
-        _etiqueta_descripcion = QLabel(descripcion)
-        _etiqueta_descripcion.setFixedSize(__tamano_etiqueta)
-        _etiqueta_descripcion.setFixedWidth(300)
+        etiqueta_descripcion = QLabel(descripcion)
+        etiqueta_descripcion.setFixedSize(tamano_etiqueta)
+        etiqueta_descripcion.setFixedWidth(300)
 
-        _etiqueta_relleno = QLabel(" X ")
-        _etiqueta_relleno.setFixedSize(__tamano_etiqueta)
-        _etiqueta_relleno.setFixedWidth(50)
+        etiqueta_relleno = QLabel(" X ")
+        etiqueta_relleno.setFixedSize(tamano_etiqueta)
+        etiqueta_relleno.setFixedWidth(50)
 
-        _etiqueta_cantidad = QLabel("")
-        _etiqueta_cantidad.setFixedSize(__tamano_etiqueta)
-        _etiqueta_cantidad.setFixedWidth(50)
+        etiqueta_cantidad = QLabel("")
+        etiqueta_cantidad.setFixedSize(tamano_etiqueta)
+        etiqueta_cantidad.setFixedWidth(50)
 
-        _etiqueta_precio = QLabel("$")
-        _etiqueta_precio.setFixedSize(__tamano_etiqueta)
-        _etiqueta_precio.setFixedWidth(50)
+        etiqueta_precio = QLabel("$")
+        etiqueta_precio.setFixedSize(tamano_etiqueta)
+        etiqueta_precio.setFixedWidth(50)
 
-        _precio = QLabel(f"{precio:.2f}")
-        _precio.setFixedSize(__tamano_etiqueta)
-        _precio.setFixedWidth(50)
+        precio = QLabel(f"{precio:.2f}")
+        precio.setFixedSize(tamano_etiqueta)
+        precio.setFixedWidth(50)
 
-        _fila_layout.addWidget(_boton_eliminar)
-        _fila_layout.addWidget(_etiqueta_descripcion)
-        _fila_layout.addWidget(_etiqueta_relleno)
-        _fila_layout.addWidget(_etiqueta_cantidad)
-        _fila_layout.addWidget(_etiqueta_precio)
-        _fila_layout.addWidget(_precio)
+        fila_layout.addWidget(boton_eliminar)
+        fila_layout.addWidget(etiqueta_descripcion)
+        fila_layout.addWidget(etiqueta_relleno)
+        fila_layout.addWidget(etiqueta_cantidad)
+        fila_layout.addWidget(etiqueta_precio)
+        fila_layout.addWidget(precio)
 
-        layout.insertLayout(0, _fila_layout)
-        return _fila_layout
+        layout.insertLayout(0, fila_layout)
+        return fila_layout
 
     # Para saber si se cerró una ventana
     def closeEvent(self, event):

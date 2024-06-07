@@ -27,7 +27,7 @@ class VistaInicioSesion(QWidget):
         self.etiqueta_cafe = QLabel()
         # self.etiqueta_cafe.setContentsMargins(0, 0, 0, 0)     
         #self.imagen= QPixmap("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes//coffe.png").scaled(25, 25)  
-        self.imagen= QPixmap("C:/Users/Alambrito/Documents/GitHub/SG_Cafeteria/Visual/imagenes/coffe.png").scaled(25,25)
+        self.imagen= QPixmap("C://SG_Cafeteria//Visual_dos//imagenes///coffe.png").scaled(25,25)
         self.etiqueta_cafe.setPixmap(self.imagen)
         self.etiqueta_nombre = QLabel(" Cafe Viera",self)
         #self.etiqueta_nombre.setContentsMargins(0, 0, 0, 0)

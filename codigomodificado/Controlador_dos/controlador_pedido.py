@@ -24,32 +24,33 @@ class ControladorPedido:
         self.__vista_pedido = VentanaPedido(self, numero_mesa)
         self.__vista_pedido.show()
         # self.__vista_pedido.closed.connect(self.cerrar_ventana_pedido)
-        self.usuario = usuario
-        self.numero_mesa = numero_mesa
-        self.actualizar_mesa_callback = actualizar_mesa_callback
-        self.productos_seleccionados = productos_seleccionados or {}
+        self.__usuario = usuario
+        self.__numero_mesa = numero_mesa
+        self.__actualizar_mesa_callback = actualizar_mesa_callback
+        self.__productos_seleccionados = productos_seleccionados or {}
 
-        producto_dao = ProductoDAO()
-        self.productos_bebida = producto_dao.obtener_productos_categoria("A")
-        self.productos_comida = producto_dao.obtener_productos_categoria("B")
-        self.productos_helado = producto_dao.obtener_productos_categoria("C")
-        self.bebidas = [producto[1] for producto in self.productos_bebida]
-        self.comida = [producto[1] for producto in self.productos_comida]
-        self.helados = [producto[1] for producto in self.productos_helado]
+        self.__producto_dao = ProductoDAO()
+        self.__productos_bebida = self.__producto_dao.obtener_productos_categoria("A")
+        self.__productos_comida = self.__producto_dao.obtener_productos_categoria("B")
+        self.__productos_helado = self.__producto_dao.obtener_productos_categoria("C")
+        self.__bebidas = [producto[1] for producto in self.__productos_bebida]
+        self.__comida = [producto[1] for producto in self.__productos_comida]
+        self.__helados = [producto[1] for producto in self.__productos_helado]
 
-        productos = producto_dao.obtener_todos_productos()
-        self.precios = [producto[6] for producto in productos]
+        self.productos = self.__producto_dao.obtener_todos_productos()
+        self.precios = [producto[6] for producto in self.productos]
+        self.stock = [producto[4] for producto in self.productos]
         self.diccionario_pedidos = {}
 
         # Llenar las tablas con los productos obtenidos
-        self.llenar_tabla(self.__vista_pedido._tabla_comida, self.bebidas)
-        self.llenar_tabla(self.__vista_pedido._tabla_bebidas, self.comida)
-        self.llenar_tabla(self.__vista_pedido._tabla_helados, self.helados)
+        self.llenar_tabla(self.__vista_pedido.tabla_comida, self.__bebidas)
+        self.llenar_tabla(self.__vista_pedido.tabla_bebidas, self.__comida)
+        self.llenar_tabla(self.__vista_pedido.tabla_helados, self.__helados)
         print(
             "Cantidad de botones en el diccionario:",
-            len(self.__vista_pedido._botones_sumar),
+            len(self.__vista_pedido.botones_sumar),
         )
-        for producto in self.__vista_pedido._productos_agregados:
+        for producto in self.__vista_pedido.productos_agregados:
             print(f"Descripción: {producto[0]}, Cantidad: {producto[1]}")
 
     def llenar_tabla(self, tabla, productos):
@@ -59,7 +60,7 @@ class ControladorPedido:
     def llenar_tabla_pedido(
         self, tabla, indice_modificado, nueva_cantidad, nuevo_precio
     ):
-        producto, cantidad = self.__vista_pedido._productos_agregados[indice_modificado]
+        producto, cantidad = self.__vista_pedido.productos_agregados[indice_modificado]
 
         # Verificar si la cantidad es mayor que cero y si el producto está en la lista
         if producto not in self.diccionario_pedidos and cantidad == 1:
@@ -91,21 +92,25 @@ class ControladorPedido:
                     etiqueta_cantidad = (
                         etiqueta_cantidad_item.widget()
                     )  # Obtiene la etiqueta de cantidad
-                    if etiqueta_cantidad:
-                        print(nueva_cantidad)
-                        etiqueta_cantidad.setText(str(nueva_cantidad))
+                    self.stock_producto= self.stock[indice_modificado]
+                    if cantidad <= self.stock_producto:
+                            print(nueva_cantidad)
+                            etiqueta_cantidad.setText(str(nueva_cantidad)) 
+                    else:
+                             etiqueta_cantidad.setStyleSheet(" color: red;")
+                             QTimer.singleShot(2000, lambda: etiqueta_cantidad.setStyleSheet("color: black;"))
         if (
             producto in self.diccionario_pedidos and cantidad == 0
         ):  # Eliminar el layout del producto si la cantidad es 0
             layout = self.diccionario_pedidos.get(producto)
-            for i in range(self.__vista_pedido._tabla_pedido.count()):
-                layout_item = self.__vista_pedido._tabla_pedido.itemAt(i)
+            for i in range(self.__vista_pedido.tabla_pedido.count()):
+                layout_item = self.__vista_pedido.tabla_pedido.itemAt(i)
                 if layout_item.layout() == layout:
                     while layout.count():
                         child = layout.takeAt(0)
                         if child.widget():
                             child.widget().deleteLater()
-                    self.__vista_pedido._tabla_pedido.removeItem(
+                    self.__vista_pedido.tabla_pedido.removeItem(
                         layout_item
                     )  # Eliminar el layout del pedido
                     layout_item.deleteLater()
@@ -121,18 +126,18 @@ class ControladorPedido:
         )  # Obtener el botón que generó el evento
         print("Botón seleccionado:", boton_presionado.text())
 
-        if boton_presionado in self.__vista_pedido._botones_sumar:
+        if boton_presionado in self.__vista_pedido.botones_sumar:
             print("Se presionó un botón de sumar.")
             # Obtener la ubicación del botón en la lista
-            ubicacion = self.__vista_pedido._botones_sumar.index(
+            ubicacion = self.__vista_pedido.botones_sumar.index(
                 boton_presionado
             )  # Obtener la ubicación del botón en la lista
             print("Ubicación del botón suma:", ubicacion)
             self.sumar_etiqueta_cantidad(ubicacion)
 
-        elif boton_presionado in self.__vista_pedido._botones_restar:
+        elif boton_presionado in self.__vista_pedido.botones_restar:
             print("Se presionó un botón de restar.")
-            ubicacion = self.__vista_pedido._botones_restar.index(boton_presionado)
+            ubicacion = self.__vista_pedido.botones_restar.index(boton_presionado)
             print("Ubicación del botón resta :", ubicacion)
 
             self.restar_etiqueta_cantidad(ubicacion)
@@ -140,7 +145,7 @@ class ControladorPedido:
             print("Botón no identificado.")
 
     def sumar_etiqueta_cantidad(self, indice):
-        etiqueta_cantidad = self.__vista_pedido._etiquetas_cantidad[
+        etiqueta_cantidad = self.__vista_pedido.etiquetas_cantidad[
             indice
         ]  # Obtener la etiqueta de cantidad en la misma posición que el botón
         precio_producto = self.precios[indice]
@@ -148,18 +153,18 @@ class ControladorPedido:
         nueva_cantidad = cantidad_actual + 1
         nuevo_precio = precio_producto * nueva_cantidad
         etiqueta_cantidad.setText(str(nueva_cantidad))
-        self.__vista_pedido._productos_agregados[indice] = (
-            self.__vista_pedido._productos_agregados[indice][0],
+        self.__vista_pedido.productos_agregados[indice] = (
+            self.__vista_pedido.productos_agregados[indice][0],
             nueva_cantidad,
         )
-        print(self.__vista_pedido._productos_agregados[indice])
+        print(self.__vista_pedido.productos_agregados[indice])
         self.llenar_tabla_pedido(
-            self.__vista_pedido._tabla_pedido, indice, nueva_cantidad, nuevo_precio
+            self.__vista_pedido.tabla_pedido, indice, nueva_cantidad, nuevo_precio
         )
 
     def restar_etiqueta_cantidad(self, indice):
 
-        etiqueta_cantidad = self.__vista_pedido._etiquetas_cantidad[indice]
+        etiqueta_cantidad = self.__vista_pedido.etiquetas_cantidad[indice]
         precio_producto = self.precios[indice]
         cantidad_actual = int(etiqueta_cantidad.text())
 
@@ -167,17 +172,18 @@ class ControladorPedido:
             nueva_cantidad = cantidad_actual - 1
             nuevo_precio = precio_producto * nueva_cantidad
             etiqueta_cantidad.setText(str(nueva_cantidad))
-            self.__vista_pedido._productos_agregados[indice] = (
-                self.__vista_pedido._productos_agregados[indice][0],
+            self.__vista_pedido.productos_agregados[indice] = (
+                self.__vista_pedido.productos_agregados[indice][0],
                 nueva_cantidad,
             )
-            print(self.__vista_pedido._productos_agregados[indice])
+            print(self.__vista_pedido.productos_agregados[indice])
             self.llenar_tabla_pedido(
-                self.__vista_pedido._tabla_pedido, indice, nueva_cantidad, nuevo_precio
+                self.__vista_pedido.tabla_pedido, indice, nueva_cantidad, nuevo_precio
             )
 
     def finalizar_pedido(self):  # para imrpimir la factura y posible actualizar base
         lista_widgets = []
+        lista_widget_stock = []
 
         for producto, layout in self.diccionario_pedidos.items():
             item_1 = layout.itemAt(1)
@@ -193,33 +199,42 @@ class ControladorPedido:
             item5 = widget_5.text()
 
             lista_widgets.append((item1, item3, float(item5)))
+            lista_widget_stock.append((item1,item3))
+            
 
-            for widgets in lista_widgets:
-                print(widgets)
+            for nombre ,cantidad in  lista_widget_stock:
+                  
+                for producto in self.productos:
+                        if nombre == producto[1]:
+                            codigo =producto[0]
+                            break 
+                print(codigo)
+                print(cantidad)
+                self.__producto_dao.disminuir_stock(codigo, cantidad)
 
         pdf = PDF()
         pdf.crear_factura(
             nro_factura="001",
             fecha=datetime.now(),
             lista_pedido=lista_widgets,
-            nro_mesa="05",
+            nro_mesa=self.__numero_mesa,
             metodo_pago="Efectivo",
-            empleado="Juan",
+            empleado=self.__usuario,
             dni="39910232",
         )
-        self.actualizar_mesa_callback(self.numero_mesa, "libre")
+        self.__actualizar_mesa_callback(self.__numero_mesa, "libre")
         self.__vista_pedido.close()
 
         # Elimina instancia de pedido del diccionario de pedido
         # del self.controladores_pedidos[self.numero_mesa]
 
     def anular_pedido(self):
-        self.actualizar_mesa_callback(self.numero_mesa, "libre")
+        self.__actualizar_mesa_callback(self.__numero_mesa, "libre")
         self.__vista_pedido.close()
         # del self.controladores_pedidos[self.numero_mesa]
 
     def cerrar_ventana_pedido(self):
-        print(f"Ventana del pedido de la mesa {self.numero_mesa} cerrada")
+        print(f"Ventana del pedido de la mesa {self.__numero_mesa} cerrada")
 
     def abrir_ventana_pedido(self):
         self.__vista_pedido.show()
