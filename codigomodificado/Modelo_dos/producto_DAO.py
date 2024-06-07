@@ -12,15 +12,23 @@ class ProductoDAO:
         consulta = 'INSERT into public."productos"(descripcion, fecha, cantidad, stock_minimo, precio_unitario) VALUES (%s, %s, %s, %s, %s)'
         # valores = (descripcion, fecha_modif, cantidad, minimo, precio)
         valores = (descripcion, self.__fecha_actual, cantidad, minimo, precio)
-        self.__base.consulta(consulta, valores)
-        print("Se agrego a la base de datos un nuevo producto")
+        try:
+            self.__base.consulta(consulta, valores)
+            print("Se agrego a la base de datos un nuevo producto")
+        except Exception as e:
+            print("Error al agregar producto a la base:", e)
+            return None
 
     ## TODO: Agregar código para identificar el producto que se va a eliminar
     def eliminar_producto(self, cod_producto, causa):
         consulta = 'UPDATE public."productos" SET vigente = %s, motivo_baja = %s WHERE codigo_producto = %s;'
         valores = (False, causa, cod_producto)
-        self.__base.consulta(consulta, valores)
-        print(f"Se dio la baja lógica del producto con el código {cod_producto}")
+        try:
+            self.__base.consulta(consulta, valores)
+            print(f"Se dio la baja lógica del producto con el código {cod_producto}")
+        except Exception as e:
+            print("Error al dar la baja lógica:", e)
+            return None
 
     ## TODO: Agregar los "producto_modificado.get_[x]" cuando los defina.
     def modificar_producto(
@@ -30,6 +38,13 @@ class ProductoDAO:
         valores = (descripcion, self.__fecha_actual, cantidad, stock, precio, cod_prod)
         self.__base.consulta(consulta, valores)
         print(f"Se modificaron los datos del producto con el código {cod_prod}")
+
+        try:
+            self.__base.consulta(consulta, valores)
+            print(f"Se modificaron los datos del producto con el código {cod_prod}")
+        except Exception as e:
+            print("Error al modificar datos del producto:", e)
+            return None
 
     # def obtener_un_producto(self, cod_prod):
     #     consulta = f'SELECT * FROM public."productos" WHERE {acá va cod_producto} = {cod_producto}'
@@ -66,18 +81,27 @@ class ProductoDAO:
     def agregar_stock(self, cod_producto, cantidad):
         consulta = 'UPDATE public."productos" SET cantidad = cantidad + %s, fecha = %s WHERE codigo_producto = %s;'
         valores = (cantidad, self.__fecha_actual, cod_producto)
-        self.__base.consulta(consulta, valores)
-        print(
-            f"Stock del producto {cod_producto} agregado exitosamente, cantidad = {cantidad}."
-        )
+        try:
+            self.__base.consulta(consulta, valores)
+            print(
+                f"Stock del producto {cod_producto} agregado exitosamente, cantidad agregada = {cantidad}."
+            )
+        except Exception as e:
+            print("Error al agregar stock:", e)
+            return None
 
     def disminuir_stock(self, cod_producto, cantidad):
         consulta = 'UPDATE public."productos" SET cantidad = cantidad - %s, fecha = %s WHERE codigo_producto = %s;'
         valores = (cantidad, self.__fecha_actual, cod_producto)
-        self.__base.consulta(consulta, valores)
-        print(
-            f"Stock del producto {cod_producto} disminuido exitosamente, cantidad = -{cantidad}."
-        )
+
+        try:
+            self.__base.consulta(consulta, valores)
+            print(
+                f"Stock del producto {cod_producto} disminuido exitosamente, cantidad = -{cantidad}."
+            )
+        except Exception as e:
+            print("Error al disminuir stock:", e)
+            return None
 
     def obtener_stock_minimo(self, cod_producto):
         consulta = f'SELECT stock_minimo FROM public."productos" WHERE codigo_producto = {cod_producto};'

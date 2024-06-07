@@ -42,7 +42,14 @@ class FacturaDAO:
     def agregar_detalle_factura(self, id_factura, id_producto, cantidad):
         consulta = 'INSERT into public."detalle_factura"(id_factura, id_producto, cantidad) VALUES (%s, %s, %s)'
         valores = (id_factura, id_producto, cantidad)
-        self.__base.consulta(consulta, valores)
+        try:
+            self.__base.consulta(consulta, valores)
+            print(
+                f"Se agrego a la base de datos un nuevo detalle de la factura {id_factura}"
+            )
+        except Exception as e:
+            print(f"Error al agrear detalle a la factura {id_factura}:", e)
+            return None
 
     # def obtener_un_producto(self, cod_prod):
     #     consulta = f'SELECT * FROM public."productos" WHERE {acá va cod_producto} = {cod_producto}'
@@ -75,4 +82,8 @@ class FacturaDAO:
             return None
 
 
-## print(FacturaDAO().obtener_producto_por_factura(1))
+# prueba agregar factura + detalle
+# id_factura = FacturaDAO().agregar_factura(8237.32, 3, 1, 4, 8237.32)
+# lista_productos = [13, 2, 10, 6]
+# for i in lista_productos:
+#     FacturaDAO().agregar_detalle_factura(id_factura, i, 1)
