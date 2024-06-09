@@ -11,10 +11,10 @@ import re
 # sys.path.append('C://Users//camus//Desktop//SG_Cafeteria)//Visual')
 # sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
 
-from Modelo_dos.producto_DAO import ProductoDAO
-from Modelo_dos.factura_DAO import FacturaDAO
-from Visual_dos.vista_pedido import VentanaPedido
-from Visual_dos.vista_factura import PDF
+from Modelo.producto_DAO import ProductoDAO
+from Modelo.factura_DAO import FacturaDAO
+from Visual.vista_pedido import VentanaPedido
+from Visual.vista_factura import PDF
 
 
 class ControladorPedido:

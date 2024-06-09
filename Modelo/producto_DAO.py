@@ -1,4 +1,4 @@
-from Modelo_dos.base_de_datos import BaseDeDatos
+from Modelo.base_de_datos import BaseDeDatos
 from datetime import datetime
 
 

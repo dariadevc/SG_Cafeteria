@@ -1,26 +1,52 @@
 from Visual.vista_ticket import VistaTicket
 from Visual.vista_factura import PDF
-from codigomodificado.Modelo_dos.producto_DAO import ProductoDAO
+from Modelo.producto_DAO import ProductoDAO
 from PyQt6.QtWidgets import *
 from datetime import datetime
 
+# from Controlador.controlador_vendedor import ControladorVendedor
+# from Controlador.controlador_inicio import ControladorInicioSesion
+# from Controlador.controlador_venta import ControladorVenta
+
 
 class ControladorTicket:
-    def __init__(self, vista):
+    def __init__(self, usuario, numero_mesa, actualizar_mesa_callback):
+        self.__usuario = usuario
+        # nombre = usuario.get_usuario()
         self.__vista_ticket = VistaTicket()
+        self.__vista_ticket.show()
         self.__producto_dao = ProductoDAO()
-        self.__vista_ticket.btn_suma.clicked.connect(self.sumar_producto)
-        self.__vista_ticket.btn_resta.clicked.connect(self.restar_producto)
         self.cargar_productos()
+        self.__vista_ticket.btn_imprimir.clicked.connect(self.imprimir_ticket)
+        self.__vista_ticket.btn_anular.clicked.connect(self.anular_venta)
 
     def cargar_productos(self):
         productos = self.__producto_dao.obtener_todos_productos(1)
         self.__vista_ticket.tabla1.setRowCount(len(productos))
         for fila, producto in enumerate(productos):
-            descripcion = QTableWidgetItem(producto[1])
+            descripcion = QTableWidgetItem(f"{producto[1]}")
             cantidad = QTableWidgetItem(str(producto[3]))
             self.__vista_ticket.tabla1.setItem(fila, 0, descripcion)
             self.__vista_ticket.tabla1.setItem(fila, 1, cantidad)
+
+    def imprimir_ticket(self):
+        pdf = PDF()
+        lista = [("cola cola", 2, 15.65), ("cafe doble", 2, 30.65)]
+        pdf.crear_factura(
+            nro_factura="001",
+            fecha=datetime.now(),
+            lista_pedido=lista,
+            nro_mesa="05",
+            metodo_pago="Efectivo",
+            empleado="Juan",
+            dni="39910232",
+        )
+        self.actualizar_mesa_callback(self.numero_mesa, "libre")
+        self.__vista_ticket.close()
+
+    def anular_venta(self):
+        self.actualizar_mesa_callback(self.numero_mesa, "libre")
+        self.__vista_ticket.close()
 
     def sumar_producto(self):
         items_seleccionados = self.__vista_ticket.tabla1.selectedItems()
@@ -63,6 +89,7 @@ class ControladorTicket:
     def restar_producto(self):
         print("se resto un producto")
         items_seleccionados = self.__vista_ticket.tabla1.selectedItems()
+        print(items_seleccionados)
         if len(items_seleccionados) > 0:
             # fila_seleccionada = items_seleccionados[0].row()
             producto = items_seleccionados[0].text()
@@ -87,17 +114,24 @@ class ControladorTicket:
                             self.__vista_ticket.tabla1.setItem(
                                 fila1, 2, QTableWidgetItem(str(cantidad_disponible + 1))
                             )
-                            return
+                            # return
 
-    def imprimir_producto(self):
-        pdf = PDF()
-        lista = [("cola cola", 2, 15.65), ("cafe doble", 2, 30.65)]
-        pdf.crear_factura(
-            nro_factura="001",
-            fecha=datetime.now(),
-            lista_pedido=lista,
-            nro_mesa="05",
-            metodo_pago="Efectivo",
-            empleado="Juan",
-            dni="39910232",
-        )
+    # def cerrar_sesion (self):
+    #     self.cambio = Controlador_dos.controlador_inicio.ControladorInicioSesion()
+    #     self.__vista_ticket.close()
+
+    # def cambio_a_stock (self):
+    #     self.cambio = Controlador_dos.controlador_vendedor.ControladorVendedor(self.__usuario).cambio_a_stock()
+    #     self.__vista_ticket.close()
+
+    # def cambio_a_generar (self):
+    #     pass
+
+    # def cambio_a_informe (self):
+    #     self.cambio = Controlador_dos.controlador_vendedor.ControladorVendedor(self.__usuario).cambio_a_informe()
+    #     self.__vista_ticket.close()
+
+    # def cambio_a_anular (self):
+    #     self.cambio = Controlador_dos.controlador_venta.ControladorVenta(self.__usuario)
+    #     self.cambio.cambio_a_anular()
+    #     self.__vista_ticket.close()

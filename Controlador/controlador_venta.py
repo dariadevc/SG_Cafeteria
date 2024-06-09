@@ -1,40 +1,51 @@
-from Visual.vista_venta_dos import VentanaVenta
-from Controlador.controlador_generar_ticket import ControladorTicket
+from Visual.vista_venta import VentanaVenta
+from Controlador.controlador_pedido import ControladorPedido
+
+# from Controlador.controlador_vendedor import ControladorVendedor
+# from Controlador.controlador_inicio import ControladorInicioSesion
+
+from PyQt6.QtWidgets import *
+
 
 class ControladorVenta:
-    
-    def __init__(self, usuario):
-        self.__vista_venta = VentanaVenta()
-        self.__vista_venta.stacked_botones.setCurrentIndex(0)
-        self.__vista_venta.show()
-        self.usuario = usuario
-        self.__vista_venta.label.setText(self.usuario)
-        self.__vista_venta.boton_stock.clicked.connect(self.cambio_a_stock)
-        self.__vista_venta.boton_informe.clicked.connect(self.cambio_a_informe)
-        self.__vista_venta.boton_generar_ticket.clicked.connect(self.cambio_a_generar)
-        self.__vista_venta.boton_anular_venta.clicked.connect(self.cambio_a_anular)
-       
 
+    def __init__(self, usuario, id_usuario):
+        self.__vista_venta = VentanaVenta(self)
+        self.__id_usuario = id_usuario
+        # self.__vista_venta.show()
+        self.__usuario = usuario
+        self.__mesas_ocupadas = set()  # Almacena las mesas ocupadas
+        self.__pedido = None  # Para instanciar el controlador del pedido más adelante
 
-    
-    
-    def cambio_a_stock (self):
-        print("stock click")
-    
-    def cambio_a_informe (self):
-        print("informe click")
-    
-    def cambio_a_generar (self):
-        self.__vista_venta.boton_anular_venta.setStyleSheet("background-color: lightblue;")
-        self.__vista_venta.boton_generar_ticket.setStyleSheet("background-color: rgb(135, 206, 235);")
-        self.__vista_venta.stacked_botones.setCurrentIndex(1)
-        vista_ticket = self.__vista_venta.obtener_vista_ticket()
-        self.controlador_ticket = ControladorTicket(vista_ticket)
-        self.__vista_venta.vista_ticket.btn_resta.clicked.connect(self.controlador_ticket.restar_producto)
-        self.__vista_venta.vista_ticket.btn_suma.clicked.connect(self.controlador_ticket.sumar_producto)
-        self.__vista_venta.vista_ticket.btn_imprimir.clicked.connect(self.controlador_ticket.imprimir_producto)
-    
-    def cambio_a_anular (self):
-        self.__vista_venta.boton_generar_ticket.setStyleSheet("background-color: lightblue;")
-        self.__vista_venta.boton_anular_venta.setStyleSheet("background-color: rgb(135, 206, 235);")
-        self.__vista_venta.stacked_botones.setCurrentIndex(2)
+        # Guarda las instancias de los pedidos, así no se abren muchas ventanas por mesa
+        self.pedidos_activos = {}
+
+    def get_vista(self):
+        return self.__vista_venta
+
+    def seleccionar_mesa(self, numero_mesa):
+        if numero_mesa in self.pedidos_activos:
+            self.__pedido = self.pedidos_activos[numero_mesa]
+            self.__pedido.abrir_ventana_pedido()
+        else:
+            self.__mesas_ocupadas.add(numero_mesa)
+            self.__vista_venta.actualizar_estado_mesas(self.__mesas_ocupadas)
+            self.__pedido = ControladorPedido(
+                self.__id_usuario, numero_mesa, self.actualizar_mesa
+            )
+            self.pedidos_activos[numero_mesa] = self.__pedido
+            self.__pedido.abrir_ventana_pedido()
+
+    def anular_venta(self, numero_mesa):
+        if numero_mesa in self.__mesas_ocupadas:
+            self.__mesas_ocupadas.remove(numero_mesa)
+            self.__vista_venta.actualizar_estado_mesas(self.__mesas_ocupadas)
+
+    def actualizar_mesa(self, numero_mesa, estado):
+        if estado == "ocupada":
+            self.__mesas_ocupadas.add(numero_mesa)
+        elif estado == "libre":
+            self.__mesas_ocupadas.remove(numero_mesa)
+            if numero_mesa in self.pedidos_activos:
+                del self.pedidos_activos[numero_mesa]
+        self.__vista_venta.actualizar_estado_mesas(self.__mesas_ocupadas)

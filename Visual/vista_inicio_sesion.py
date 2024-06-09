@@ -1,17 +1,14 @@
-import sys
 from PyQt6.QtCore import * 
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 
 
-
-
-class VistaInicioSesion(QMainWindow):
+class VistaInicioSesion(QWidget):
     def __init__(self,controlador):
         super().__init__()
         self.setWindowTitle("Bienvenido ")
         self.setFixedSize(QSize(400, 500))            
-      
+
         palette = QPalette()
         palette.setColor(QPalette.ColorGroup.All, QPalette.ColorRole.Window, QColor(135, 206, 235)) #color de la ventana
         self.setPalette(palette)
@@ -25,12 +22,12 @@ class VistaInicioSesion(QMainWindow):
 
         self.contenedor_horizontal= QHBoxLayout(self.frame_imagen) #para almacenar la las etiquetas de imagen y nombre empresa
         self.contenedor_horizontal.setContentsMargins(0, 0, 0, 0)
-       # self.contenedor_horizontal.setSpacing(0) 
+        # self.contenedor_horizontal.setSpacing(0) 
         self.contenedor_horizontal.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
-  
         self.etiqueta_cafe = QLabel()
-       # self.etiqueta_cafe.setContentsMargins(0, 0, 0, 0)     
+        # self.etiqueta_cafe.setContentsMargins(0, 0, 0, 0)     
         self.imagen= QPixmap("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes//coffe.png").scaled(25, 25)  
+        #self.imagen= QPixmap("C://SG_Cafeteria//Visual_dos//imagenes///coffe.png").scaled(25,25)
         self.etiqueta_cafe.setPixmap(self.imagen)
         self.etiqueta_nombre = QLabel(" Cafe Viera",self)
         #self.etiqueta_nombre.setContentsMargins(0, 0, 0, 0)
@@ -39,8 +36,6 @@ class VistaInicioSesion(QMainWindow):
         self.contenedor_horizontal.addWidget(self.etiqueta_cafe)
         self.contenedor_horizontal.addWidget(self.etiqueta_nombre)
         
-   
-      
         lblIniciarSesion = QLabel("Iniciar Sesion")
         lblIniciarSesion.setStyleSheet("color: white; font-weight: bold; font-size: 20px; margin-left: 50px")
         self.contenedor_vertical.addWidget(lblIniciarSesion)
@@ -49,7 +44,7 @@ class VistaInicioSesion(QMainWindow):
         lblUsuario.setStyleSheet("color: white; font-weight: bold; font-size: 16px; margin-left: 5px")
         self.contenedor_vertical.addWidget(lblUsuario)
         self.contenedor_vertical.addSpacing(20)
-        self.inputUsuario = QLineEdit("kelly64")
+        self.inputUsuario = QLineEdit("mgarrison")
         self.inputUsuario.setStyleSheet("margin-left: 30px")
         self.inputUsuario.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         self.inputUsuario.setFixedWidth(200)    
@@ -62,7 +57,7 @@ class VistaInicioSesion(QMainWindow):
         self.frame_contrasena = QFrame()
         self.contenedor_contrasena = QHBoxLayout(self.frame_contrasena)
         self.contenedor_contrasena.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.inputContrasenia = QLineEdit('s6BJseOY%)')
+        self.inputContrasenia = QLineEdit('E$8HjHRj)o')
         self.inputContrasenia.setEchoMode(QLineEdit.EchoMode.Password)
         self.inputUsuario.setStyleSheet("margin-left: 3px")
         self.inputContrasenia.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
@@ -73,14 +68,14 @@ class VistaInicioSesion(QMainWindow):
         self.imagen_contrasena = QPushButton()    #boton contrasena oculta  
         self.imagen_contrasena.setFixedSize(27, 25)   
         self.imagen_contrasena_oculta= QPixmap("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes//contrasena_oculta").scaled(30, 25)  
-        self.imagen_contrasena_visible= QPixmap("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes////contrasena_visible").scaled(30, 25) 
+        self.imagen_contrasena_visible= QPixmap("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes////contrasena_visible").scaled(30, 25)
+        #self.imagen_contrasena_oculta= QPixmap("C:/Users/Alambrito/Documents/GitHub/SG_Cafeteria//Visual//imagenes//contrasena_oculta").scaled(30, 25)  
+        #self.imagen_contrasena_visible= QPixmap("C://Users//Alambrito//Documents//Github//SG_Cafeteria//Visual//imagenes//contrasena_visible").scaled(30, 25) 
         self.imagen_contrasena.setIcon(QIcon(self.imagen_contrasena_oculta))
         self.imagen_contrasena.setIconSize(self.imagen_contrasena_oculta.size())
         self.imagen_contrasena.setStyleSheet("background-color: none; padding-top: 7px; padding-bottom: 5px;")
         self.imagen_contrasena.pressed.connect(controlador.cambio_modo_contrasena)
         self.contrasena_oculta = True
-      
-        
         
         self.contenedor_contrasena.addWidget(self.imagen_contrasena)
         self.contenedor_vertical.addWidget(self.frame_contrasena)
@@ -98,10 +93,7 @@ class VistaInicioSesion(QMainWindow):
         self.etiqueta_error.setStyleSheet("background-color: bold; color: red;")
         self.contenedor_vertical.addWidget(self.etiqueta_error)
         
-        
-        
         self.contenedor_principal.addWidget(self.frame_imagen)   
         self.contenedor_principal.addWidget(self.frame_login)   
-        central_widget = QWidget()  
-        central_widget.setLayout(self.contenedor_principal)
-        self.setCentralWidget(central_widget)  
+        
+        self.setLayout(self.contenedor_principal)

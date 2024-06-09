@@ -19,9 +19,8 @@ class VentanaPedido(QWidget):
         self.etiquetas_cantidad = []
         self.productos_agregados = []
         self.pedidos_realizados = []
-        self.stock =[]
-        
-  
+        self.stock = []
+
         # self.imagenes_x_subido = QPixmap(
         #     "C://SG_Cafeteria//Visual//imagenes//check.jpg"
         # ).scaled(10, 10)
@@ -31,9 +30,15 @@ class VentanaPedido(QWidget):
         # self.imagenes_mas_subido = QPixmap(
         #     "C://SG_Cafeteria//Visual//imagenes//+.jfif"
         # ).scaled(10, 10)
-        self.imagenes_x_subido = QPixmap("C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//check.jpg").scaled(10, 10)
-        self.imagenes_menos_subido = QPixmap("C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//-.jfif").scaled(10, 10)
-        self.imagenes_mas_subido = QPixmap("C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//+.jfif").scaled(10, 10)
+        self.imagenes_x_subido = QPixmap(
+            "C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//check.jpg"
+        ).scaled(10, 10)
+        self.imagenes_menos_subido = QPixmap(
+            "C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//-.jfif"
+        ).scaled(10, 10)
+        self.imagenes_mas_subido = QPixmap(
+            "C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//+.jfif"
+        ).scaled(10, 10)
 
         self.contenedor = QVBoxLayout()
         self.contenedor.setSpacing(30)

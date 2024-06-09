@@ -1,0 +1,19 @@
+Funcionalidades:
+    - ABM de producto y si el de usuario ya estaba funcional, llegar a la presentación funcional. 
+    - Informe de fuera de stock.
+
+Cosas visuales como: 
+    - Inicio de sesión:
+        - Acentos
+        - Botón recuperar contraseña (no funcional)
+        - Agrandar título
+        - No limitar tiempo de mensaje de error.
+    - Que se pueda ver en qué sección estoy.
+    - Columna baja con true o false ponerlo de otra forma no como el valor que viene de BD.
+    - Listar el tipo de usuario.
+    - Usar png transparentes para los iconos. 
+    - Cerrar ventanas emergentes y notificar que es lo que pasa luego (ej: se modificó exitosamente tal producto).
+    - En venta poner leyenda de qué significan los colores. 
+    - Poner scroll de artículos seleccionados y el total acumulado. 
+
+No es necesario que hagan el informe de ventas, ni lo que hablamos sobre mostrar los usuarios dados de baja y lo del check para verlos. 

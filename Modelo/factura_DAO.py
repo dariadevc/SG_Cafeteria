@@ -2,7 +2,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from Modelo_dos.base_de_datos import BaseDeDatos
+from Modelo.base_de_datos import BaseDeDatos
 from datetime import datetime
 
 

@@ -1,23 +1,28 @@
 from __future__ import annotations
 import sys
-#sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
+
+# sys.path.append('C://Users//camus//Desktop//SG_Cafeteria//Modelo')
 from Modelo.usuario_DAO import UsuarioDAO
 
 
-
 class Usuario:
-    def __init__(self, dni, nombre, apellido, tipo, usuario, contra, baja, causa):
-        self.__dni = dni
-        self.__nombre = nombre
-        self.__apellido = apellido
-        self.__tipo = tipo
-        self.__usuario = usuario
-        self.__contra = contra
-        self.__baja = baja
-        self.__causa = causa
+    def __init__(self, datos):
+        self.__id_usuario = datos[0]
+        self.__dni = datos[1]
+        self.__nombre = datos[2]
+        self.__apellido = datos[3]
+        self.__usuario = datos[4]
+        self.__contra = datos[5]
+        self.__baja = datos[6]
+        self.__causa = datos[7]
+        self.__tipo = datos[8]
         self.__usuariodao = UsuarioDAO()
 
     ## Getters y Setters
+
+    def get_id(self):
+        print("Se solicitó el dni del usuario.")
+        return self.__id_usuario
 
     def get_dni(self):
         print("Se solicitó el dni del usuario.")
@@ -91,5 +96,13 @@ class Usuario:
             return datos + f" | BAJA: {self.__baja} | CAUSA: {self.__causa}"
 
     def login(self):
-        result = self.__usuariodao.login_usuario(self.__usuario, self.__contra)
-        return result
+        resultado = self.__usuariodao.login_usuario(self.__usuario, self.__contra)
+        if resultado:
+            return Usuario(resultado)
+        else:
+            return None
+
+    def agregar_a_bd(self):
+        self.__usuariodao.agregar_usuario(
+            self.__dni, self.__nombre, self.__apellido, self.__usuario, self.__contra
+        )

@@ -1,4 +1,4 @@
-from codigomodificado.Modelo_dos.base_de_datos import BaseDeDatos
+from Modelo.base_de_datos import BaseDeDatos
 
 
 class MetodoPagoDAO:

@@ -1,8 +1,8 @@
-from Visual_dos.ventana_stock import VentanaStock
-from Modelo_dos.producto_DAO import ProductoDAO
-from Controlador_dos.controlador_modificar_producto import ControladorModificarProducto
-from Controlador_dos.controlador_agregar_producto import ControladorAgregarProducto
-from Controlador_dos.controlador_eliminar_producto import ControladorEliminarProducto
+from Visual.ventana_stock import VentanaStock
+from Modelo.producto_DAO import ProductoDAO
+from Controlador.controlador_modificar_producto import ControladorModificarProducto
+from Controlador.controlador_agregar_producto import ControladorAgregarProducto
+from Controlador.controlador_eliminar_producto import ControladorEliminarProducto
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 

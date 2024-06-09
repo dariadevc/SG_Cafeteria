@@ -1,5 +1,5 @@
-from Visual_dos.ventana_modificar_producto import VentanaModificarProducto
-from Modelo_dos.producto_DAO import ProductoDAO
+from Visual.ventana_modificar_producto import VentanaModificarProducto
+from Modelo.producto_DAO import ProductoDAO
 
 
 class ControladorModificarProducto:
@@ -25,4 +25,10 @@ class ControladorModificarProducto:
         cantidad_modificada = int(self.__ventana_modificar.input_2.text())
         stockminimo_modificado = int(self.__ventana_modificar.input_3.text())
         precio_modificado = self.__ventana_modificar.input_4.text()
-        ProductoDAO().modificar_producto(codigo,descripcion_modificada,cantidad_modificada,stockminimo_modificado,precio_modificado)
+        ProductoDAO().modificar_producto(
+            codigo,
+            descripcion_modificada,
+            cantidad_modificada,
+            stockminimo_modificado,
+            precio_modificado,
+        )
