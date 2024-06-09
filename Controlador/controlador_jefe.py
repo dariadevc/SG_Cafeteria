@@ -1,7 +1,7 @@
 from Visual.vista_jefe import VistaJefe
 from Controlador.controlador_jefe_usuario import ControladorJefeUsuario
 
-# from Controlador.controlador_inicio import ControladorInicioSesion
+import Controlador.controlador_inicio
 from Controlador.controlador_venta import ControladorVenta
 from Controlador.controlador_stock import ControladorStock
 
@@ -42,7 +42,7 @@ class ControladorJefe:
         self.__vista_jefe.show()
 
     def cerrar_sesion(self):
-        self.__cerrar = Controlador_dos.controlador_inicio.ControladorInicioSesion()
+        self.__cerrar = Controlador.controlador_inicio.ControladorInicioSesion()
         self.__vista_jefe.close()
 
     def cambio_a_venta(self):

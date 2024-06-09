@@ -4,10 +4,10 @@ Funcionalidades:
 
 Cosas visuales como: 
     - Inicio de sesión:
-        - Acentos
-        - Botón recuperar contraseña (no funcional)
-        - Agrandar título
-        - No limitar tiempo de mensaje de error.
+        - Acentos [Listo]
+        - Botón recuperar contraseña (no funcional) [Listo]
+        - Agrandar título [Listo]
+        - No limitar tiempo de mensaje de error. [Listo]
     - Que se pueda ver en qué sección estoy.
     - Columna baja con true o false ponerlo de otra forma no como el valor que viene de BD.
     - Listar el tipo de usuario.

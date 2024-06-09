@@ -27,7 +27,7 @@ class ControladorInicioSesion:
             self.__vista.imagen_contrasena.setIconSize(
                 self.__vista.imagen_contrasena_visible.size()
             )
-            self.__vista.inputContrasenia.setEchoMode(QLineEdit.EchoMode.Normal)
+            self.__vista.input_contrasenia.setEchoMode(QLineEdit.EchoMode.Normal)
         else:
             self.__vista.imagen_contrasena.setIcon(
                 QIcon(self.__vista.imagen_contrasena_oculta)
@@ -35,15 +35,15 @@ class ControladorInicioSesion:
             self.__vista.imagen_contrasena.setIconSize(
                 self.__vista.imagen_contrasena_oculta.size()
             )
-            self.__vista.inputContrasenia.setEchoMode(QLineEdit.EchoMode.Password)
+            self.__vista.input_contrasenia.setEchoMode(QLineEdit.EchoMode.Password)
 
         self.__vista.contrasena_oculta = (
             not self.__vista.contrasena_oculta
         )  # Cambia el estado
 
     def valido_entrada(self):
-        nombre_usuario = self.__vista.inputUsuario.text()
-        contrasenia = self.__vista.inputContrasenia.text()
+        nombre_usuario = self.__vista.input_usuario.text()
+        contrasenia = self.__vista.input_contrasenia.text()
 
         usuario_datos = UsuarioDAO().login_usuario(nombre_usuario, contrasenia)
 
@@ -58,15 +58,10 @@ class ControladorInicioSesion:
                     self.inicio = ControladorVendedor(usuario, usuario.get_id)
                     print("Inicio sesión de vendedor")
                 else:
-                    self.__vista.etiqueta_error.setText(
+                    self.__vista.set_mensaje_error(
                         "El usuario está dado de baja\nNo se puede iniciar sesión"
                     )
-                    QTimer.singleShot(2000, self.limpiar_error)
                     return
             self.__vista.close()
         else:
-            self.__vista.etiqueta_error.setText("Usuario o contrasena Incorrecta")
-            QTimer.singleShot(2000, self.limpiar_error)
-
-    def limpiar_error(self):
-        self.__vista.etiqueta_error.setText(" ")
+            self.__vista.set_mensaje_error("Usuario o contrasena Incorrecta")

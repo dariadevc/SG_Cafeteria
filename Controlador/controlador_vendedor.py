@@ -4,7 +4,7 @@ from Visual.vista_vendedor import VistaVendedor
 from Controlador.controlador_venta import ControladorVenta
 from Controlador.controlador_stock import ControladorStock
 
-# from Controlador.controlador_inicio import ControladorInicioSesion
+import Controlador.controlador_inicio
 
 
 class ControladorVendedor:
@@ -63,7 +63,5 @@ class ControladorVendedor:
         print("informe click")
 
     def logout(self):
-        self.__vista_inicio = (
-            Controlador_dos.controlador_inicio.ControladorInicioSesion()
-        )
+        self.__vista_inicio = Controlador.controlador_inicio.ControladorInicioSesion()
         self.__vista_vendedor.close()

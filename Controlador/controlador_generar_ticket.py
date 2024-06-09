@@ -4,10 +4,6 @@ from Modelo.producto_DAO import ProductoDAO
 from PyQt6.QtWidgets import *
 from datetime import datetime
 
-# from Controlador.controlador_vendedor import ControladorVendedor
-# from Controlador.controlador_inicio import ControladorInicioSesion
-# from Controlador.controlador_venta import ControladorVenta
-
 
 class ControladorTicket:
     def __init__(self, usuario, numero_mesa, actualizar_mesa_callback):
@@ -115,23 +111,3 @@ class ControladorTicket:
                                 fila1, 2, QTableWidgetItem(str(cantidad_disponible + 1))
                             )
                             # return
-
-    # def cerrar_sesion (self):
-    #     self.cambio = Controlador_dos.controlador_inicio.ControladorInicioSesion()
-    #     self.__vista_ticket.close()
-
-    # def cambio_a_stock (self):
-    #     self.cambio = Controlador_dos.controlador_vendedor.ControladorVendedor(self.__usuario).cambio_a_stock()
-    #     self.__vista_ticket.close()
-
-    # def cambio_a_generar (self):
-    #     pass
-
-    # def cambio_a_informe (self):
-    #     self.cambio = Controlador_dos.controlador_vendedor.ControladorVendedor(self.__usuario).cambio_a_informe()
-    #     self.__vista_ticket.close()
-
-    # def cambio_a_anular (self):
-    #     self.cambio = Controlador_dos.controlador_venta.ControladorVenta(self.__usuario)
-    #     self.cambio.cambio_a_anular()
-    #     self.__vista_ticket.close()
