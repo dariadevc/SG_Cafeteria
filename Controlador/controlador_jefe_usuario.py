@@ -10,7 +10,7 @@ from PyQt6.QtCore import *
 class ControladorJefeUsuario:
 
     def __init__(self):
-        self.__ventana_usuario_jefe = VentanaUsuarioJefe()
+        self.__ventana_usuario_jefe = VentanaUsuarioJefe(self)
         self.__ventana_usuario_jefe.show()
         self.__usuario_dao = UsuarioDAO()
         self.cargar_usuarios()
