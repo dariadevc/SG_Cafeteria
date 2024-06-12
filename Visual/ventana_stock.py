@@ -46,15 +46,13 @@ class VentanaStock(QWidget):
         ###################################################
         self.layout_botonera = QVBoxLayout()
 
-        icon = QPixmap(
-             "C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//refrescar3.jpg"
-        ).scaled(25, 25)
-
         self.boton_refrescar_tabla = QPushButton()
         self.boton_refrescar_tabla.setStyleSheet("background-color: lightblue;")
-        self.boton_refrescar_tabla.setFixedSize(80, 30)
-        self.boton_refrescar_tabla.setIcon(QIcon(icon))
-        self.boton_refrescar_tabla.setIconSize(icon.size())
+        self.boton_refrescar_tabla.setFixedSize(100, 50)
+        imagen_refrescar = QPixmap("C:/Users/Alan/Desktop/clon/Visual/imagenes/refrescar").scaled(100,100)
+        self.boton_refrescar_tabla.setIcon(QIcon(imagen_refrescar))
+        self.boton_refrescar_tabla.setIconSize(QSize(100,50))
+        
         self.boton_agregar_producto = QPushButton("AGREGAR PRODUCTO")
         self.boton_agregar_producto.setStyleSheet("background-color: lightblue;")
         self.boton_agregar_producto.setFixedSize(120, 70)

@@ -19,7 +19,6 @@ class ControladorStock:
         self.__ventana_stock.limpiar_tabla()
         productos = self.__producto_dao.obtener_todos_productos()
         productos_vigentes = [producto for producto in productos if producto[7]]
-        print(productos)
         self.__ventana_stock.tabla_productos.setRowCount(len(productos_vigentes))
         for fila, producto in enumerate(productos_vigentes):
             codigo = QTableWidgetItem(f"{producto[0]}")

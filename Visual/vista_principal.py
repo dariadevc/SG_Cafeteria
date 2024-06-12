@@ -1,7 +1,6 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
-import sys
 
 
 class VistaPrincipal(QWidget):
@@ -10,23 +9,23 @@ class VistaPrincipal(QWidget):
         super().__init__()
         self.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.setWindowTitle("Cafeteria Viera")
-        self.boton_cerrar = QPushButton("Cerrar\nSesion")
+        imagen_cerrar = QPixmap("C:/Users/Alan/Desktop/clon/Visual/imagenes/salir").scaled(100,100)
+        self.boton_cerrar = QPushButton()
         self.boton_cerrar.setFixedSize(80, 60)
         self.boton_cerrar.setStyleSheet("background-color: lightblue;")
-
+        self.boton_cerrar.setIcon(QIcon(imagen_cerrar))
+        self.boton_cerrar.setIconSize(QSize(80,60))
         self.label = QLabel("Nombre y Apellido")
         self.label.setFixedSize(500, 60)
         self.label.setContentsMargins(0, 20, 0, 0)
         self.label.setAlignment(Qt.AlignmentFlag.AlignRight)
 
-        self.imagen = QLabel("foto")
+        self.imagen = QLabel()
         # pixmap = QPixmap("C:/Users/Alambrito/Documents/GitHub/SG_Cafeteria/Visual/imagenes/foto_usuario.jpg")
-        pixmap = QPixmap(
-            "C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//foto_usuario.jpg"
-        )
-        self.imagen.setPixmap(pixmap.scaled(100, 80))
+        pixmap = QPixmap("C:/Users/Alan/Desktop/clon/Visual/imagenes/foto_usuario").scaled(100,100)
+        self.imagen.setPixmap(pixmap)
         self.imagen.setFixedSize(100, 80)
-        self.imagen.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        #self.imagen.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.setFixedSize(750, 640)
         self.layout_principal = QVBoxLayout()

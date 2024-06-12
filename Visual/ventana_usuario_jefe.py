@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
-
+from PyQt6.QtGui import *
 
 class VentanaUsuarioJefe(QWidget):
 
@@ -35,7 +35,10 @@ class VentanaUsuarioJefe(QWidget):
         self.layout_botonera_usuario = QVBoxLayout()
 
         self.boton_refrescar_tabla = QPushButton()
-        self.boton_refrescar_tabla.setFixedSize(80, 30)
+        self.boton_refrescar_tabla.setFixedSize(100, 50)
+        imagen_refrescar = QPixmap("C:/Users/Alan/Desktop/clon/Visual/imagenes/refrescar").scaled(100,100)
+        self.boton_refrescar_tabla.setIcon(QIcon(imagen_refrescar))
+        self.boton_refrescar_tabla.setIconSize(QSize(100,50))
         self.boton_agregar_usuario = QPushButton("AGREGAR USUARIO")
         self.boton_agregar_usuario.setFixedSize(120, 70)
         self.boton_modificar_usuario = QPushButton("MODIFICAR USUARIO")

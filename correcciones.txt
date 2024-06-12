@@ -1,4 +1,4 @@
-Funcionalidades:
+﻿Funcionalidades:
     - ABM de producto y si el de usuario ya estaba funcional, llegar a la presentación funcional. 
     - Informe de fuera de stock.
 
@@ -8,9 +8,9 @@ Cosas visuales como:
         - Botón recuperar contraseña (no funcional) [Listo]
         - Agrandar título [Listo]
         - No limitar tiempo de mensaje de error. [Listo]
-    - Que se pueda ver en qué sección estoy.
-    - Columna baja con true o false ponerlo de otra forma no como el valor que viene de BD.
-    - Listar el tipo de usuario.
+    - Que se pueda ver en qué sección estoy. [Listo]
+    - Columna baja con true o false ponerlo de otra forma no como el valor que viene de BD. [Listo]
+    - Listar el tipo de usuario. [Listo]
     - Usar png transparentes para los iconos. 
     - Cerrar ventanas emergentes y notificar que es lo que pasa luego (ej: se modificó exitosamente tal producto).
     - En venta poner leyenda de qué significan los colores. 
