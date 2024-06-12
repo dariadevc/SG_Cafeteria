@@ -14,6 +14,6 @@ class ControladorAgregarUsuario:
         apellido = self.__ventana_agregar_usuario.line_edit_3.text()
         nombre_usuario = self.__ventana_agregar_usuario.line_edit_4.text()
         contrasenia = self.__ventana_agregar_usuario.line_edit_5.text()
-        datos = [dni, nombre, apellido, "", nombre_usuario, contrasenia, "", ""]
+        datos = ['',dni, nombre, apellido, nombre_usuario, contrasenia, "", "",'']
         usuario_nuevo = Usuario(datos)
         usuario_nuevo.agregar_a_bd()

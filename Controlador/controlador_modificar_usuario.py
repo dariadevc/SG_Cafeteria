@@ -16,8 +16,8 @@ class ControladorModificarUsuario:
         self.__ventana_modificar.label_dni.setText(f"{datos_usuario[1]}")
         self.__ventana_modificar.input_1.setText(datos_usuario[2])
         self.__ventana_modificar.input_2.setText(datos_usuario[3])
-        self.__ventana_modificar.input_3.setText(datos_usuario[5])
-        self.__ventana_modificar.input_4.setText(datos_usuario[6])
+        self.__ventana_modificar.input_3.setText(datos_usuario[4])
+        self.__ventana_modificar.input_4.setText(datos_usuario[5])
 
     def modificar_usuario(self):
         dni_usuario = self.__ventana_modificar.label_dni.text()

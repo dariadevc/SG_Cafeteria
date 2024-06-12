@@ -23,15 +23,21 @@ class ControladorJefeUsuario:
             dni = QTableWidgetItem(f"{usuario[1]}")
             nombre = QTableWidgetItem(f"{usuario[2]}")
             apellido = QTableWidgetItem(f"{usuario[3]}")
-            tipo = QTableWidgetItem(f"{usuario[4]}")
-            baja = QTableWidgetItem(f"{usuario[7]}")
-            causa = QTableWidgetItem(f"{usuario[8]}")
+            if usuario[6]:
+                estado = QTableWidgetItem("Inactivo")
+            else:
+                estado = QTableWidgetItem("Activo")
+            causa = QTableWidgetItem(f"{usuario[7]}")
+            if usuario[8]:
+                tipo = QTableWidgetItem("Jefe")
+            else:
+                tipo = QTableWidgetItem("Vendedor")
 
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 0, dni)
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 1, nombre)
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 2, apellido)
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 3, tipo)
-            self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 4, baja)
+            self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 4, estado)
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 5, causa)
 
     def get_vista(self):

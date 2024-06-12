@@ -50,6 +50,8 @@ class VistaPrincipal(QWidget):
         self.layout_botones.addWidget(self.boton_stock)
         self.layout_botones.addWidget(self.boton_informe)
 
+        self._lista_botones = [self.boton_venta, self.boton_stock, self.boton_informe]
+
         self.stacked_layout = QStackedLayout()
 
         self.layout_principal.addLayout(layout_usuario)
@@ -65,8 +67,8 @@ class VistaPrincipal(QWidget):
         self.stacked_layout.addWidget(vista)
 
     def actualizar_color_boton(self, boton_seleccionado):
-        botones = [self.boton_venta, self.boton_stock, self.boton_informe]
-        for boton in botones:
+        
+        for boton in self._lista_botones:
             if boton == boton_seleccionado:
                 boton.setStyleSheet("background-color: lightgray;")
             else:

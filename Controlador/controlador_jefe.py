@@ -14,6 +14,7 @@ class ControladorJefe:
         self._usuario = usuario
         self.__id_usuario = id_usuario
         nombre_usuario = self._usuario.get_usuario()
+        self.__vista_jefe.label.setText("Bienvenido Jefe " + nombre_usuario)
 
         self.__controlador_venta = ControladorVenta(usuario, self.__id_usuario)
         self.__vista_venta = self.__controlador_venta.get_vista()
@@ -48,19 +49,15 @@ class ControladorJefe:
     def cambio_a_venta(self):
         self.__vista_jefe.cambiar_vista(0)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_venta)
-        # print("venta click")
 
     def cambio_a_stock(self):
         self.__vista_jefe.cambiar_vista(1)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_stock)
-        # print("stock click")
 
     def cambio_a_informe(self):
         self.__vista_jefe.cambiar_vista(3)
-        self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_stock)
-        # print("informe click")
+        self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_informe)
 
     def cambio_a_usuario(self):
         self.__vista_jefe.cambiar_vista(2)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_usuario)
-        # print("usuario click")

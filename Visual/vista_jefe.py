@@ -12,7 +12,7 @@ class VistaJefe(VistaPrincipal):
         self.boton_usuario = QPushButton("USUARIO")
         self.boton_usuario.setStyleSheet("background-color:lightblue")
         self.layout_botones.addWidget(self.boton_usuario)
-
+        self._lista_botones.append(self.boton_usuario)
         self.boton_usuario.clicked.connect(controlador.cambio_a_usuario)
         self.boton_informe.clicked.connect(controlador.cambio_a_informe)
         self.boton_venta.clicked.connect(controlador.cambio_a_venta)

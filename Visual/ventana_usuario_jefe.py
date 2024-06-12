@@ -11,14 +11,14 @@ class VentanaUsuarioJefe(QWidget):
         ###################################################
         self.tabla_usuarios = QTableWidget()
         self.tabla_usuarios.setColumnCount(6)
-        self.tabla_usuarios.setColumnWidth(0, 100)
-        self.tabla_usuarios.setColumnWidth(3, 80)
-        self.tabla_usuarios.setColumnWidth(4, 150)
-        self.tabla_usuarios.setColumnWidth(5, 50)
+        self.tabla_usuarios.setColumnWidth(0, 80)
+        self.tabla_usuarios.setColumnWidth(3, 100)
+        self.tabla_usuarios.setColumnWidth(4, 90)
+        self.tabla_usuarios.setColumnWidth(5, 140)
         self.tabla_usuarios.setFixedSize(550, 450)
 
         self.tabla_usuarios.setHorizontalHeaderLabels(
-            ["DNI", "NOMBRE", "APELLIDO", "NOMBRE USUARIO", "CAUSA", "BAJA"]
+            ["DNI", "NOMBRE", "APELLIDO", "TIPOUSUARIO", "ESTADO", "CAUSA"]
         )
         self.tabla_usuarios.verticalHeader().setVisible(False)
         self.tabla_usuarios.setEditTriggers(
