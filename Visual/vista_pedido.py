@@ -80,10 +80,20 @@ class VentanaPedido(QWidget):
         self.contenedor.addLayout(self.tabla_alta)
 
         self.tabla_baja = QHBoxLayout()
+        self.tabla_total = QHBoxLayout()
         self.tabla_baja.setAlignment(
             Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft
         )
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
 
+    
+        self.scroll_widget = QWidget()
+        self.scroll_layout = QVBoxLayout(self.scroll_widget)
+        self.scroll_widget.setLayout(self.scroll_layout)
+        self.scroll_area.setWidget(self.scroll_widget)
+        self.scroll_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.scroll_layout.setSpacing(1)
         self.tabla_pedido = QVBoxLayout()
         spacio_pedido = QSpacerItem(
             1000, 600, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed
@@ -93,7 +103,7 @@ class VentanaPedido(QWidget):
         self.tabla_pedido.setAlignment(
             Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignRight
         )
-
+        self.scroll_layout.addLayout(self.tabla_pedido)
         ## Botón finalizar pedido
         self.boton_finalizar_pedido = QPushButton("Finalizar Pedido")
         font = QFont()
@@ -120,11 +130,21 @@ class VentanaPedido(QWidget):
         self.botones_pedido.addWidget(self.boton_finalizar_pedido)
         self.botones_pedido.addWidget(self.boton_anular_pedido)
 
-        self.tabla_baja.addLayout(self.tabla_pedido)
+        self.etiqueta_total = QLabel("TOTAL  :  $  ")
+        self.etiqueta_total.setStyleSheet("font-weight: bold;")
+        self.etiqueta_total.setAlignment(
+             Qt.AlignmentFlag.AlignCenter
+        )
+        self.tabla_total.addWidget(self.etiqueta_total)
+
+        self.tabla_baja.addWidget(self.scroll_area)
+
+    
         self.tabla_baja.addLayout(self.botones_pedido)
 
         self.contenedor.addLayout(self.tabla_alta)
         self.contenedor.addLayout(self.tabla_baja)
+        self.contenedor.addLayout(self.tabla_total)
 
         self.setLayout(self.contenedor)
 

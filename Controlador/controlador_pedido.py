@@ -45,6 +45,7 @@ class ControladorPedido:
         self.precios = [producto[6] for producto in self.productos]
         self.stock = [producto[4] for producto in self.productos]
         self.diccionario_pedidos = {}
+        self.__total= 0
 
         # Llenar las tablas con los productos obtenidos
         self.llenar_tabla(self.__vista_pedido.tabla_comida, self.__bebidas)
@@ -65,7 +66,7 @@ class ControladorPedido:
             self.__vista_pedido.agregarFilaConBotones(tabla, producto)
 
     def llenar_tabla_pedido(
-        self, tabla, indice_modificado, nueva_cantidad, nuevo_precio
+         self, tabla, indice_modificado, nueva_cantidad, nuevo_precio, precio_producto,es_negativo
     ):
         producto, cantidad = self.__vista_pedido.productos_agregados[indice_modificado]
 
@@ -129,7 +130,13 @@ class ControladorPedido:
             del self.diccionario_pedidos[
                 producto
             ]  # Eliminar la entrada del diccionario con el pedido
-
+        if es_negativo:
+            self.__total -= precio_producto
+            print(f'precio restar : {self.__total}')
+        else:
+            self.__total += precio_producto
+            print(f'precio sumar : {self.__total}')
+        self.__vista_pedido.etiqueta_total.setText(f"TOTAL  :  $  {self.__total:.2f}")
     def boton_presionado(self):
         boton_presionado = (
             self.__vista_pedido.sender()
@@ -169,8 +176,8 @@ class ControladorPedido:
         )
         print(self.__vista_pedido.productos_agregados[indice])
         self.llenar_tabla_pedido(
-            self.__vista_pedido.tabla_pedido, indice, nueva_cantidad, nuevo_precio
-        )
+            self.__vista_pedido.tabla_pedido, indice, nueva_cantidad, nuevo_precio, precio_producto,es_negativo = False
+                          )
 
     def restar_etiqueta_cantidad(self, indice):
 
@@ -188,7 +195,7 @@ class ControladorPedido:
             )
             print(self.__vista_pedido.productos_agregados[indice])
             self.llenar_tabla_pedido(
-                self.__vista_pedido.tabla_pedido, indice, nueva_cantidad, nuevo_precio
+                self.__vista_pedido.tabla_pedido, indice, nueva_cantidad, nuevo_precio, precio_producto,es_negativo = True
             )
 
     def finalizar_pedido(self):  # para imrpimir la factura y posible actualizar base
