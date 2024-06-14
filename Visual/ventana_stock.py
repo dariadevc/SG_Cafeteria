@@ -144,3 +144,10 @@ class VentanaStock(QWidget):
             "Debe seleccionar un producto de la tabla para realizar esta acción."
         )
         mensaje.exec()
+
+    def imprimo_alerta (self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("No se seleccionó ningún producto")
+        msg.setInformativeText("Seleccione un producto y vuelva a presionar")
+        msg.exec()

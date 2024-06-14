@@ -32,3 +32,9 @@ class VentanaEliminarUsuario (QWidget):
         self.layout_ventana.addWidget(self.boton_eliminar)
         
         self.setLayout(self.layout_ventana)
+    
+    def notifico_eliminacion(self,dni, causa):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setText(f"Se eliminó correctamente el usuario con dni: {dni} \n Causa de eliminación: {causa}")
+        msg.exec()

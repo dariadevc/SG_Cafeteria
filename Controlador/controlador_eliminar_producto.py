@@ -13,3 +13,5 @@ class ControladorEliminarProducto:
         producto_dao = ProductoDAO()
         causa = self.__ventana_eliminar.combo_box.currentText()
         producto_dao.eliminar_producto(self.__codigo_producto, causa)
+        self.__ventana_eliminar.notifico_eliminacion(self.__codigo_producto, causa)
+        self.__ventana_eliminar.hide()

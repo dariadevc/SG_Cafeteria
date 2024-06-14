@@ -81,3 +81,16 @@ class VentanaAgregarProducto(QWidget):
         self.boton_agregar_producto.clicked.connect(controlador.agregar_producto_a_bd)
 
         self.setLayout(layout_ventana_agregar)
+
+    def imprimo_alerta (self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("Hay campos vacios o con datos incorrectos")
+        msg.setInformativeText("Revise todos los campos y vuelva a presionar")
+        msg.exec()
+    
+    def notifico_insercion(self,nombre_producto):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setText(f"Se añadió correctamente el producto: {nombre_producto}")
+        msg.exec()

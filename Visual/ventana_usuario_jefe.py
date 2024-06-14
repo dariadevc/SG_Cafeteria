@@ -124,3 +124,10 @@ class VentanaUsuarioJefe(QWidget):
         self.boton_eliminar_usuario.setStyleSheet(
             "background-color: gray; font-size: 14px; font-weight: bold;"
         )
+
+    def imprimo_alerta (self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("No se seleccionó ningún usuario")
+        msg.setInformativeText("Seleccione un usuario y vuelva a presionar")
+        msg.exec()

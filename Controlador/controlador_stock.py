@@ -5,7 +5,7 @@ from Controlador.controlador_agregar_producto import ControladorAgregarProducto
 from Controlador.controlador_eliminar_producto import ControladorEliminarProducto
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
-
+from PyQt6.QtGui import *
 
 class ControladorStock:
 
@@ -77,7 +77,7 @@ class ControladorStock:
                 producto
             )
         except IndexError:
-            print("No se seleccionó ningún producto")
+            self.__ventana_stock.imprimo_alerta()
 
     def eliminar_producto(self):
         self.__ventana_stock.actualizar_color_boton(
@@ -92,12 +92,4 @@ class ControladorStock:
                 producto_a_eliminar[0]
             )
         except IndexError:
-            print("No se seleccionó ningún producto")
-
-    # def cambio_de_color(self):
-    #     self.__ventana_stock.boton_eliminar_producto.setStyleSheet(
-    #         "background-color: lightblue;"
-    #     )
-    #     self.__ventana_stock.boton_modificar_producto.setStyleSheet(
-    #         "background-color: lightblue;"
-    #     )
+            self.__ventana_stock.imprimo_alerta()

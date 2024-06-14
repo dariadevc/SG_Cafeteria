@@ -5,7 +5,7 @@ from Modelo.usuario import Usuario
 import Controlador.controlador_inicio
 from Controlador.controlador_venta import ControladorVenta
 from Controlador.controlador_stock import ControladorStock
-from Controlador.controlador_informe import GenerarInforme
+from Controlador.controlador_informe import ControladorInforme
 
 
 class ControladorJefe:
@@ -15,8 +15,6 @@ class ControladorJefe:
         self.__vista_jefe.show()
         self._usuario = usuario
         self.__id_usuario = id_usuario
-        # nombre_usuario = self._usuario.get_usuario()
-        # self.__vista_jefe.label.setText("Bienvenido Jefe " + nombre_usuario)
 
         self.__controlador_venta = ControladorVenta(usuario, self.__id_usuario)
         self.__vista_venta = self.__controlador_venta.get_vista()
@@ -27,7 +25,7 @@ class ControladorJefe:
         self.__controlador_usuario = ControladorJefeUsuario()
         self.__vista_usuario = self.__controlador_usuario.get_vista()
 
-        self.__controlador_informe = GenerarInforme()
+        self.__controlador_informe = ControladorInforme()
         self.__vista_informe = self.__controlador_informe.get_vista()
 
         self.__vista_jefe.agregar_seccion(self.__vista_venta)

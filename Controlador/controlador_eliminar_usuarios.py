@@ -13,3 +13,5 @@ class ControladorEliminarUsuario:
         usuario_dao = UsuarioDAO()
         causa = self.__ventana_eliminar.combo_box.currentText()
         usuario_dao.eliminar_usuario(self.__dni_usuario, causa)
+        self.__ventana_eliminar.notifico_eliminacion(self.__dni_usuario, causa)
+        self.__ventana_eliminar.hide()

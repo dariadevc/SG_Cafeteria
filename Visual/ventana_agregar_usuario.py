@@ -76,3 +76,16 @@ class VentanaAgregarUsuario (QWidget):
         self.boton_agregar_usuario.clicked.connect(controlador.agregar_usuario_a_bd)
         
         self.setLayout(layout_ventana_agregar)
+    
+    def imprimo_alerta (self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("Hay campos vacios")
+        msg.setInformativeText("Complete todos los campos y vuelva a presionar")
+        msg.exec()
+    
+    def notifico_insercion(self,dni):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setText(f"Se añadió correctamente el usuario con dni: {dni}")
+        msg.exec()

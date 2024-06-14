@@ -64,3 +64,16 @@ class VentanaModificarUsuario (QWidget):
         layout_modificar_usuario.addWidget(self.boton_modificar)
         
         self.setLayout(layout_modificar_usuario)
+    
+    def imprimo_alerta (self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("Tipos Incorrectos")
+        msg.setInformativeText("Verifique que ingresa datos validos en cada bloque")
+        msg.exec()
+    
+    def notifico_modificacion (self, dni):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setText(f"Usuario con dni {dni} modificado correctamente")
+        msg.exec()

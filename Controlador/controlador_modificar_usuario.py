@@ -20,15 +20,24 @@ class ControladorModificarUsuario:
         self.__ventana_modificar.input_4.setText(datos_usuario[5])
 
     def modificar_usuario(self):
-        dni_usuario = self.__ventana_modificar.label_dni.text()
-        nombre_modificado = self.__ventana_modificar.input_1.text()
-        apellido_modificado = self.__ventana_modificar.input_2.text()
-        nombre_usuario_modificado = self.__ventana_modificar.input_3.text()
-        contrasenia_modificada = self.__ventana_modificar.input_4.text()
-        UsuarioDAO().modificar_usuario(
-            dni_usuario,
-            nombre_modificado,
-            apellido_modificado,
-            nombre_usuario_modificado,
-            contrasenia_modificada,
-        )
+        try:
+            dni_usuario = self.__ventana_modificar.label_dni.text()
+            nombre_modificado = self.__ventana_modificar.input_1.text()
+            apellido_modificado = self.__ventana_modificar.input_2.text()
+            nombre_usuario_modificado = self.__ventana_modificar.input_3.text()
+            contrasenia_modificada = self.__ventana_modificar.input_4.text()
+            lista = [dni_usuario,nombre_modificado,apellido_modificado,nombre_usuario_modificado,contrasenia_modificada]
+            if None in lista or '' in lista:
+                raise ValueError
+            else:
+                UsuarioDAO().modificar_usuario(
+                    dni_usuario,
+                    nombre_modificado,
+                    apellido_modificado,
+                    nombre_usuario_modificado,
+                    contrasenia_modificada,
+                )
+                self.__ventana_modificar.notifico_modificacion(dni_usuario)
+                self.__ventana_modificar.hide()
+        except ValueError:
+            self.__ventana_modificar.imprimo_alerta()

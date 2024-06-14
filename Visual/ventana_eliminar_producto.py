@@ -32,3 +32,9 @@ class VentanaEliminarProducto (QWidget):
         self.layout_ventana.addWidget(self.boton_eliminar)
         
         self.setLayout(self.layout_ventana)
+    
+    def notifico_eliminacion(self, codigo, causa):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setText(f"Se eliminó correctamente el producto con código: {codigo} \n Causa de eliminación: {causa}")
+        msg.exec()

@@ -73,7 +73,7 @@ class ControladorJefeUsuario:
                 usuario_a_modificar
             )
         except IndexError:
-            print("No se seleccionó ningún usuario")
+            self.__ventana_usuario_jefe.imprimo_alerta()
 
     def eliminar_usuario(self):
         try:
@@ -87,12 +87,4 @@ class ControladorJefeUsuario:
                 usuario_seleccionado[0].text()
             )
         except IndexError:
-            print("No se seleccionó ningún usuario")
-
-    # def cambio_de_color(self):
-    #     self.__ventana_usuario_jefe.boton_eliminar_usuario.setStyleSheet(
-    #         "background-color: rgb(135, 206, 235)"
-    #     )
-    #     self.__ventana_usuario_jefe.boton_modificar_usuario.setStyleSheet(
-    #         "background-color: rgb(135, 206, 235)"
-    #     )
+            self.__ventana_usuario_jefe.imprimo_alerta()

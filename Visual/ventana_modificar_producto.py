@@ -75,3 +75,16 @@ class VentanaModificarProducto(QWidget):
         layout_modificar.addWidget(self.boton_modificar)
 
         self.setLayout(layout_modificar)
+
+    def imprimo_alerta (self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("Tipos de Datos Incorrectos")
+        msg.setInformativeText("Verifique que ingresa datos validos en cada bloque")
+        msg.exec()
+    
+    def notifico_modificacion (self, cod_prod):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setText(f"Producto con codigo {cod_prod} modificado correctamente")
+        msg.exec()

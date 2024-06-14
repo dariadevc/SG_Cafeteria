@@ -23,22 +23,31 @@ class ControladorModificarProducto:
         self.__ventana_modificar.input_4.setText(str(datos_producto[6]))
 
     def modificar_producto(self):
-        codigo = self.__ventana_modificar.label_cod.text()
-        descripcion_modificada = self.__ventana_modificar.input_1.text()
-        categoria = self.categoria_a_letra(
-            self.__ventana_modificar.combo_box_categoria.currentText()
-        )
-        cantidad_modificada = int(self.__ventana_modificar.input_2.text())
-        stockminimo_modificado = int(self.__ventana_modificar.input_3.text())
-        precio_modificado = self.__ventana_modificar.input_4.text()
-        ProductoDAO().modificar_producto(
-            codigo,
-            categoria,
-            descripcion_modificada,
-            cantidad_modificada,
-            stockminimo_modificado,
-            precio_modificado,
-        )
+        try:
+            codigo = self.__ventana_modificar.label_cod.text()
+            descripcion_modificada = self.__ventana_modificar.input_1.text()
+            categoria = self.categoria_a_letra(
+                self.__ventana_modificar.combo_box_categoria.currentText()
+            )
+            cantidad_modificada = int(self.__ventana_modificar.input_2.text())
+            stockminimo_modificado = int(self.__ventana_modificar.input_3.text())
+            precio_modificado = self.__ventana_modificar.input_4.text()
+            lista = [codigo,descripcion_modificada,categoria,cantidad_modificada,stockminimo_modificado,precio_modificado]
+            if None in lista or '' in lista:
+                raise ValueError
+            else:
+                ProductoDAO().modificar_producto(
+                    codigo,
+                    categoria,
+                    descripcion_modificada,
+                    cantidad_modificada,
+                    stockminimo_modificado,
+                    precio_modificado,
+                )
+                self.__ventana_modificar.notifico_modificacion(codigo)
+                self.__ventana_modificar.hide()
+        except ValueError:
+            self.__ventana_modificar.imprimo_alerta()
 
     def categoria_a_letra(self, categoria):
         if categoria == "Bebida":
