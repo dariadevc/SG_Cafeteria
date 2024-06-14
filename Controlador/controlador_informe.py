@@ -29,12 +29,10 @@ class ControladorInforme:
         canvas_bebida = self.crear_grafico(self.grafico_bebidas, "Stock bebida")
         canvas_helado = self.crear_grafico(self.grafico_helados, "Stock helados")
 
-        # Ajustar la altura del canvas a 400px
         canvas_comida.setMinimumHeight(400)
         canvas_bebida.setMinimumHeight(400)
         canvas_helado.setMinimumHeight(400)
 
-        # Agregar los canvas al layout de gráficos
         self.__vista_informe.layout_graficos.addWidget(canvas_comida)
         self.__vista_informe.layout_graficos.addWidget(canvas_bebida)
         self.__vista_informe.layout_graficos.addWidget(canvas_helado)
