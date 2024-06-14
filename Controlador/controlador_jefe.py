@@ -4,7 +4,7 @@ from Controlador.controlador_jefe_usuario import ControladorJefeUsuario
 import Controlador.controlador_inicio
 from Controlador.controlador_venta import ControladorVenta
 from Controlador.controlador_stock import ControladorStock
-
+from Controlador.controlador_informe import ControladorInforme
 
 class ControladorJefe:
 
@@ -25,12 +25,12 @@ class ControladorJefe:
         self.__controlador_usuario = ControladorJefeUsuario()
         self.__vista_usuario = self.__controlador_usuario.get_vista()
 
-        # self.__controlador_informe = ControladorInforme()
-        # self.__vista_informe = self.__controlador_informe.get_vista()
+        self.__controlador_informe = ControladorInforme()
+        self.__vista_informe = self.__controlador_informe.get_vista()
 
         self.__vista_jefe.agregar_seccion(self.__vista_venta)
         self.__vista_jefe.agregar_seccion(self.__vista_stock)
-        # self.__vista_jefe.agregar_seccion(self.__vista_informe)
+        self.__vista_jefe.agregar_seccion(self.__vista_informe)
         self.__vista_jefe.agregar_seccion(self.__vista_usuario)
 
         self.__vista_jefe.boton_venta.clicked.connect(self.cambio_a_venta)
@@ -55,9 +55,9 @@ class ControladorJefe:
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_stock)
 
     def cambio_a_informe(self):
-        self.__vista_jefe.cambiar_vista(3)
+        self.__vista_jefe.cambiar_vista(2)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_informe)
 
     def cambio_a_usuario(self):
-        self.__vista_jefe.cambiar_vista(2)
+        self.__vista_jefe.cambiar_vista(3)
         self.__vista_jefe.actualizar_color_boton(self.__vista_jefe.boton_usuario)
