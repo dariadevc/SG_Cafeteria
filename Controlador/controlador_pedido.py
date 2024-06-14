@@ -256,6 +256,7 @@ class ControladorPedido:
             empleado=self.__id_usuario,
             dni="39910232",
         )
+       
         self.__actualizar_mesa_callback(self.__numero_mesa, "libre")
         self.__vista_pedido.close()
 

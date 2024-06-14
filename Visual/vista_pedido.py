@@ -193,7 +193,11 @@ class VentanaPedido(QWidget):
     def agregarFilaConBotonEliminar(self, layout, descripcion, precio):
 
         fila_layout = QHBoxLayout()
-        tamano_etiqueta = QSize(200, 15)
+        fila_layout.setSpacing(20) 
+        fila_layout.setAlignment(
+            Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft
+        )
+        tamano_etiqueta = QSize(250, 15)
         tamano_botones = QSize(15, 15)
 
         boton_eliminar = QPushButton()
@@ -206,19 +210,19 @@ class VentanaPedido(QWidget):
 
         etiqueta_descripcion = QLabel(descripcion)
         etiqueta_descripcion.setFixedSize(tamano_etiqueta)
-        etiqueta_descripcion.setFixedWidth(300)
+        etiqueta_descripcion.setFixedWidth(120)
 
         etiqueta_relleno = QLabel(" X ")
         etiqueta_relleno.setFixedSize(tamano_etiqueta)
-        etiqueta_relleno.setFixedWidth(50)
+        etiqueta_relleno.setFixedWidth(40)
 
         etiqueta_cantidad = QLabel("")
         etiqueta_cantidad.setFixedSize(tamano_etiqueta)
-        etiqueta_cantidad.setFixedWidth(50)
+        etiqueta_cantidad.setFixedWidth(40)
 
         etiqueta_precio = QLabel("$")
         etiqueta_precio.setFixedSize(tamano_etiqueta)
-        etiqueta_precio.setFixedWidth(50)
+        etiqueta_precio.setFixedWidth(40)
 
         precio = QLabel(f"{precio:.2f}")
         precio.setFixedSize(tamano_etiqueta)

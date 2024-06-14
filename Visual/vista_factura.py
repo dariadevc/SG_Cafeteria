@@ -17,7 +17,7 @@ class PDF(FPDF):
         self.__empleado = empleado
         self.__dni = dni
 
-        app = QApplication([])
+    
 
         canti_filas = len(self.__lista_pedido)
 
@@ -27,7 +27,7 @@ class PDF(FPDF):
         pdf.cell(0, 10, "CAFETERIA VIERA", 0, 1, "C")
         pdf.set_font("Arial", "", 12)
         # C:/Users/Alambrito/Documents/GitHub/
-        pdf.image("C://Users//camus//Desktop//SG_Cafeteria//codigomodificado//Visual_dos//imagenes//coffe.png", x=0, y=25, w=30,h=25)
+        pdf.image("C://Users//camus//Desktop//SG_Cafeteria//Visual//imagenes//coffe.png", x=0, y=25, w=30,h=25)
         # pdf.image(
         #     "C://Users//Alambrito//Documents//Github//SG_Cafeteria//Visual//imagenes//coffe.png",
         #     x=0,
@@ -132,17 +132,16 @@ class PDF(FPDF):
         )
         pdf.set_font("Arial", "", 12)
         pdf.cell(200, 10, txt=f"Empleado : {self.__empleado}", ln=True, align="L")
-        pdf.cell(200, 10, txt=f"DNI : {self.__dni}", ln=True, align="L")
+       # pdf.cell(200, 10, txt=f"DNI : {self.__dni}", ln=True, align="L")
 
-        # Imprime el PDF
         printer = QPrinter()
         printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
         output_file = "output.pdf"
         printer.setOutputFileName(output_file)
         pdf.output(output_file)
 
-        # Abre el PDF automáticamente
         output_file = output_file
         subprocess.Popen(["start", output_file], shell=True)
 
-        app.quit()
+       #app.quit()
+       
