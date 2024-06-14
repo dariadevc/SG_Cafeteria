@@ -5,13 +5,25 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
 
+from PyQt6.QtWidgets import (
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QScrollArea,
+    QPushButton,
+    QLabel,
+    QSizePolicy,
+)
+from PyQt6.QtCore import Qt
+
+
 class VentanaPedido(QWidget):
     closed = pyqtSignal()
 
     def __init__(self, controlador, nro_mesa):
         super().__init__()
         self.setWindowTitle("Pedido Mesa " + str(nro_mesa))
-        self.setFixedSize(675, 500)
+        self.setFixedSize(750, 500)
         self.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.controlador = controlador
         self.botones_sumar = []
@@ -47,17 +59,17 @@ class VentanaPedido(QWidget):
         self.etiqueta_comida = QLabel("Bebidas")
         self.etiqueta_comida.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.etiqueta_comida.setStyleSheet(
-            "background-color: darkblue; color: white;font-weight: bold;"
+            "background-color: darkblue; color: white; font-size: 14px; font-weight: bold;"
         )
         self.etiqueta_bebida = QLabel("Comida")
         self.etiqueta_bebida.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.etiqueta_bebida.setStyleSheet(
-            "background-color: darkblue; color: white;font-weight: bold;"
+            "background-color: darkblue; color: white; font-size: 14px; font-weight: bold;"
         )
         self.etiqueta_helado = QLabel("Helados")
         self.etiqueta_helado.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.etiqueta_helado.setStyleSheet(
-            "background-color: darkblue; color: white;font-weight: bold;"
+            "background-color: darkblue; color: white; font-size: 14px; font-weight: bold;"
         )
 
         self.contenedor_nombres.addWidget(self.etiqueta_comida)
@@ -87,7 +99,6 @@ class VentanaPedido(QWidget):
         self.scroll_area = QScrollArea()
         self.scroll_area.setWidgetResizable(True)
 
-    
         self.scroll_widget = QWidget()
         self.scroll_layout = QVBoxLayout(self.scroll_widget)
         self.scroll_widget.setLayout(self.scroll_layout)
@@ -105,24 +116,26 @@ class VentanaPedido(QWidget):
         )
         self.scroll_layout.addLayout(self.tabla_pedido)
         ## Botón finalizar pedido
-        self.boton_finalizar_pedido = QPushButton("Finalizar Pedido")
+        self.boton_finalizar_pedido = QPushButton("IMPRIMIR TICKET")
         font = QFont()
         font.setBold(True)
         self.boton_finalizar_pedido.setFont(font)
-        self.tamano_botones = QSize(150, 80)
+        self.tamano_botones = QSize(130, 60)
         self.boton_finalizar_pedido.setFixedSize(self.tamano_botones)
         self.boton_finalizar_pedido.setStyleSheet(
-            "background-color: green; color: white"
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
         )
         self.boton_finalizar_pedido.clicked.connect(controlador.finalizar_pedido)
 
         ## Botón anular pedido
-        self.boton_anular_pedido = QPushButton("Anular Pedido")
+        self.boton_anular_pedido = QPushButton("ANULAR PEDIDO")
         font = QFont()
         font.setBold(True)
         self.boton_anular_pedido.setFont(font)
         self.boton_anular_pedido.setFixedSize(self.tamano_botones)
-        self.boton_anular_pedido.setStyleSheet("background-color: green; color: white")
+        self.boton_anular_pedido.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_anular_pedido.clicked.connect(controlador.anular_pedido)
 
         # Layout botones
@@ -131,15 +144,15 @@ class VentanaPedido(QWidget):
         self.botones_pedido.addWidget(self.boton_anular_pedido)
 
         self.etiqueta_total = QLabel("TOTAL  :  $  ")
-        self.etiqueta_total.setStyleSheet("font-weight: bold;")
-        self.etiqueta_total.setAlignment(
-             Qt.AlignmentFlag.AlignCenter
+        self.etiqueta_total.setFixedWidth(200)
+        self.etiqueta_total.setStyleSheet(
+            "background-color: white; font-size: 14px; font-weight: bold;"
         )
+        self.etiqueta_total.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.tabla_total.addWidget(self.etiqueta_total)
 
         self.tabla_baja.addWidget(self.scroll_area)
 
-    
         self.tabla_baja.addLayout(self.botones_pedido)
 
         self.contenedor.addLayout(self.tabla_alta)
@@ -154,6 +167,7 @@ class VentanaPedido(QWidget):
         tamano_botones = QSize(15, 15)
 
         etiqueta_producto = QLabel(descripcion_producto)
+        etiqueta_producto.setStyleSheet("font-size: 14px;")
         etiqueta_producto.setFixedSize(tamano_etiqueta)
         etiqueta_producto.setFixedWidth(600)
 
@@ -193,10 +207,8 @@ class VentanaPedido(QWidget):
     def agregarFilaConBotonEliminar(self, layout, descripcion, precio):
 
         fila_layout = QHBoxLayout()
-        fila_layout.setSpacing(20) 
-        fila_layout.setAlignment(
-            Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft
-        )
+        fila_layout.setSpacing(20)
+        fila_layout.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
         tamano_etiqueta = QSize(250, 15)
         tamano_botones = QSize(15, 15)
 
@@ -209,22 +221,27 @@ class VentanaPedido(QWidget):
         )
 
         etiqueta_descripcion = QLabel(descripcion)
+        etiqueta_descripcion.setStyleSheet("font-size: 14px;")
         etiqueta_descripcion.setFixedSize(tamano_etiqueta)
         etiqueta_descripcion.setFixedWidth(120)
 
         etiqueta_relleno = QLabel(" X ")
+        etiqueta_relleno.setStyleSheet("font-size: 14px;")
         etiqueta_relleno.setFixedSize(tamano_etiqueta)
         etiqueta_relleno.setFixedWidth(40)
 
         etiqueta_cantidad = QLabel("")
+        etiqueta_cantidad.setStyleSheet("font-size: 14px;")
         etiqueta_cantidad.setFixedSize(tamano_etiqueta)
         etiqueta_cantidad.setFixedWidth(40)
 
         etiqueta_precio = QLabel("$")
+        etiqueta_precio.setStyleSheet("font-size: 14px;")
         etiqueta_precio.setFixedSize(tamano_etiqueta)
         etiqueta_precio.setFixedWidth(40)
 
         precio = QLabel(f"{precio:.2f}")
+        etiqueta_precio.setStyleSheet("font-size: 14px;")
         precio.setFixedSize(tamano_etiqueta)
         precio.setFixedWidth(50)
 

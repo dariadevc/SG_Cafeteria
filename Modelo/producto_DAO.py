@@ -76,7 +76,7 @@ class ProductoDAO:
         consulta = 'SELECT * FROM public."productos"'
         return self.__base.obtener_elementos(consulta)
 
-    def obtener_productos(self, categoria):
+    def obtener_productos_categoria(self, categoria):
         orden = [
             "cod_producto",
             "descripcion",

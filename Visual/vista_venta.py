@@ -83,25 +83,20 @@ class VentanaVenta(QWidget):
         self.setLayout(layout_principal)
 
     def crear_indicador_color(self, color, texto):
-        # Crear el layout para un indicador de color
         indicador_layout = QHBoxLayout()
 
-        # Crear el cuadrado de color
         cuadro_color = QLabel()
         cuadro_color.setFixedSize(15, 15)
         cuadro_color.setStyleSheet(
             f"background-color: {color};border: 1px solid black;"
         )
 
-        # Crear la etiqueta de texto
         etiqueta = QLabel(texto)
         etiqueta.setStyleSheet("font-size: 14px;")
 
-        # Añadir el cuadrado de color y la etiqueta al layout del indicador
         indicador_layout.addWidget(cuadro_color)
         indicador_layout.addWidget(etiqueta)
 
-        # Añadir el layout del indicador al layout de indicadores de color
         self.indicadores_color.addLayout(indicador_layout)
 
     def actualizar_estado_mesas(self, mesas_ocupadas):
