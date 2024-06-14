@@ -18,17 +18,20 @@ class ControladorStock:
     def cargar_productos(self):
         self.__ventana_stock.limpiar_tabla()
         productos = self.__producto_dao.obtener_todos_productos()
-        productos_vigentes = [producto for producto in productos if producto[7]]
+        productos_vigentes = []
+        for producto in productos:
+            if producto[7]:
+                productos_vigentes.append(producto)
         self.__ventana_stock.tabla_productos.setRowCount(len(productos_vigentes))
         for fila, producto in enumerate(productos_vigentes):
             codigo = QTableWidgetItem(f"{producto[0]}")
             descripcion = QTableWidgetItem(f"{producto[1]}")
             # categoria = QTableWidgetItem(f"{producto[2]}")
-            categoria = QTableWidgetItem(self.categoria_to_nombre(producto[2]))
+            categoria = QTableWidgetItem(self.categoria_a_cadena(producto[2]))
             fecha_mod = QTableWidgetItem(f"{producto[3]}")
             cantidad = QTableWidgetItem(f"{producto[4]}")
             stock_min = QTableWidgetItem(f"{producto[5]}")
-            precio_unitario = QTableWidgetItem(f"{producto[6]}")
+            precio_unitario = QTableWidgetItem(f"{float(producto[6])}")
             # vigente = QTableWidgetItem(f"{producto[7]}")
             # causa = QTableWidgetItem(f"{producto[8]}")
 
@@ -42,7 +45,7 @@ class ControladorStock:
             # self.__ventana_stock.tabla_productos.setItem(fila,7,vigente)
             # self.__ventana_stock.tabla_productos.setItem(fila,8,causa)
 
-    def categoria_to_nombre(self, categoria_codigo):
+    def categoria_a_cadena(self, categoria_codigo):
         if categoria_codigo == "A":
             return "Bebidas"
         elif categoria_codigo == "B":
@@ -74,10 +77,7 @@ class ControladorStock:
                 producto
             )
         except IndexError:
-            self.__ventana_stock.boton_modificar_producto.setStyleSheet(
-                "background-color:gray"
-            )
-            QTimer.singleShot(1000, self.cambio_de_color)
+            print("No se seleccionó ningún producto")
 
     def eliminar_producto(self):
         self.__ventana_stock.actualizar_color_boton(
@@ -92,10 +92,7 @@ class ControladorStock:
                 producto_a_eliminar[0]
             )
         except IndexError:
-            self.__ventana_stock.boton_eliminar_producto.setStyleSheet(
-                "background-color:gray"
-            )
-            QTimer.singleShot(1000, self.cambio_de_color)
+            print("No se seleccionó ningún producto")
 
     # def cambio_de_color(self):
     #     self.__ventana_stock.boton_eliminar_producto.setStyleSheet(

@@ -1,0 +1,64 @@
+
+QPushButton {
+    /* padding-block: 1px;
+    padding-inline: 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initia */
+}
+
+
+
+QLabel#titulo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    color: #f48221;
+}
+
+QLabel#pixmap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ec720b;
+    min-height: 100vh;
+}
+
+QLabel{
+    font-size: 14px;
+}
+
+QLabel#titulo_label{
+    background-color: white;
+    font-weight: bold;
+    font-size: 33px;
+    color: #f48221;
+}
+
+QLabel#logo{
+    background-color: white;
+}
+
+
+QWidget#interfaz_widget{
+    background-color: white;
+    border-radius: 10px;
+}
+
+QLineEdit{
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid #a8a8a8;
+    padding-left: 5px;
+    width: 250px;
+}
+
+QPushButton{
+    width: 250px;
+    margin: 5px;
+    padding: 5px;
+}
+
+QCheckBox{
+    margin-left: 15px;
+}

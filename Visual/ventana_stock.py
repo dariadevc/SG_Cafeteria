@@ -49,18 +49,28 @@ class VentanaStock(QWidget):
         self.boton_refrescar_tabla = QPushButton()
         self.boton_refrescar_tabla.setStyleSheet("background-color: lightblue;")
         self.boton_refrescar_tabla.setFixedSize(100, 50)
-        imagen_refrescar = QPixmap("C:/Users/Alan/Desktop/clon/Visual/imagenes/refrescar").scaled(100,100)
+        imagen_refrescar = QPixmap(
+            "C:/Users/Alan/Desktop/clon/Visual/imagenes/refrescar"
+        ).scaled(100, 100)
         self.boton_refrescar_tabla.setIcon(QIcon(imagen_refrescar))
-        self.boton_refrescar_tabla.setIconSize(QSize(100,50))
-        
-        self.boton_agregar_producto = QPushButton("AGREGAR PRODUCTO")
-        self.boton_agregar_producto.setStyleSheet("background-color: lightblue;")
+        self.boton_refrescar_tabla.setIconSize(QSize(100, 50))
+
+        self.boton_agregar_producto = QPushButton("AGREGAR\nPRODUCTO")
+        self.boton_agregar_producto.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_agregar_producto.setFixedSize(120, 70)
-        self.boton_modificar_producto = QPushButton("MODIFICAR PRODUCTO")
-        self.boton_modificar_producto.setStyleSheet("background-color: lightblue;")
+
+        self.boton_modificar_producto = QPushButton("MODIFICAR\nPRODUCTO")
+        self.boton_modificar_producto.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_modificar_producto.setFixedSize(120, 70)
-        self.boton_eliminar_producto = QPushButton("ELIMINAR PRODUCTO")
-        self.boton_eliminar_producto.setStyleSheet("background-color: lightblue;")
+
+        self.boton_eliminar_producto = QPushButton("ELIMINAR\nPRODUCTO")
+        self.boton_eliminar_producto.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_eliminar_producto.setFixedSize(120, 70)
 
         self.boton_agregar_producto.clicked.connect(controlador.agregar_producto)

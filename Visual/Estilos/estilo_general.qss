@@ -1,0 +1,53 @@
+QLabel#nombre_refugio_label{
+    font-size: 30px;
+    font-weight: bold;
+    color: #f48221;
+}
+
+QWidget#contenedor_botones_nav{
+    max-height: 50px;
+    background-color: #5c5958;
+    background-color: #f48221;
+}
+
+QPushButton#boton-nav{
+    padding: 30px;
+    /*background-color: #5c5958;*/
+    background-color: #f48221;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+QPushButton#boton-nav:hover{
+    background-color:#2980b9;
+}
+
+QPushButton#boton-nav:pressed{
+    background-color:#1c6ea3;
+}
+
+QPushButton#boton-nav-presionado{
+    padding: 30px;
+    background-color: #d43fb1;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+QLineEdit {
+    margin: 10px;
+    height: 25px;
+    font-style: italic;
+    padding-left: 5px;
+}
+
+QPushButton#boton-tabla{
+    padding: 10px;
+    margin-bottom: 10px;
+    max-height: 30px;
+    icon-size: 25px 25px;
+
+}
+
+QWidget#contenedor-botones-tabla{
+    max-width: 150px;
+}

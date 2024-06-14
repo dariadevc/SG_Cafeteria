@@ -9,12 +9,14 @@ class VistaPrincipal(QWidget):
         super().__init__()
         self.setStyleSheet("background-color: rgb(135, 206, 235);")
         self.setWindowTitle("Cafeteria Viera")
-        imagen_cerrar = QPixmap("C:/Users/Alan/Desktop/clon/Visual/imagenes/salir").scaled(100,100)
+        imagen_cerrar = QPixmap(
+            "C:/Users/Alan/Desktop/clon/Visual/imagenes/salir"
+        ).scaled(100, 100)
         self.boton_cerrar = QPushButton()
         self.boton_cerrar.setFixedSize(80, 60)
         self.boton_cerrar.setStyleSheet("background-color: lightblue;")
         self.boton_cerrar.setIcon(QIcon(imagen_cerrar))
-        self.boton_cerrar.setIconSize(QSize(80,60))
+        self.boton_cerrar.setIconSize(QSize(80, 60))
         self.label = QLabel("Nombre y Apellido")
         self.label.setFixedSize(500, 60)
         self.label.setContentsMargins(0, 20, 0, 0)
@@ -22,10 +24,12 @@ class VistaPrincipal(QWidget):
 
         self.imagen = QLabel()
         # pixmap = QPixmap("C:/Users/Alambrito/Documents/GitHub/SG_Cafeteria/Visual/imagenes/foto_usuario.jpg")
-        pixmap = QPixmap("C:/Users/Alan/Desktop/clon/Visual/imagenes/foto_usuario").scaled(100,100)
+        pixmap = QPixmap(
+            "C:/Users/Alan/Desktop/clon/Visual/imagenes/foto_usuario"
+        ).scaled(100, 100)
         self.imagen.setPixmap(pixmap)
         self.imagen.setFixedSize(100, 80)
-        #self.imagen.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        # self.imagen.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.setFixedSize(750, 640)
         self.layout_principal = QVBoxLayout()
@@ -34,11 +38,17 @@ class VistaPrincipal(QWidget):
         self.layout_botones = QHBoxLayout()
 
         self.boton_venta = QPushButton("VENTA")
-        self.boton_venta.setStyleSheet("background-color: lightblue;")
+        self.boton_venta.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_stock = QPushButton("STOCK")
-        self.boton_stock.setStyleSheet("background-color: lightblue;")
+        self.boton_stock.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_informe = QPushButton("INFORME")
-        self.boton_informe.setStyleSheet("background-color: lightblue;")
+        self.boton_informe.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
 
         layout_usuario.setContentsMargins(20, 0, 0, 0)
         layout_usuario.addWidget(self.boton_cerrar)
@@ -66,7 +76,7 @@ class VistaPrincipal(QWidget):
         self.stacked_layout.addWidget(vista)
 
     def actualizar_color_boton(self, boton_seleccionado):
-        
+
         for boton in self._lista_botones:
             if boton == boton_seleccionado:
                 boton.setStyleSheet("background-color: lightgray;")

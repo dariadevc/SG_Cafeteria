@@ -32,7 +32,7 @@ class VistaInicioSesion(QWidget):
         self.etiqueta_nombre = QLabel(" Cafe Viera", self)
         self.etiqueta_nombre.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.etiqueta_nombre.setStyleSheet(
-            "color: white; font-weight: bold; font-size: 40px"
+            "color: white; font-weight: bold; font-size: 40px;"
         )
 
         self.contenedor_horizontal.addWidget(self.etiqueta_cafe)
@@ -70,7 +70,8 @@ class VistaInicioSesion(QWidget):
         self.input_usuario.setSizePolicy(
             QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed
         )
-        self.input_usuario.setFixedWidth(200)
+        self.input_usuario.setFixedWidth(210)
+        self.input_usuario.setContentsMargins(10, 0, 0, 0)
         self.contenedor_usuario.addWidget(self.input_usuario)
         self.contenedor_vertical.addWidget(self.frame_usuario)
         self.contenedor_vertical.addSpacing(10)
@@ -153,9 +154,6 @@ class VistaInicioSesion(QWidget):
         self.boton_recuperar_contrasena.setTextInteractionFlags(
             Qt.TextInteractionFlag.TextBrowserInteraction
         )
-        # self.boton_recuperar_contrasena.linkActivated.connect(
-        #     controlador.recuperar_contrasena
-        # )
         self.contenedor_vertical.addWidget(self.boton_recuperar_contrasena)
         self.contenedor_vertical.addSpacing(10)
 

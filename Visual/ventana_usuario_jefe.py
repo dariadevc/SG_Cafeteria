@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 
+
 class VentanaUsuarioJefe(QWidget):
 
     def __init__(self, controlador):
@@ -36,14 +37,29 @@ class VentanaUsuarioJefe(QWidget):
 
         self.boton_refrescar_tabla = QPushButton()
         self.boton_refrescar_tabla.setFixedSize(100, 50)
-        imagen_refrescar = QPixmap("C:/Users/Alan/Desktop/clon/Visual/imagenes/refrescar").scaled(100,100)
+        imagen_refrescar = QPixmap(
+            "C:/Users/Alan/Desktop/clon/Visual/imagenes/refrescar"
+        ).scaled(100, 100)
         self.boton_refrescar_tabla.setIcon(QIcon(imagen_refrescar))
-        self.boton_refrescar_tabla.setIconSize(QSize(100,50))
-        self.boton_agregar_usuario = QPushButton("AGREGAR USUARIO")
+        self.boton_refrescar_tabla.setStyleSheet("background-color: lightblue;")
+        self.boton_refrescar_tabla.setIconSize(QSize(100, 50))
+
+        self.boton_agregar_usuario = QPushButton("AGREGAR\nUSUARIO")
+        self.boton_agregar_usuario.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_agregar_usuario.setFixedSize(120, 70)
-        self.boton_modificar_usuario = QPushButton("MODIFICAR USUARIO")
+
+        self.boton_modificar_usuario = QPushButton("MODIFICAR\nUSUARIO")
+        self.boton_modificar_usuario.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_modificar_usuario.setFixedSize(120, 70)
-        self.boton_eliminar_usuario = QPushButton("ELIMINAR USUARIO")
+
+        self.boton_eliminar_usuario = QPushButton("ELIMINAR\nUSUARIO")
+        self.boton_eliminar_usuario.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.boton_eliminar_usuario.setFixedSize(120, 70)
 
         self.boton_agregar_usuario.clicked.connect(controlador.agregar_usuario)
@@ -67,3 +83,20 @@ class VentanaUsuarioJefe(QWidget):
 
     def limpiar_tabla(self):
         self.tabla_usuarios.clearContents()
+
+    def actualizar_color_boton(self, boton_seleccionado):
+        botones = [
+            self.boton_refrescar_tabla,
+            self.boton_agregar_usuario,
+            self.boton_modificar_usuario,
+            self.boton_eliminar_usuario,
+        ]
+        for boton in botones:
+            if boton == boton_seleccionado:
+                boton.setStyleSheet(
+                    "background-color: lightgray; font-size: 14px; font-weight: bold;"
+                )
+            else:
+                boton.setStyleSheet(
+                    "background-color: lightblue; font-size: 14px; font-weight: bold;"
+                )

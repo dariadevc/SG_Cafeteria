@@ -10,7 +10,9 @@ class VistaJefe(VistaPrincipal):
         super().__init__()
 
         self.boton_usuario = QPushButton("USUARIO")
-        self.boton_usuario.setStyleSheet("background-color:lightblue")
+        self.boton_usuario.setStyleSheet(
+            "background-color:lightblue; font-size: 14px; font-weight: bold;"
+        )
         self.layout_botones.addWidget(self.boton_usuario)
         self._lista_botones.append(self.boton_usuario)
         self.boton_usuario.clicked.connect(controlador.cambio_a_usuario)

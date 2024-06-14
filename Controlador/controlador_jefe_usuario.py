@@ -23,15 +23,9 @@ class ControladorJefeUsuario:
             dni = QTableWidgetItem(f"{usuario[1]}")
             nombre = QTableWidgetItem(f"{usuario[2]}")
             apellido = QTableWidgetItem(f"{usuario[3]}")
-            if usuario[6]:
-                estado = QTableWidgetItem("Inactivo")
-            else:
-                estado = QTableWidgetItem("Activo")
+            estado = QTableWidgetItem(self.estado_a_cadena(usuario[6]))
             causa = QTableWidgetItem(f"{usuario[7]}")
-            if usuario[8]:
-                tipo = QTableWidgetItem("Jefe")
-            else:
-                tipo = QTableWidgetItem("Vendedor")
+            tipo = QTableWidgetItem(self.tipo_a_cadena(usuario[8]))
 
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 0, dni)
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 1, nombre)
@@ -40,14 +34,32 @@ class ControladorJefeUsuario:
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 4, estado)
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 5, causa)
 
+    def estado_a_cadena(self, estado):
+        if estado:
+            return "Inactivo"
+        else:
+            return "Activo"
+
+    def tipo_a_cadena(self, tipo):
+        if tipo:
+            return "Jefe"
+        else:
+            return "Cajero"
+
     def get_vista(self):
         return self.__ventana_usuario_jefe
 
     def agregar_usuario(self):
+        self.__ventana_usuario_jefe.actualizar_color_boton(
+            self.__ventana_usuario_jefe.boton_agregar_usuario
+        )
         self.__controlador_agregar = ControladorAgregarUsuario()
 
     def modificar_usuario(self):
         try:
+            self.__ventana_usuario_jefe.actualizar_color_boton(
+                self.__ventana_usuario_jefe.boton_modificar_usuario
+            )
             usuario_seleccionado = (
                 self.__ventana_usuario_jefe.tabla_usuarios.selectedItems()
             )
@@ -58,13 +70,13 @@ class ControladorJefeUsuario:
                 usuario_a_modificar
             )
         except IndexError:
-            self.__ventana_usuario_jefe.boton_modificar_usuario.setStyleSheet(
-                "background-color:gray"
-            )
-            QTimer.singleShot(1000, self.cambio_de_color)
+            print("No se seleccionó ningún usuario")
 
     def eliminar_usuario(self):
         try:
+            self.__ventana_usuario_jefe.actualizar_color_boton(
+                self.__ventana_usuario_jefe.boton_eliminar_usuario
+            )
             usuario_seleccionado = (
                 self.__ventana_usuario_jefe.tabla_usuarios.selectedItems()
             )
@@ -72,15 +84,12 @@ class ControladorJefeUsuario:
                 usuario_seleccionado[0].text()
             )
         except IndexError:
-            self.__ventana_usuario_jefe.boton_eliminar_usuario.setStyleSheet(
-                "background-color:gray"
-            )
-            QTimer.singleShot(1000, self.cambio_de_color)
+            print("No se seleccionó ningún usuario")
 
-    def cambio_de_color(self):
-        self.__ventana_usuario_jefe.boton_eliminar_usuario.setStyleSheet(
-            "background-color: rgb(135, 206, 235)"
-        )
-        self.__ventana_usuario_jefe.boton_modificar_usuario.setStyleSheet(
-            "background-color: rgb(135, 206, 235)"
-        )
+    # def cambio_de_color(self):
+    #     self.__ventana_usuario_jefe.boton_eliminar_usuario.setStyleSheet(
+    #         "background-color: rgb(135, 206, 235)"
+    #     )
+    #     self.__ventana_usuario_jefe.boton_modificar_usuario.setStyleSheet(
+    #         "background-color: rgb(135, 206, 235)"
+    #     )

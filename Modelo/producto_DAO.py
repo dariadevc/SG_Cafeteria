@@ -1,3 +1,4 @@
+import logging
 from Modelo.base_de_datos import BaseDeDatos
 from datetime import datetime
 
@@ -7,19 +8,39 @@ class ProductoDAO:
         self.__base = BaseDeDatos()
         self.__fecha_actual = datetime.today().strftime("%Y-%m-%d")
 
-    ## TODO: Consultar el tema de agregar un código extra para cada producto, con el que lo identifiquen los empleados, no en la base
-    def agregar_producto(self, descripcion, cantidad, minimo, precio):
-        consulta = 'INSERT into public."productos"(descripcion, fecha, cantidad, stock_minimo, precio_unitario) VALUES (%s, %s, %s, %s, %s)'
+    def agregar_producto(self, descripcion, categoria, cantidad, minimo, precio):
+        consulta = 'INSERT into public."productos"(descripcion, categoria, fecha, cantidad, stock_minimo, precio_unitario, vigente) VALUES (%s, %s, %s, %s, %s, %s, %s)'
         # valores = (descripcion, fecha_modif, cantidad, minimo, precio)
-        valores = (descripcion, self.__fecha_actual, cantidad, minimo, precio)
-        try:
-            self.__base.consulta(consulta, valores)
-            print("Se agrego a la base de datos un nuevo producto")
-        except Exception as e:
-            print("Error al agregar producto a la base:", e)
+        valores = (
+            descripcion,
+            categoria,
+            self.__fecha_actual,
+            cantidad,
+            minimo,
+            float(precio),
+            True,
+        )
+
+        # Validación de entrada
+        if not all([descripcion, categoria, cantidad, minimo, precio]):
+            print(
+                "Error: Todos los campos deben ser proporcionados y no pueden ser vacíos."
+            )
             return None
 
-    ## TODO: Agregar código para identificar el producto que se va a eliminar
+        # Información de depuración
+        print(f"Ejecutando consulta: {consulta}")
+        print(f"Con valores: {valores}")
+
+        try:
+            self.__base.consulta(consulta, valores)
+            print("Se agregó a la base de datos un nuevo producto")
+        except Exception as e:
+            print("Error al agregar producto a la base de datos:", e)
+            # Registro del error detallado
+            logging.error("Error al agregar producto a la base de datos: %s", e)
+            return None
+
     def eliminar_producto(self, cod_producto, causa):
         consulta = 'UPDATE public."productos" SET vigente = %s, motivo_baja = %s WHERE codigo_producto = %s;'
         valores = (False, causa, cod_producto)
@@ -32,10 +53,18 @@ class ProductoDAO:
 
     ## TODO: Agregar los "producto_modificado.get_[x]" cuando los defina.
     def modificar_producto(
-        self, cod_prod, descripcion, cantidad, stock, precio
-    ):  # , producto_modificado=Producto):
-        consulta = 'UPDATE public."productos" SET descripcion = %s, fecha = %s, cantidad = %s, stock_minimo = %s, precio_minimo = %s WHERE codigo_producto = %s;'
-        valores = (descripcion, self.__fecha_actual, cantidad, stock, precio, cod_prod)
+        self, cod_prod, categoria, descripcion, cantidad, stock, precio
+    ):
+        consulta = 'UPDATE public."productos" SET descripcion = %s, categoria = %s, fecha = %s, cantidad = %s, stock_minimo = %s, precio_unitario = %s WHERE codigo_producto = %s;'
+        valores = (
+            descripcion,
+            categoria,
+            self.__fecha_actual,
+            cantidad,
+            stock,
+            precio,
+            cod_prod,
+        )
         self.__base.consulta(consulta, valores)
         print(f"Se modificaron los datos del producto con el código {cod_prod}")
 
@@ -44,18 +73,10 @@ class ProductoDAO:
         return self.__base.obtener_un_elemento(consulta)
 
     def obtener_todos_productos(self):
-        orden = [
-            "cod_producto",
-            "descripcion",
-            "fecha",
-            "cantidad",
-            "stock_minimo",
-            "precio_unitario",
-        ]
-        consulta = 'SELECT * FROM public."productos"'  # ORDER BY {orden[opcion]};'
+        consulta = 'SELECT * FROM public."productos"'
         return self.__base.obtener_elementos(consulta)
 
-    def obtener_productos_categoria(self, categoria):
+    def obtener_productos(self, categoria):
         orden = [
             "cod_producto",
             "descripcion",
