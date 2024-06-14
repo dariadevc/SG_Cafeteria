@@ -1,8 +1,8 @@
 ﻿Funcionalidades:
     - ABM de producto [Listo]
-        - Ver color de los botones
+        - Ver color de los botones [Listo]
     - ABM de usuario funcional [Listo]
-        - Ver color de los botones
+        - Ver color de los botones[Listo]
     - Informe de fuera de stock.
 
 Cosas visuales como: 
@@ -14,9 +14,9 @@ Cosas visuales como:
     - Que se pueda ver en qué sección estoy. [Listo]
     - Columna baja con true o false ponerlo de otra forma no como el valor que viene de BD. [Listo]
     - Listar el tipo de usuario. [Listo]
-    - Usar png transparentes para los iconos. 
+    - Usar png transparentes para los iconos. [[Listo]]
     - Cerrar ventanas emergentes y notificar que es lo que pasa luego (ej: se modificó exitosamente tal producto).
     - En venta poner leyenda de qué significan los colores. [Listo]
-    - Poner scroll de artículos seleccionados y el total acumulado. 
+    - Poner scroll de artículos seleccionados y el total acumulado. [Listo]
 
 No es necesario que hagan el informe de ventas, ni lo que hablamos sobre mostrar los usuarios dados de baja y lo del check para verlos. 

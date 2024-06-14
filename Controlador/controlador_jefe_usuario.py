@@ -24,7 +24,10 @@ class ControladorJefeUsuario:
             nombre = QTableWidgetItem(f"{usuario[2]}")
             apellido = QTableWidgetItem(f"{usuario[3]}")
             estado = QTableWidgetItem(self.estado_a_cadena(usuario[6]))
-            causa = QTableWidgetItem(f"{usuario[7]}")
+            if usuario[7] == None:
+                causa = QTableWidgetItem("-")
+            else:
+                causa = QTableWidgetItem(f"{usuario[7]}")
             tipo = QTableWidgetItem(self.tipo_a_cadena(usuario[8]))
 
             self.__ventana_usuario_jefe.tabla_usuarios.setItem(fila, 0, dni)

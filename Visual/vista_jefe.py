@@ -6,8 +6,8 @@ from PyQt6.QtGui import *
 
 class VistaJefe(VistaPrincipal):
 
-    def __init__(self, controlador):
-        super().__init__()
+    def __init__(self, nombre_apellido, controlador):
+        super().__init__(nombre_apellido)
 
         self.boton_usuario = QPushButton("USUARIO")
         self.boton_usuario.setStyleSheet(

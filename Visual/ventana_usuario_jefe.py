@@ -78,11 +78,15 @@ class VentanaUsuarioJefe(QWidget):
 
         self.setLayout(self.layout_ppal)
 
+        self.deshabilitar_botones()
+
     def selecciono_fila(self):
         self.tabla_usuarios.selectRow(self.tabla_usuarios.currentRow())
+        self.habilitar_botones()
 
     def limpiar_tabla(self):
         self.tabla_usuarios.clearContents()
+        self.deshabilitar_botones()
 
     def actualizar_color_boton(self, boton_seleccionado):
         botones = [
@@ -100,3 +104,23 @@ class VentanaUsuarioJefe(QWidget):
                 boton.setStyleSheet(
                     "background-color: lightblue; font-size: 14px; font-weight: bold;"
                 )
+
+    def habilitar_botones(self):
+        self.boton_modificar_usuario.setEnabled(True)
+        self.boton_modificar_usuario.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
+        self.boton_eliminar_usuario.setEnabled(True)
+        self.boton_eliminar_usuario.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
+
+    def deshabilitar_botones(self):
+        self.boton_modificar_usuario.setEnabled(False)
+        self.boton_modificar_usuario.setStyleSheet(
+            "background-color: gray; font-size: 14px; font-weight: bold;"
+        )
+        self.boton_eliminar_usuario.setEnabled(False)
+        self.boton_eliminar_usuario.setStyleSheet(
+            "background-color: gray; font-size: 14px; font-weight: bold;"
+        )

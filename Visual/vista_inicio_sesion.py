@@ -29,7 +29,7 @@ class VistaInicioSesion(QWidget):
         ).scaled(45, 45)
         self.etiqueta_cafe.setPixmap(self.imagen)
 
-        self.etiqueta_nombre = QLabel(" Cafe Viera", self)
+        self.etiqueta_nombre = QLabel(" Café Viera", self)
         self.etiqueta_nombre.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.etiqueta_nombre.setStyleSheet(
             "color: white; font-weight: bold; font-size: 40px;"

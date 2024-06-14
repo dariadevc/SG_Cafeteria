@@ -95,6 +95,9 @@ class Usuario:
         else:
             return datos + f" | BAJA: {self.__baja} | CAUSA: {self.__causa}"
 
+    def get_nombre_apellido(self):
+        return f"{self.__nombre} {self.__apellido}"
+
     def login(self):
         resultado = self.__usuariodao.login_usuario(self.__usuario, self.__contra)
         if resultado:

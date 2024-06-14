@@ -31,9 +31,9 @@ class ControladorAgregarProducto:
         producto_nuevo.agregar_a_bd()
 
     def categoria_a_letra(self, categoria):
-        if categoria == "Comida":
+        if categoria == "Bebida":
             return "A"
-        elif categoria == "Bebida":
+        elif categoria == "Comida":
             return "B"
         elif categoria == "Helados":
             return "C"

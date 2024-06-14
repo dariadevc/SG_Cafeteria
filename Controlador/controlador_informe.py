@@ -7,14 +7,14 @@ from Modelo.producto_DAO import ProductoDAO
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from Visual.ventana_informe import VentanaInforme
 
-class ControladorInforme:
+class GenerarInforme:
     def __init__(self):
         self.__vista_informe = VentanaInforme(self)
         self.__vista_informe.show()
         self.producto = ProductoDAO()
-        self.__productos_bebida = self.producto.obtener_productos("A")
-        self.__productos_comida = self.producto.obtener_productos("B")
-        self.__productos_helado = self.producto.obtener_productos("C")
+        self.__productos_bebida = self.producto.obtener_productos_categoria("A")
+        self.__productos_comida = self.producto.obtener_productos_categoria("B")
+        self.__productos_helado = self.producto.obtener_productos_categoria("C")
 
         self.lista_comida = self.llenar_listas(self.__productos_comida)
         self.lista_bebida = self.llenar_listas(self.__productos_bebida)
@@ -83,5 +83,13 @@ class ControladorInforme:
                     return FigureCanvas(fig)
 
 
-    def get_vista (self):
-        return self.__vista_informe
+
+
+
+
+
+
+
+
+
+

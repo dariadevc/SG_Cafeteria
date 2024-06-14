@@ -89,11 +89,15 @@ class VentanaStock(QWidget):
 
         self.setLayout(self.layout_ppal)
 
+        self.deshabilitar_botones()
+
     def selecciono_fila(self):
         self.tabla_productos.selectRow(self.tabla_productos.currentRow())
+        self.habilitar_botones()
 
     def limpiar_tabla(self):
         self.tabla_productos.clearContents()
+        self.deshabilitar_botones()
 
     def actualizar_color_boton(self, boton_seleccionado):
         botones = [
@@ -104,6 +108,39 @@ class VentanaStock(QWidget):
         ]
         for boton in botones:
             if boton == boton_seleccionado:
-                boton.setStyleSheet("background-color: lightgray;")
+                boton.setStyleSheet(
+                    "background-color: lightgray; font-size: 14px; font-weight: bold;"
+                )
             else:
-                boton.setStyleSheet("background-color: lightblue;")
+                boton.setStyleSheet(
+                    "background-color: lightblue; font-size: 14px; font-weight: bold;"
+                )
+
+    def habilitar_botones(self):
+        self.boton_modificar_producto.setEnabled(True)
+        self.boton_modificar_producto.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
+        self.boton_eliminar_producto.setEnabled(True)
+        self.boton_eliminar_producto.setStyleSheet(
+            "background-color: lightblue; font-size: 14px; font-weight: bold;"
+        )
+
+    def deshabilitar_botones(self):
+        self.boton_modificar_producto.setEnabled(False)
+        self.boton_modificar_producto.setStyleSheet(
+            "background-color: gray; font-size: 14px; font-weight: bold;"
+        )
+        self.boton_eliminar_producto.setEnabled(False)
+        self.boton_eliminar_producto.setStyleSheet(
+            "background-color: gray; font-size: 14px; font-weight: bold;"
+        )
+
+    def mostrar_mensaje_seleccion_producto(self):
+        mensaje = QMessageBox()
+        mensaje.setIcon(QMessageBox.Icon.Warning)
+        mensaje.setWindowTitle("Advertencia")
+        mensaje.setText(
+            "Debe seleccionar un producto de la tabla para realizar esta acción."
+        )
+        mensaje.exec()

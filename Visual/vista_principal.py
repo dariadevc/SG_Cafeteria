@@ -5,10 +5,10 @@ from PyQt6.QtGui import *
 
 class VistaPrincipal(QWidget):
 
-    def __init__(self):
+    def __init__(self, nombre_apellido):
         super().__init__()
         self.setStyleSheet("background-color: rgb(135, 206, 235);")
-        self.setWindowTitle("Cafeteria Viera")
+        self.setWindowTitle("Café Viera")
         imagen_cerrar = QPixmap(
             "C:/Users/Alan/Desktop/clon/Visual/imagenes/salir"
         ).scaled(100, 100)
@@ -17,7 +17,8 @@ class VistaPrincipal(QWidget):
         self.boton_cerrar.setStyleSheet("background-color: lightblue;")
         self.boton_cerrar.setIcon(QIcon(imagen_cerrar))
         self.boton_cerrar.setIconSize(QSize(80, 60))
-        self.label = QLabel("Nombre y Apellido")
+        self.label = QLabel(f"Bienvendo {nombre_apellido}")
+        self.label.setStyleSheet("font-size: 12px; font-weight: bold;")
         self.label.setFixedSize(500, 60)
         self.label.setContentsMargins(0, 20, 0, 0)
         self.label.setAlignment(Qt.AlignmentFlag.AlignRight)
@@ -79,6 +80,10 @@ class VistaPrincipal(QWidget):
 
         for boton in self._lista_botones:
             if boton == boton_seleccionado:
-                boton.setStyleSheet("background-color: lightgray;")
+                boton.setStyleSheet(
+                    "background-color: lightgray; font-size: 14px; font-weight: bold;"
+                )
             else:
-                boton.setStyleSheet("background-color: lightblue;")
+                boton.setStyleSheet(
+                    "background-color: lightblue; font-size: 14px; font-weight: bold;"
+                )

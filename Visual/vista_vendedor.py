@@ -5,8 +5,8 @@ from PyQt6.QtCore import *
 
 class VistaVendedor(VistaPrincipal):
 
-    def __init__(self, controlador):
-        super().__init__()
+    def __init__(self, nombre_apellido, controlador):
+        super().__init__(nombre_apellido)
 
         # self.lbl_bienvenida_vendedor = QLabel("BIENVENIDO USUARIO VENDEDOR")
         # self.lbl_bienvenida_vendedor.setAlignment(Qt.AlignmentFlag.AlignCenter)
